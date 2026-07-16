@@ -1,0 +1,63 @@
+{
+  "name": "@airwayai/crf-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "JSON Schema-driven React eCRF renderer demo baseline.",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/airwayai-crf.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11"
+  },
+  "scripts": {
+    "dev": "vite",
+    "validate:schema": "node scripts/validate-schema.mjs",
+    "check": "tsc --noEmit && vitest run src/contract.test.ts src/engine.test.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "npm run build:demo && playwright test",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "build:demo": "vite build",
+    "build": "npm run check && npm run build:lib && npm run build:demo",
+    "release": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/release.ps1",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hook-form": "^7.81.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "axe-core": "^4.12.1",
+    "jsdom": "^29.1.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.4",
+    "vitest": "^4.1.10",
+    "yaml": "^2.8.1"
+  }
+}

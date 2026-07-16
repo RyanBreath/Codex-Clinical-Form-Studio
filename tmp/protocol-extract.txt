@@ -1,0 +1,285 @@
+
+
+===== PAGE 1 =====
+
+ 
+ 
+Assessment of Post-surgical improvement in Obstructive Sleep Apnea Patients after 
+imaging of Upper Respiratory Airway using Cone Beam Computed Tomography 
+(CBCT) and Drug-Induced Sleep Endoscopy (DISE) versus Drug-Induced Sleep 
+Endoscopy Only:  A Validity Study 
+ 
+Registered at www.clinicaltrials.gov. ID: OCS05051989 
+ 
+ 
+ 
+Protocol submitted to 
+Faculty of Dentistry, Cairo University 
+for partial fulfilment of the requirements for the Ph.D. Degree in Oral and Maxillofacial Radiology,  
+Faculty of Dentistry, Cairo University 
+ 
+By 
+Marco Emad Shawky Isaac 
+Teaching Assistant of Oral Medicine, Periodontology, Diagnosis and Oral Radiology Department, 
+Faculty of Oral and Dental Medicine,  
+Delta University for Science and Technology 
+BDS 2011, MSc, MFDS RCSD 
+ 
+ 
+Date: 22/01/2021 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 2 =====
+
+ 
+ 
+Supervisors’ signature Head of the department’s 
+signature 
+1- Dr. Dina Mohammed El-Beshlawy  
+Associate Professor of Oral and Maxillofacial 
+Radiology Department,  
+Faculty of Dentistry, Cairo University 
+Prof. Mohamed El-Sorougy  
+Head of Department and Professor of 
+Oral and Maxillofacial Radiology 
+Department, Faculty of Dentistry, Cairo 
+University 
+2- Dr. Sarah Mohammed Kenawy 
+Lecturer of Oral and Maxillofacial Radiology 
+Department, Faculty of Dentistry, Cairo 
+University 
+ 
+3- Dr. Ahmed Abdel-Fatah Farag  
+El-Sobky  
+Associate Professor of ENT Department, Faculty 
+of Medicine, Mansoura University 
+ 
+  
+ 
+Code:  RAD 7-1-1 
+
+===== PAGE 3 =====
+
+ 
+I- Study Protocol: 
+A) Study design and setting 
+1. Study design 
+In this validity two-arm study, a total of (70) patient s will be included; all are diagnosed with OSA and will 
+undergo surgical treatment after appropriate planning. Patients will be classified into two equal groups ( with 
+allocation ratio 1:1). Patients of the study group will be examined after scanning with CBCT at both ends of 
+expiration and inspiration and DISE. Control group patients will be examined by DISE only. 
+These (70) patients will be selected by the ENT specialist according to the following; 
+• A multidisciplinary approach will be performed to diagnose OSA patients who are indicated for 
+surgery. Firstly, a comprehensive assessment of patients’ history will be performed; including 
+evaluation of all risk factors and complete sleep history (Epstein et al. 2009). 
+• Epworth Sleepiness Scale (ESS)  which consists of eight section q uestionnaire that defines the 
+frequency of an individual to fall asleep during regular daily activities will be obtained from the 
+patients (Johns 1992, Sharkey et al. 2013). 
+• Afterward, a proper physical examination will be performed including a thorough clinical 
+examination of the oropharynx, nasopharynx, and hypopharynx to evaluate any anatomical 
+abnormalities as impotency of the nasal airway, elongated soft palate or uvula, enlarged lingual 
+tonsils, and any other pathological conditions of tongue, palate, and tonsils. 
+• Then, Polysomnography (PSG) (sleep study) will be performed to allow proper evaluation of normal 
+and abnormal physiological sleep episodes. Apnea/ Hypopnea    Index (AHI) will be reported to 
+detect the severity of OSA and patients were classified into mild (AHI = 5-14 / hour), moderate (AHI 
+= 15-30 / hour) and severe (AHI  >30 / hour) (Maspero et al. 2015). 
+• All patients in both groups will undergo upper airway surgery, DISE will be performed by the same 
+ENT surgeon to detect the level of collapse in the upper airway which will be assessed by LwPTL 
+and VOTE classifications, emphasizing on the primary structure s contributing at upper airway 
+collapse, either alone or in combination: the larynx, palate, tongue and pharyngeal lateral walls.  
+• Study group participants only will be scanned by CBCT twice; once at the end of inspiration and the 
+other at the end of expir ation while they are gently holding their breath for as long as possible. 
+(Woodson 2003)
+ 
+• In the study group, surgical procedures decision will be taken after appropriate assessment to sites of 
+collapse in CBCT views at both ends of expiration and inspiration vies in combination to DISE. 
+• Finally, strict post-operative instructions will be given to patients of both groups. 
+ 2. Settings 
+This study will be carried out on patients attending outpatient clinics in the ENT department, Faculty of 
+Medicine, Mansoura University, Egypt. CBCT scans of surgical candidates of OSA patients will be included 
+
+===== PAGE 4 =====
+
+ 
+according to the proposed eligibility criteria. 
+B) Participants 
+1. Eligibility criteria and selection methods 
+Inclusion Criteria: 
+• Patients’ age is more than 18 years old. 
+• Patients are indicated for upper respiratory airway surgery based on adequate history taking, proper 
+clinical examination, and sleep study. 
+• Patients refusing non-surgical treatment procedures as Continuous Positive Airway Pre ssure (CPAP) 
+treatment. 
+• Systemically medically free patients. 
+Exclusion Criteria: 
+• Patients who are refusing the surgical approach as a treatment option. 
+• Patients who have undergone previous surgeries in the upper respiratory airway. 
+• Pregnant women. 
+• Patients who didn’t follow post-operative instructions. 
+• Patients who are not able to come for the follow-up appointments. 
+Follow up: 
+• Patients who strictly follow post- operative instructions will perform another sleep study after 3 
+months from the day of the surgery. 
+• Percentage of AHI reduction will be calculated which in turn indicates post-surgical improvement. 
+2. Matching criteria and allocation ratio 
+The patients will be randomly allocated to the intervention groups using computer -generated random 
+numbers that will be performed by the main investigator (Marco Isaac). The patients will be allocated in a 
+ratio of 1:1 (35 patients in each group). 
+The two groups will be equally clinically examined before surgical procedures. Then the decision of which 
+group wi ll be scanned with CBCT  and which won’t will be taken according to the randomized numbers 
+placed in opaque sealed envelopes. The number will be picked by the main investigator (Marco Isaac). 
+The main investigator will be responsible for the generation of a llocation sequence and will assign the 
+patients to the 2 intervention groups. The main investigator will also be responsible for patient enrolment. 
+ 
+C) Variables 
+1. Details about variables 
+
+===== PAGE 5 =====
+
+ 
+• Mean AHI reduction percentage. 
+• Level of Collapse of the upper respiratory airway. 
+• The volume of the upper respiratory airway. 
+2. Data sources and management  
+• The level of the collapse of the upper respiratory airway will be determined by an expert ENT 
+surgeon with DISE. 
+• Radiographic assessment will be  performed usin g the iCAT FLX V17 -Series CBCT machine 
+(Imaging Science International, ISI, PA, USA). Quick scan imaging protocol of 16cm x 13cm Field 
+Of View (FOV) (120 KV, 5 mA, 2 sec) and 0.3 mm voxel size.  
+• Participants are required to wear a protective lead apron dur ing scanning. The position of the X -ray 
+tube will be adjusted to minimize the extent of scanning and to ensure the lowest radiation dose as 
+much as possible. To prevent motion artifacts, participants will be  instructed not to move their head, 
+body, tongue, and jaws during scanning. 
+• Raw DICOM data from CBCT scanning will be  checked to evaluate whether there were any motion 
+artifacts in images at coronal, horizontal, and sagittal planes.  
+• CBCT scans at both ends of inspiration and expiration will be analyzed using Invivo5 software. 
+• For the second outcome, CBCT images will be interpreted by three  oral and maxillofacial 
+radiologists independently; blinded from demographic data of the patients , DISE findings, and the 
+results of each other.  
+• Each radiologist will evaluate the CBCT images for assessment of the level of collapse and 
+assessment of the secondary outcomes. One radiologist will assess all the outcomes twice with more 
+than 1month interval. Intra-observer and inter -observer variability of CBCT findings wil l be 
+evaluated. 
+3. Addressing potential sources of bias 
+No source of bias. CBCT images will be interpreted by three  oral and maxillofacial radiologists 
+independently blinded from demographic data of the patients, DISE findings, and the results of each other. 
+                                              
+D) Study size 
+1. Study size 
+This study aims to assess surgical improvement in OSA p atients after imaging of upper Respiratory Airway 
+using CBCT and DISE using mean AHI reduction percentage. According to the results of  (Pang et al. 
+2020), the mean of AHI reduction percentage  and the minimal clinically  important difference estimated by 
+the expert was 21.6. By adopting an alpha (α) level of 0.05 (5%) and a power of 80%, the predicted sample 
+size is 35 per group with a total of 70. To compensate for losses durin g follow up, the sample will be 
+
+===== PAGE 6 =====
+
+ 
+increased by 20% to be 84 participants in total.  Sample size calculation was achieved using PS: Power and 
+Sample Size Calculation software Version 3.1.2 (Vanderbilt University, Nashville, Tennessee, USA).  
+E) Quantitative variables  
+1. Handling of quantitative variables in the analyses 
+The volume of the upper respiratory airway will be determined and correlated with its level of collapse. 
+F) Statistical methods 
+1. Statistical methods  
+Data will be analyzed using SPSS (statistical package for social sciences) version 22. Qualitative data will 
+be presented as number and percent, Quantitative data will be tested for normality by the Kolmogrov-
+Smirnov test then described as mean and standar d deviation for normally distributed data and median and 
+range for non-normally distributed. The appropriate statistical test will be applied according to the data type 
+with the following suggested tests: Chi-Square for the categorical variable. Student t-test and Mann Whitney 
+U test for continuous variables.  
+ 
+II. Ethics and dissemination: 
+a. Research ethics approval 
+The study protocol will be submitted to the Ethics commute in the Faculty of Dentistry , Cairo University for 
+approval.  
+b. Protocol amendments 
+Any amendments in the protocol will be reported to the main and co-supervisors. 
+c. Informed consent 
+After discussing the treatment plan with the patient and educating the patient with all the data needed, an 
+arabic consent form will be signed by the willing participants. 
+d. Confidentiality 
+• All study-related information will be stored securely.  
+• All reports, data, scans , and administrative forms  will be identifie d by a coded ID (identification)  
+number only to maintain participant confidentiality.  
+• All personal data that contain names or other identifiers including age, sex, identification number, 
+address, phone number, work address , and any other information  will be stored separately from the 
+study records and identified by a code number. 
+e. Declaration of interest 
+There is no conflict of interest. 
+
+===== PAGE 7 =====
+
+ 
+f. Access to data 
+Investigator, Co-supervisors, and main supervisor will have access to the final trial data set . 
+g. Dissemination policy 
+The Investigator will communicate his r esults with other participants and healthcare providers through the 
+publication of the protocol and the research final results and recommendations. This will be done through 
+publication websites and j ournals concerned with Oral and Maxillofacial Radiology specialty, For Sharing 
+the recommended clinical application obtained from the final results of the research. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 8 =====
+
+ 
+III- Appendix: 
+1- Epworth Sleepiness Scale (ESS): 
+ 
+ 
+ 
+
+
+===== PAGE 9 =====
+
+ 
+ 
+2- Informed Consent: 
+ 
+
+===== PAGE 10 =====
+
+ 
+ 
+
+===== PAGE 11 =====
+
+ 
+ 
+ 
+ 

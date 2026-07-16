@@ -1,0 +1,419 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://airwayai.example/forms/airwayai-baseline/1.0.0",
+  "title": "AirwayAI Baseline Assessment Synthetic Demo",
+  "description": "Synthetic, non-clinical eCRF used to verify the JSON-driven renderer.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "participantCode": {
+      "type": "string",
+      "pattern": "^DEMO-[0-9]{3}$",
+      "maxLength": 8
+    },
+    "visitDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "visitType": {
+      "type": "string",
+      "enum": ["baseline", "follow-up", "unscheduled"]
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 18,
+      "maximum": 85
+    },
+    "biologicalSex": {
+      "type": "string",
+      "enum": ["female", "male", "other", "unknown"]
+    },
+    "symptoms": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "snoring",
+          "daytime-sleepiness",
+          "witnessed-apnea",
+          "morning-headache",
+          "other"
+        ]
+      }
+    },
+    "otherSymptoms": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "sleepStudyCompleted": {
+      "type": "boolean"
+    },
+    "ahi": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "ess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "q1": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "q2": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "q3": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "q4": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "q5": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "q6": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "q7": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "q8": { "type": "integer", "enum": [0, 1, 2, 3], "minimum": 0, "maximum": 3 },
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 24,
+          "readOnly": true
+        }
+      },
+      "required": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"]
+    },
+    "cbctAvailable": {
+      "type": "boolean"
+    },
+    "landmarkCoordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "number", "minimum": -200, "maximum": 200 },
+        "y": { "type": "number", "minimum": -200, "maximum": 200 },
+        "z": { "type": "number", "minimum": -200, "maximum": 200 },
+        "unit": { "type": "string", "enum": ["mm"] }
+      },
+      "required": ["x", "y", "z", "unit"]
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "consentConfirmed": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "participantCode",
+    "visitDate",
+    "visitType",
+    "age",
+    "biologicalSex",
+    "sleepStudyCompleted",
+    "ess",
+    "cbctAvailable",
+    "consentConfirmed"
+  ],
+  "x-airwayai": {
+    "contractVersion": "1.0.0",
+    "formId": "airwayai-baseline",
+    "schemaVersion": "1.0.0",
+    "status": "demo",
+    "defaultLocale": "zh-TW",
+    "locales": ["zh-TW"],
+    "title": {
+      "zh-TW": "AirwayAI 基線評估"
+    },
+    "description": {
+      "zh-TW": "以 JSON Schema 驅動的合成 eCRF 示範，用來驗證欄位、條件、計算與送出流程。"
+    },
+    "disclaimer": {
+      "zh-TW": "合成 Demo｜非核准試驗計畫、非醫療用途，請勿輸入真實個人資料或健康資訊。"
+    },
+    "fields": {
+      "/participantCode": {
+        "label": { "zh-TW": "合成受試者代碼" },
+        "help": { "zh-TW": "格式為 DEMO-001；請勿輸入真實識別碼。" },
+        "placeholder": { "zh-TW": "DEMO-001" },
+        "widget": "text"
+      },
+      "/visitDate": {
+        "label": { "zh-TW": "訪視日期" },
+        "widget": "date"
+      },
+      "/visitType": {
+        "label": { "zh-TW": "訪視類型" },
+        "widget": "select",
+        "options": [
+          { "value": "baseline", "label": { "zh-TW": "基線訪視" } },
+          { "value": "follow-up", "label": { "zh-TW": "追蹤訪視" } },
+          { "value": "unscheduled", "label": { "zh-TW": "非預定訪視" } }
+        ]
+      },
+      "/age": {
+        "label": { "zh-TW": "年齡" },
+        "help": { "zh-TW": "此合成樣板接受 18 至 85 歲。" },
+        "widget": "integer",
+        "unit": { "code": "a", "display": { "zh-TW": "歲" } }
+      },
+      "/biologicalSex": {
+        "label": { "zh-TW": "生理性別" },
+        "widget": "radio",
+        "options": [
+          { "value": "female", "label": { "zh-TW": "女性" } },
+          { "value": "male", "label": { "zh-TW": "男性" } },
+          { "value": "other", "label": { "zh-TW": "其他" } },
+          { "value": "unknown", "label": { "zh-TW": "未知／不提供" } }
+        ]
+      },
+      "/symptoms": {
+        "label": { "zh-TW": "目前症狀" },
+        "description": { "zh-TW": "可複選；此內容只作為 renderer 示範。" },
+        "widget": "checkbox_group",
+        "options": [
+          { "value": "snoring", "label": { "zh-TW": "打鼾" } },
+          { "value": "daytime-sleepiness", "label": { "zh-TW": "日間嗜睡" } },
+          { "value": "witnessed-apnea", "label": { "zh-TW": "目擊呼吸中止" } },
+          { "value": "morning-headache", "label": { "zh-TW": "晨起頭痛" } },
+          { "value": "other", "label": { "zh-TW": "其他" } }
+        ]
+      },
+      "/otherSymptoms": {
+        "label": { "zh-TW": "其他症狀說明" },
+        "widget": "text",
+        "visibleWhen": { "op": "contains", "path": "/symptoms", "value": "other" },
+        "requiredWhen": { "op": "contains", "path": "/symptoms", "value": "other" }
+      },
+      "/sleepStudyCompleted": {
+        "label": { "zh-TW": "是否已有睡眠檢查結果？" },
+        "widget": "boolean"
+      },
+      "/ahi": {
+        "label": { "zh-TW": "呼吸中止低通氣指數（AHI）" },
+        "help": { "zh-TW": "僅輸入合成數值；允許範圍 0–150。" },
+        "widget": "number",
+        "unit": { "code": "{events}/h", "display": { "zh-TW": "次／小時" } },
+        "visibleWhen": { "op": "eq", "path": "/sleepStudyCompleted", "value": true },
+        "requiredWhen": { "op": "eq", "path": "/sleepStudyCompleted", "value": true }
+      },
+      "/ess/q1": {
+        "label": { "zh-TW": "坐著閱讀時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/q2": {
+        "label": { "zh-TW": "看電視時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/q3": {
+        "label": { "zh-TW": "在公共場所靜坐時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/q4": {
+        "label": { "zh-TW": "連續乘車一小時時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/q5": {
+        "label": { "zh-TW": "下午躺下休息時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/q6": {
+        "label": { "zh-TW": "坐著與人交談時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/q7": {
+        "label": { "zh-TW": "午餐後靜坐時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/q8": {
+        "label": { "zh-TW": "駕車等紅燈時打瞌睡的可能性" },
+        "widget": "radio",
+        "options": [
+          { "value": 0, "label": { "zh-TW": "0｜從不" } },
+          { "value": 1, "label": { "zh-TW": "1｜輕微" } },
+          { "value": 2, "label": { "zh-TW": "2｜中等" } },
+          { "value": 3, "label": { "zh-TW": "3｜很高" } }
+        ]
+      },
+      "/ess/total": {
+        "label": { "zh-TW": "ESS 合成總分" },
+        "help": { "zh-TW": "由 8 題即時計算；後端仍須從分項重算。" },
+        "widget": "computed",
+        "unit": { "code": "score", "display": { "zh-TW": "分" } }
+      },
+      "/cbctAvailable": {
+        "label": { "zh-TW": "是否有合成 CBCT 座標資料？" },
+        "widget": "boolean"
+      },
+      "/landmarkCoordinate": {
+        "label": { "zh-TW": "合成上呼吸道基準點座標" },
+        "help": { "zh-TW": "每一軸允許 -200 至 200 mm；不可輸入真實影像或病人資料。" },
+        "widget": "coordinate_3d",
+        "visibleWhen": { "op": "eq", "path": "/cbctAvailable", "value": true },
+        "requiredWhen": { "op": "eq", "path": "/cbctAvailable", "value": true },
+        "coordinate": {
+          "axes": ["x", "y", "z"],
+          "unitPath": "/landmarkCoordinate/unit"
+        }
+      },
+      "/notes": {
+        "label": { "zh-TW": "補充說明" },
+        "help": { "zh-TW": "最多 1000 字；請勿輸入任何可識別個人的資訊。" },
+        "placeholder": { "zh-TW": "輸入合成示範備註" },
+        "widget": "textarea"
+      },
+      "/consentConfirmed": {
+        "label": { "zh-TW": "我確認此頁只使用合成 Demo 資料" },
+        "widget": "boolean"
+      }
+    },
+    "layout": [
+      {
+        "type": "section",
+        "id": "visit",
+        "title": { "zh-TW": "研究識別與訪視" },
+        "description": { "zh-TW": "使用不可識別、純合成的代碼開始本次示範。" },
+        "items": [
+          {
+            "type": "group",
+            "id": "visit-details",
+            "columns": 3,
+            "items": [
+              { "type": "field", "path": "/participantCode" },
+              { "type": "field", "path": "/visitDate" },
+              { "type": "field", "path": "/visitType" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "id": "profile",
+        "title": { "zh-TW": "基本資料" },
+        "items": [
+          {
+            "type": "group",
+            "id": "profile-core",
+            "columns": 2,
+            "items": [
+              { "type": "field", "path": "/age" },
+              { "type": "field", "path": "/biologicalSex" }
+            ]
+          },
+          { "type": "field", "path": "/symptoms" },
+          { "type": "field", "path": "/otherSymptoms" }
+        ]
+      },
+      {
+        "type": "section",
+        "id": "sleep-study",
+        "title": { "zh-TW": "睡眠檢查" },
+        "items": [
+          {
+            "type": "group",
+            "id": "sleep-study-results",
+            "columns": 2,
+            "items": [
+              { "type": "field", "path": "/sleepStudyCompleted" },
+              { "type": "field", "path": "/ahi" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "id": "ess",
+        "title": { "zh-TW": "Epworth 嗜睡量表（合成示範）" },
+        "description": { "zh-TW": "每題選 0–3 分；全部完成後自動顯示總分。" },
+        "items": [
+          {
+            "type": "group",
+            "id": "ess-items",
+            "columns": 2,
+            "items": [
+              { "type": "field", "path": "/ess/q1" },
+              { "type": "field", "path": "/ess/q2" },
+              { "type": "field", "path": "/ess/q3" },
+              { "type": "field", "path": "/ess/q4" },
+              { "type": "field", "path": "/ess/q5" },
+              { "type": "field", "path": "/ess/q6" },
+              { "type": "field", "path": "/ess/q7" },
+              { "type": "field", "path": "/ess/q8" }
+            ]
+          },
+          { "type": "field", "path": "/ess/total" }
+        ]
+      },
+      {
+        "type": "section",
+        "id": "cbct",
+        "title": { "zh-TW": "CBCT 結構資料" },
+        "description": { "zh-TW": "本區僅示範條件欄位與結構化三維座標。" },
+        "items": [
+          { "type": "field", "path": "/cbctAvailable" },
+          { "type": "field", "path": "/landmarkCoordinate" }
+        ]
+      },
+      {
+        "type": "section",
+        "id": "completion",
+        "title": { "zh-TW": "完成與確認" },
+        "items": [
+          { "type": "field", "path": "/notes" },
+          { "type": "field", "path": "/consentConfirmed" }
+        ]
+      }
+    ],
+    "computed": {
+      "/ess/total": {
+        "op": "add",
+        "args": [
+          { "op": "path", "path": "/ess/q1" },
+          { "op": "path", "path": "/ess/q2" },
+          { "op": "path", "path": "/ess/q3" },
+          { "op": "path", "path": "/ess/q4" },
+          { "op": "path", "path": "/ess/q5" },
+          { "op": "path", "path": "/ess/q6" },
+          { "op": "path", "path": "/ess/q7" },
+          { "op": "path", "path": "/ess/q8" }
+        ]
+      }
+    }
+  }
+}

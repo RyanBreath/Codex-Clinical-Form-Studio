@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
+    "rootDir": "src",
+    "outDir": "dist/types",
+    "types": ["vite/client"]
+  },
+  "include": ["src/index.ts", "src/types.ts", "src/FormRenderer.tsx", "src/FormRenderer.module.css"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/demo", "e2e"]
+}

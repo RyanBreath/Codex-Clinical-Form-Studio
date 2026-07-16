@@ -1,0 +1,15 @@
+# AirwayAI Clinical Trial Copilot - Local Agent Roles
+agent-clinic.md
+agent-QA.md
+agent-SD.md
+
+# SA renderer dependencies and generated artifacts
+template/crf/node_modules/
+template/crf/dist/
+template/crf/dist-demo/
+template/crf/coverage/
+template/crf/output/
+template/crf/.vite/
+
+# Protocol work packages may contain confidential source material.
+2.SA/projects/

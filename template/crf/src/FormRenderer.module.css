@@ -366,6 +366,32 @@
   font-size: 0.86em;
 }
 
+.codingPanel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 8px 0 0;
+  padding: 9px 11px;
+  border: 1px solid #cbdad7;
+  border-radius: 9px;
+  color: #314d4a;
+  background: #f1f8f6;
+  font-size: 0.76rem;
+}
+
+.codingPanel div {
+  display: flex;
+  gap: 5px;
+}
+
+.codingPanel dt {
+  font-weight: 800;
+}
+
+.codingPanel dd {
+  margin: 0;
+}
+
 .choiceGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -386,6 +412,14 @@
   transition:
     border-color 140ms ease,
     background-color 140ms ease;
+}
+
+.optionCoding {
+  display: block;
+  margin-top: 2px;
+  color: #55716d;
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 
 .choice:hover {

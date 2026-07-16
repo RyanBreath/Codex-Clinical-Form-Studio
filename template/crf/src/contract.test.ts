@@ -36,7 +36,7 @@ describe("compileContract", () => {
     }
   });
 
-  it("accepts only contractVersion 1.0.0", () => {
+  it("accepts only supported contract versions", () => {
     const schema = cloneSchema();
     (schema["x-airwayai"] as unknown as { contractVersion: string }).contractVersion = "2.0.0";
 
@@ -46,6 +46,59 @@ describe("compileContract", () => {
     if (!result.ok) {
       expect(result.diagnostics.some((item) => item.path?.includes("contractVersion"))).toBe(true);
     }
+  });
+
+  it("requires a CDISC coding status on every field in contractVersion 1.1.0", () => {
+    const schema = cloneSchema();
+    schema["x-airwayai"].contractVersion = "1.1.0";
+
+    const result = compileContract(schema);
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.diagnostics).toEqual(
+        expect.arrayContaining([expect.objectContaining({ code: "coding-status-required" })]),
+      );
+    }
+  });
+
+  it("validates codelist option terminology in contractVersion 1.1.0", () => {
+    const schema = cloneSchema();
+    schema["x-airwayai"].contractVersion = "1.1.0";
+    Object.values(schema["x-airwayai"].fields).forEach((field) => {
+      field.coding = {
+        status: "not-applicable",
+        rationale: { "zh-TW": "此 Demo 欄位沒有核准的 CDISC 對應。" },
+      };
+    });
+    const field = schema["x-airwayai"].fields["/biologicalSex"];
+    field.coding = {
+      status: "matched",
+      standard: "CDISC",
+      model: "SDTM",
+      domain: "DM",
+      variable: "SEX",
+      version: "2025-03-28",
+      source: "https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.pdf",
+      codelist: {
+        name: "Sex",
+        submissionValue: "SEX",
+        ncitCode: "C66731",
+        extensible: false,
+      },
+    };
+    field.options = field.options?.map((option) => ({
+      ...option,
+      coding: {
+        system: "https://ncit.nci.nih.gov",
+        code: "C17998",
+        submissionValue: String(option.value),
+      },
+    }));
+
+    const result = compileContract(schema);
+
+    expect(result.ok, JSON.stringify(!result.ok ? result.diagnostics : [], null, 2)).toBe(true);
   });
 
   it("warns and keeps the contract usable when coordinate metadata is missing", () => {

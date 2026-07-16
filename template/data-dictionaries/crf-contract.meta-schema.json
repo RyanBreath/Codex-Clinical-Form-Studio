@@ -148,6 +148,98 @@
         },
         "label": {
           "$ref": "#/$defs/localizedText"
+        },
+        "coding": {
+          "$ref": "#/$defs/terminologyCode"
+        }
+      },
+      "additionalProperties": false
+    },
+    "terminologyCode": {
+      "type": "object",
+      "required": ["system", "code", "submissionValue"],
+      "properties": {
+        "system": {
+          "type": "string",
+          "format": "uri"
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submissionValue": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "fieldCoding": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["matched", "not-applicable"]
+        },
+        "rationale": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "standard": {
+          "const": "CDISC"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implementationGuide": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9]{1,7}$"
+        },
+        "variable": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{1,15}$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "codelist": {
+          "type": "object",
+          "required": ["name", "submissionValue", "ncitCode", "extensible"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "submissionValue": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ncitCode": {
+              "type": "string",
+              "pattern": "^C[0-9]+$"
+            },
+            "extensible": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
@@ -204,6 +296,9 @@
           "items": {
             "$ref": "#/$defs/option"
           }
+        },
+        "coding": {
+          "$ref": "#/$defs/fieldCoding"
         },
         "unit": {
           "type": "object",
@@ -387,7 +482,7 @@
       ],
       "properties": {
         "contractVersion": {
-          "const": "1.0.0"
+          "enum": ["1.0.0", "1.1.0"]
         },
         "formId": {
           "type": "string",

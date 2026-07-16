@@ -9,9 +9,9 @@ import {
 } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { compileContract, type CompiledContract } from "./contract";
+import { buildSubmissionCoding } from "./coding";
 import {
   deriveFormState,
-  findOptionLabel,
   isStructuralDataIssue,
   localizeText,
   validateDerivedState,
@@ -51,6 +51,18 @@ const EMPTY_DERIVED_STATE: DerivedFormState = {
 
 function optionEquals(left: unknown, right: unknown): boolean {
   return Object.is(left, right);
+}
+
+function optionDisplay(
+  option: NonNullable<FieldConfig["options"]>[number] | undefined,
+  locale: string,
+  defaultLocale: string,
+): string {
+  if (!option) return "";
+  const label = localizeText(option.label, locale, defaultLocale) ?? String(option.value);
+  return option.coding
+    ? `${label} [${option.coding.submissionValue}; ${option.coding.code}]`
+    : label;
 }
 
 function issueMessage(
@@ -117,11 +129,21 @@ function formatReadonlyValue(
   if (config.widget === "boolean") return value === true ? "是" : value === false ? "否" : String(value);
   if (config.widget === "checkbox_group" && Array.isArray(value)) {
     return value
-      .map((item) => findOptionLabel(config.options, item, locale, defaultLocale))
+      .map((item) =>
+        optionDisplay(
+          config.options?.find((option) => optionEquals(option.value, item)),
+          locale,
+          defaultLocale,
+        ),
+      )
       .join("、");
   }
   if (["radio", "select"].includes(config.widget)) {
-    return findOptionLabel(config.options, value, locale, defaultLocale);
+    return optionDisplay(
+      config.options?.find((option) => optionEquals(option.value, value)),
+      locale,
+      defaultLocale,
+    );
   }
   if (config.widget === "coordinate_3d" && typeof value === "object" && value !== null) {
     const coordinate = value as Record<string, unknown>;
@@ -246,6 +268,7 @@ export function FormRenderer(props: FormRendererProps) {
         locale,
         data: derivedState.activeData,
         derivedPaths: derivedState.derivedPaths,
+        coding: buildSubmissionCoding(compiled.contract, derivedState.activeData),
       };
 
       setIsSubmitting(true);
@@ -257,7 +280,7 @@ export function FormRenderer(props: FormRendererProps) {
           const response = await fetch(apiUrl.trim(), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(derivedState.activeData),
+            body: JSON.stringify(submission),
           });
           if (!response.ok) {
             throw new Error(`API 回應失敗：${response.status}`);
@@ -331,6 +354,7 @@ export function FormRenderer(props: FormRendererProps) {
     const help = loc(config.help);
     const placeholder = loc(config.placeholder);
     const unit = loc(config.unit?.display);
+    const coding = config.coding;
     const issue = issueForPath(path);
     const message = issue ? issueMessage(contract, issue, locale) : undefined;
     const fieldId = pointerToDomId(path);
@@ -440,7 +464,7 @@ export function FormRenderer(props: FormRendererProps) {
                   <option value="">請選擇</option>
                   {config.options?.map((option, index) => (
                     <option key={`${path}-${index}`} value={index}>
-                      {loc(option.label)}
+                      {optionDisplay(option, locale, extension.defaultLocale)}
                     </option>
                   ))}
                 </select>
@@ -471,7 +495,14 @@ export function FormRenderer(props: FormRendererProps) {
                         markTouched(path);
                       }}
                     />
-                    <span>{loc(option.label)}</span>
+                    <span>
+                      {loc(option.label)}
+                      {option.coding ? (
+                        <small className={styles.optionCoding}>
+                          {option.coding.submissionValue} · {option.coding.code}
+                        </small>
+                      ) : null}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -510,7 +541,14 @@ export function FormRenderer(props: FormRendererProps) {
                             markTouched(path);
                           }}
                         />
-                        <span>{loc(option.label)}</span>
+                        <span>
+                          {loc(option.label)}
+                          {option.coding ? (
+                            <small className={styles.optionCoding}>
+                              {option.coding.submissionValue} · {option.coding.code}
+                            </small>
+                          ) : null}
+                        </span>
                       </label>
                     );
                   })}
@@ -648,6 +686,42 @@ export function FormRenderer(props: FormRendererProps) {
           <p id={helpId} className={styles.help}>
             {help}
           </p>
+        ) : null}
+        {coding ? (
+          <dl className={styles.codingPanel} aria-label={`${label} CDISC coding`}>
+            <div>
+              <dt>CDISC</dt>
+              <dd>
+                {coding.status === "matched"
+                  ? [coding.model, coding.domain && coding.variable
+                      ? `${coding.domain}.${coding.variable}`
+                      : coding.variable]
+                      .filter(Boolean)
+                      .join(" · ")
+                  : "不適用"}
+              </dd>
+            </div>
+            {coding.codelist ? (
+              <div>
+                <dt>Codelist</dt>
+                <dd>
+                  {coding.codelist.submissionValue} · NCIt {coding.codelist.ncitCode}
+                </dd>
+              </div>
+            ) : null}
+            {coding.version ? (
+              <div>
+                <dt>版本</dt>
+                <dd>{coding.version}</dd>
+              </div>
+            ) : null}
+            {coding.rationale ? (
+              <div>
+                <dt>說明</dt>
+                <dd>{loc(coding.rationale)}</dd>
+              </div>
+            ) : null}
+          </dl>
         ) : null}
         {config.links?.length ? (
           <div className={styles.links}>

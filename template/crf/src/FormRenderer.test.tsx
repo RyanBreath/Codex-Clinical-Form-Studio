@@ -76,11 +76,12 @@ describe("FormRenderer", () => {
     expect(submission.data).not.toHaveProperty("ahi");
     expect(submission.data).toHaveProperty("ess.total", 8);
     expect(submission.derivedPaths).toEqual(["/ess/total"]);
+    expect(submission.coding).toEqual({ standard: "CDISC", fields: {} });
     expect(submission).toMatchObject({
       formId: "airwayai-baseline",
       schemaVersion: "1.0.0",
       contractVersion: "1.0.0",
-      rendererVersion: "0.1.0",
+      rendererVersion: "0.2.0",
       locale: "zh-TW",
     });
     expect(downloadSubmissionArtifacts).toHaveBeenCalledWith(demoSchema, submission);
@@ -99,9 +100,12 @@ describe("FormRenderer", () => {
       expect(fetchMock).toHaveBeenCalledWith("https://example.test/active", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: expect.stringContaining('"participantCode":"DEMO-101"'),
+        body: expect.stringContaining('"coding":{"standard":"CDISC"'),
       }),
     );
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    expect(body.data.participantCode).toBe("DEMO-101");
+    expect(body.formId).toBe("airwayai-baseline");
     vi.unstubAllGlobals();
   });
 

@@ -42,6 +42,33 @@ export type FieldWidget =
 export interface FieldOption {
   value: JsonPrimitive;
   label: LocalizedText;
+  coding?: TerminologyCode;
+}
+
+export interface TerminologyCode {
+  system: string;
+  code: string;
+  submissionValue: string;
+  display?: LocalizedText;
+  version?: string;
+}
+
+export interface FieldCoding {
+  status: "matched" | "not-applicable";
+  rationale?: LocalizedText;
+  standard?: "CDISC";
+  model?: string;
+  implementationGuide?: string;
+  domain?: string;
+  variable?: string;
+  version?: string;
+  source?: string;
+  codelist?: {
+    name: string;
+    submissionValue: string;
+    ncitCode: string;
+    extensible: boolean;
+  };
 }
 
 export interface FieldConfig {
@@ -51,6 +78,7 @@ export interface FieldConfig {
   placeholder?: LocalizedText;
   widget: FieldWidget;
   options?: FieldOption[];
+  coding?: FieldCoding;
   unit?: {
     code: string;
     display: LocalizedText;
@@ -97,7 +125,7 @@ export type NumericExpression =
     };
 
 export interface AirwayAiExtension {
-  contractVersion: "1.0.0";
+  contractVersion: "1.0.0" | "1.1.0";
   formId: string;
   schemaVersion: string;
   status: "demo" | "draft" | "released" | "retired";
@@ -182,11 +210,23 @@ export interface FormSnapshot {
 export interface FormSubmission {
   formId: string;
   schemaVersion: string;
-  contractVersion: "1.0.0";
+  contractVersion: "1.0.0" | "1.1.0";
   rendererVersion: string;
   locale: string;
   data: JsonRecord;
   derivedPaths: string[];
+  coding: SubmissionCoding;
+}
+
+export interface SubmissionCoding {
+  standard: "CDISC";
+  fields: Record<
+    string,
+    {
+      mapping: FieldCoding;
+      selectedTerms?: TerminologyCode[];
+    }
+  >;
 }
 
 interface SharedRendererProps {

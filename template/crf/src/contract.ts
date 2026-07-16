@@ -239,6 +239,96 @@ function validateSemanticContract(contract: CrfContract): Diagnostic[] {
       );
     }
 
+    if (extension.contractVersion === "1.1.0" && !config.coding) {
+      diagnostics.push(
+        diagnostic(
+          "error",
+          "coding-status-required",
+          "contractVersion 1.1.0 的每個欄位都必須記錄 CDISC coding status。",
+          path,
+        ),
+      );
+    }
+
+    if (config.coding?.status === "not-applicable") {
+      if (!config.coding.rationale) {
+        diagnostics.push(
+          diagnostic(
+            "error",
+            "coding-rationale-required",
+            "CDISC coding 標示為 not-applicable 時必須提供理由。",
+            path,
+          ),
+        );
+      }
+    }
+
+    if (config.coding?.status === "matched") {
+      const coding = config.coding;
+      if (
+        coding.standard !== "CDISC" ||
+        !coding.model ||
+        !coding.version ||
+        !coding.source ||
+        (!coding.variable && !coding.codelist)
+      ) {
+        diagnostics.push(
+          diagnostic(
+            "error",
+            "coding-mapping-incomplete",
+            "matched CDISC coding 必須包含 standard、model、version、source，以及 variable 或 codelist。",
+            path,
+          ),
+        );
+      }
+
+      if (coding.codelist) {
+        if (!config.options?.length) {
+          diagnostics.push(
+            diagnostic(
+              "error",
+              "coded-options-required",
+              "有 CDISC codelist 的欄位必須提供受控選項。",
+              path,
+            ),
+          );
+        } else {
+          config.options.forEach((option, index) => {
+            if (!option.coding) {
+              diagnostics.push(
+                diagnostic(
+                  "error",
+                  "option-coding-required",
+                  "CDISC codelist 的每個選項都必須提供 terminology coding。",
+                  `${path}/options/${index}`,
+                ),
+              );
+              return;
+            }
+            if (option.coding.submissionValue !== String(option.value)) {
+              diagnostics.push(
+                diagnostic(
+                  "error",
+                  "option-submission-value-mismatch",
+                  "選項 value 必須與 CDISC submissionValue 完全一致。",
+                  `${path}/options/${index}`,
+                ),
+              );
+            }
+          });
+        }
+      } else if (config.options?.some((option) => option.coding)) {
+        diagnostics.push(
+          diagnostic(
+            "error",
+            "option-coding-without-codelist",
+            "選項 terminology coding 必須搭配欄位層級的 CDISC codelist。",
+            path,
+          ),
+        );
+      }
+    }
+
     if (
       ["radio", "select", "checkbox_group"].includes(config.widget) &&
       !optionValuesMatch(config, property)
@@ -306,12 +396,26 @@ function validateSemanticContract(contract: CrfContract): Diagnostic[] {
     checkLocalizedText(diagnostics, config.help, extension.defaultLocale, `${path}/help`);
     checkLocalizedText(diagnostics, config.placeholder, extension.defaultLocale, `${path}/placeholder`);
     checkLocalizedText(diagnostics, config.unit?.display, extension.defaultLocale, `${path}/unit/display`);
+    checkLocalizedText(
+      diagnostics,
+      config.coding?.rationale,
+      extension.defaultLocale,
+      `${path}/coding/rationale`,
+    );
     config.options?.forEach((option, index) =>
       checkLocalizedText(
         diagnostics,
         option.label,
         extension.defaultLocale,
         `${path}/options/${index}/label`,
+      ),
+    );
+    config.options?.forEach((option, index) =>
+      checkLocalizedText(
+        diagnostics,
+        option.coding?.display,
+        extension.defaultLocale,
+        `${path}/options/${index}/coding/display`,
       ),
     );
     config.links?.forEach((link, index) =>

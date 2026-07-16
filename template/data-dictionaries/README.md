@@ -71,4 +71,10 @@ npm test
 npm run build
 ```
 
+## CDISC coding（contract 1.1.0）
+
+每個欄位的 `x-airwayai.fields[path].coding` 必須記錄 `matched` 或 `not-applicable`。`matched` 包含 CDISC model、domain/variable 或 codelist、版本與官方 HTTPS 來源；`not-applicable` 必須包含理由。
+
+受控選項以 `options[*].coding` 記錄 terminology system、code 與 CDISC submission value，且選項 `value` 必須等於 submission value。Renderer 會在 HTML 顯示 coding，並將 active field mapping 與選定 term 放入 `FormSubmission.coding.fields`。`onSubmit`、答案下載 JSON 及內建 API POST 都使用相同的完整 `FormSubmission`。
+
 正式 schema 還必須由 Clinic 角色依核准的 `program.yaml` 產生，並經 PI 與 QA 流程確認。

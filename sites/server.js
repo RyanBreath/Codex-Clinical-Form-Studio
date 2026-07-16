@@ -1,8 +1,9 @@
-const http = require("node:http");
-const fs = require("node:fs");
-const path = require("node:path");
+import http from "node:http";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const publicDirectory = path.resolve(__dirname, "../public");
+const publicDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../public");
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",

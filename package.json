@@ -1,0 +1,7 @@
+{
+  "name": "osa-cpap-ecrf-site",
+  "private": true,
+  "scripts": {
+    "build": "AIRWAYAI_CRF_SCHEMA_PATH=../../2.SA/projects/prj_20260716-1544/forms/screening-baseline-cpap-compliance/0.1.0/crf-schema.json npm --prefix template/crf run build"
+  }
+}

@@ -1,5 +1,5 @@
 import { copyFileSync, mkdirSync, readdirSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import { execFileSync } from "node:child_process";
 
 const root = resolve(import.meta.dirname, "..");
@@ -31,12 +31,18 @@ function copyDirectory(source, destination) {
   }
 }
 
-// Invoke npm's JavaScript entry point through this Node process. This avoids
-// relying on a platform-specific `npm`/`npm.cmd` shell executable.
-const npmCommand = process.execPath;
-const npmCli = resolve(dirname(process.execPath), "node_modules/npm/bin/npm-cli.js");
-
-run(npmCommand, [npmCli, "--prefix", crfDirectory, "install"]);
+// npm is available on the cloud Linux build image. On Windows, invoke the
+// command through cmd.exe because Node cannot directly spawn npm.cmd.
+if (process.platform === "win32") {
+  run(process.env.ComSpec ?? "cmd.exe", [
+    "/d",
+    "/s",
+    "/c",
+    `npm --prefix "${crfDirectory}" install`,
+  ]);
+} else {
+  run("npm", ["--prefix", crfDirectory, "install"]);
+}
 run(process.execPath, [resolve(crfDirectory, "node_modules/vite/bin/vite.js"), "build"], {
   cwd: crfDirectory,
   env: { ...process.env, AIRWAYAI_CRF_SCHEMA_PATH: schemaPath },

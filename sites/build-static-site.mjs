@@ -38,8 +38,8 @@ if (process.platform === "win32") {
     "/d",
     "/s",
     "/c",
-    `npm --prefix "${crfDirectory}" install`,
-  ]);
+    "npm install",
+  ], { cwd: crfDirectory });
 } else {
   run("npm", ["--prefix", crfDirectory, "install"]);
 }

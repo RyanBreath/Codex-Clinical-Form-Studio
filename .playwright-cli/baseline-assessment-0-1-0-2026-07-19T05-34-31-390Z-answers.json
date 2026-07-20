@@ -1,0 +1,82 @@
+{
+  "artifactType": "crf-answers",
+  "downloadedAt": "2026-07-19T05:34:31.390Z",
+  "rendererVersion": "0.2.0",
+  "traceability": {
+    "traceabilityVersion": "1.0.0",
+    "projectId": "prj_demo-studio",
+    "prj_id": "prj_demo-studio",
+    "protocolFileName": "protocol.pdf",
+    "formId": "baseline-assessment",
+    "schemaVersion": "0.1.0",
+    "contractVersion": "1.1.0",
+    "schemaComment": "projectId=prj_demo-studio; protocol=protocol.pdf; sha256=0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "submission": {
+    "formId": "baseline-assessment",
+    "schemaVersion": "0.1.0",
+    "contractVersion": "1.1.0",
+    "rendererVersion": "0.2.0",
+    "locale": "zh-TW",
+    "data": {
+      "ageYears": 35,
+      "biologicalSex": "F",
+      "investigatorNote": ""
+    },
+    "derivedPaths": [],
+    "coding": {
+      "standard": "CDISC",
+      "fields": {
+        "/ageYears": {
+          "mapping": {
+            "status": "matched",
+            "standard": "CDISC",
+            "model": "SDTM",
+            "implementationGuide": "SDTMIG v3.4",
+            "domain": "DM",
+            "variable": "AGE",
+            "version": "3.4",
+            "source": "https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-4"
+          }
+        },
+        "/biologicalSex": {
+          "mapping": {
+            "status": "matched",
+            "standard": "CDISC",
+            "model": "SDTM",
+            "implementationGuide": "SDTMIG v3.4",
+            "domain": "DM",
+            "variable": "SEX",
+            "version": "2026-03-27",
+            "source": "https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.txt",
+            "codelist": {
+              "name": "Sex",
+              "submissionValue": "SEX",
+              "ncitCode": "C66731",
+              "extensible": false
+            }
+          },
+          "selectedTerms": [
+            {
+              "system": "https://ncit.nci.nih.gov",
+              "code": "C16576",
+              "submissionValue": "F",
+              "display": {
+                "zh-TW": "Female"
+              },
+              "version": "2026-03-27"
+            }
+          ]
+        },
+        "/investigatorNote": {
+          "mapping": {
+            "status": "not-applicable",
+            "rationale": {
+              "zh-TW": "研究作業備註不對應提交用 CDISC 變數。"
+            }
+          }
+        }
+      }
+    }
+  }
+}

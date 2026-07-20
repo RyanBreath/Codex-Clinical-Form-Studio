@@ -1,0 +1,36 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - strong [ref=e3]: AirwayAI coded eCRF
+    - generic [ref=e4]: baseline-assessment · 0.1.0
+  - main [ref=e5]:
+    - generic [ref=e6]: 這是離線審查用 Demo。請勿輸入直接識別資訊；臨床與 CDISC 正確性仍須由授權人員確認。
+    - generic [ref=e7]:
+      - heading "基準評估表" [level=1] [ref=e8]
+      - paragraph [ref=e9]: 收集受試者基準資料。
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e12]:
+            - generic [ref=e13]: 受試者年齡 （必填）
+            - spinbutton "受試者年齡 （必填）" [ref=e14]: "42"
+            - generic [ref=e15]: 記錄同意時的年齡。
+            - generic [ref=e16]: CDISC SDTM · DM.AGE
+          - generic [ref=e17]:
+            - generic [ref=e18]: 生理性別 （必填）
+            - generic [ref=e19]:
+              - generic [ref=e20]:
+                - radio "女" [checked] [active] [ref=e21]
+                - text: 女
+              - generic [ref=e22]:
+                - radio "男" [ref=e23]
+                - text: 男
+              - generic [ref=e24]:
+                - radio "未知" [ref=e25]
+                - text: 未知
+            - generic [ref=e26]: 記錄 protocol 指定的生理性別選項。
+            - generic [ref=e27]: CDISC SDTM · DM.SEX · SEX · C66731
+          - generic [ref=e28]:
+            - generic [ref=e29]: 研究備註
+            - textbox "研究備註" [ref=e30]
+            - generic [ref=e31]: 記錄不含直接識別資訊的研究備註。
+            - generic [ref=e32]: CDISC：不適用 · 研究作業備註不對應提交用 CDISC 變數。
+        - button "下載 coded submission JSON" [ref=e34] [cursor=pointer]

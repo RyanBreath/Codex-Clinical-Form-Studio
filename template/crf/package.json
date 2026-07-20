@@ -26,6 +26,10 @@
   },
   "scripts": {
     "dev": "vite",
+    "studio": "node scripts/studio-server.mjs",
+    "studio:build": "vite build --config vite.studio.config.ts",
+    "studio:preview": "node scripts/studio-server.mjs --production",
+    "studio:test": "vitest run src/studio/compiler.test.ts && node --test scripts/cdisc-terminology.test.mjs",
     "validate:schema": "node scripts/validate-schema.mjs",
     "check": "tsc --noEmit && vitest run src/contract.test.ts src/engine.test.ts",
     "test": "vitest run",
@@ -40,6 +44,7 @@
   "dependencies": {
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
+    "jszip": "^3.10.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.81.0"

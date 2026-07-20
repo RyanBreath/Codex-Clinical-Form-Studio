@@ -1,0 +1,491 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: A
+      - generic [ref=e7]:
+        - strong [ref=e8]: AirwayAI eCRF Studio
+        - generic [ref=e9]: Protocol YAML → CDISC review → coded form
+    - generic [ref=e10]:
+      - button "Choose File" [ref=e11]
+      - button "載入 YAML" [ref=e12] [cursor=pointer]
+      - button "編輯原始 YAML" [ref=e13] [cursor=pointer]
+      - button "下載 YAML" [ref=e14] [cursor=pointer]
+      - button "下載整包 ZIP" [ref=e15] [cursor=pointer]
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: prj_demo-studio
+      - heading "基準評估表" [level=1] [ref=e19]
+      - paragraph [ref=e20]: 示範用睡眠研究計畫書
+    - generic "審核 Gate" [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]: Gate A · 臨床意義
+        - combobox "Gate A · 臨床意義" [ref=e24]:
+          - option "待核准"
+          - option "已核准" [selected]
+      - generic [ref=e25]:
+        - generic [ref=e26]: Gate B · 表單合約
+        - combobox "Gate B · 表單合約" [ref=e27]:
+          - option "待核准"
+          - option "已核准" [selected]
+  - main [ref=e28]:
+    - complementary "欄位清單" [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]: Schema fields
+          - heading "欄位清單" [level=2] [ref=e33]
+        - button "新增欄位" [ref=e34] [cursor=pointer]: ＋
+      - generic [ref=e35]:
+        - generic [ref=e36]: 搜尋欄位
+        - textbox "搜尋欄位" [ref=e37]:
+          - /placeholder: 搜尋名稱或 ID
+      - navigation [ref=e38]:
+        - button "受試者年齡 age_years 已對應" [ref=e251] [cursor=pointer]:
+          - generic [ref=e41]:
+            - strong [ref=e42]: 受試者年齡
+            - generic [ref=e43]: age_years
+          - emphasis [ref=e44]: 已對應
+        - button "生理性別 biological_sex 已對應" [ref=e45] [cursor=pointer]:
+          - generic [ref=e47]:
+            - strong [ref=e48]: 生理性別
+            - generic [ref=e49]: biological_sex
+          - emphasis [ref=e50]: 已對應
+        - button "研究備註 investigator_note 不適用" [ref=e51] [cursor=pointer]:
+          - generic [ref=e53]:
+            - strong [ref=e54]: 研究備註
+            - generic [ref=e55]: investigator_note
+          - emphasis [ref=e56]: 不適用
+    - region "欄位編輯器" [ref=e57]:
+      - generic [ref=e58]:
+        - region [ref=e59]:
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - generic [ref=e62]: Field definition
+              - heading "欄位資訊" [level=2] [ref=e63]
+            - button "刪除欄位" [ref=e64] [cursor=pointer]
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - generic [ref=e67]: Concept ID
+              - textbox "Concept ID 使用 snake_case；會轉成 JSON field path。" [ref=e68]: age_years
+              - generic [ref=e69]: 使用 snake_case；會轉成 JSON field path。
+            - generic [ref=e70]:
+              - generic [ref=e71]: 顯示名稱
+              - textbox "顯示名稱" [ref=e72]: 受試者年齡
+            - generic [ref=e73]:
+              - generic [ref=e74]: 欄位目的／臨床意義
+              - textbox "欄位目的／臨床意義" [ref=e75]: 記錄同意時的年齡。
+            - generic [ref=e76]:
+              - generic [ref=e77]: 資料型別
+              - combobox "資料型別" [ref=e78]:
+                - option "文字 string"
+                - option "整數 integer" [selected]
+                - option "數值 number"
+                - option "是／否 boolean"
+                - option "日期 date"
+                - option "待確認 unresolved"
+            - generic [ref=e79]:
+              - generic [ref=e80]: 必填性
+              - combobox "必填性" [ref=e81]:
+                - option "必填" [selected]
+                - option "選填"
+                - option "待確認"
+            - generic [ref=e82]:
+              - generic [ref=e83]: 單位
+              - textbox "單位" [ref=e84]:
+                - /placeholder: "例如 years、{events}/h"
+                - text: years
+            - generic [ref=e85]:
+              - generic [ref=e86]:
+                - generic [ref=e87]: 最小值
+                - spinbutton "最小值" [ref=e88]: "18"
+              - generic [ref=e89]:
+                - generic [ref=e90]: 最大值
+                - spinbutton "最大值" [ref=e91]: "85"
+            - generic [ref=e92]:
+              - generic [ref=e93]: 選項
+              - textbox "選項 左側是 submission value，右側是顯示文字；無選項可留白。" [ref=e94]:
+                - /placeholder: "每行一個：F | 女\nM | 男"
+              - generic [ref=e95]: 左側是 submission value，右側是顯示文字；無選項可留白。
+        - region [ref=e96]:
+          - generic [ref=e98]:
+            - generic [ref=e99]: Traceability
+            - heading "來源與推論" [level=2] [ref=e100]
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - generic [ref=e103]: Protocol 定位
+              - textbox "Protocol 定位" [ref=e104]:
+                - /placeholder: Section 8.2, page 42, Table 6 row AHI
+                - text: Section 8.2, page 42
+            - generic [ref=e105]:
+              - generic [ref=e106]: 來源信心
+              - combobox "來源信心" [ref=e107]:
+                - option "High" [selected]
+                - option "Medium"
+                - option "Low"
+            - generic [ref=e108]:
+              - generic [ref=e109]: 概念來源
+              - combobox "概念來源" [ref=e110]:
+                - option "Protocol 明示" [selected]
+                - option "推論輔助欄位"
+        - region [ref=e111]:
+          - generic [ref=e113]:
+            - generic [ref=e114]: Review-gated mapping
+            - heading "CDISC 編碼" [level=2] [ref=e115]
+          - generic [ref=e116]: 搜尋結果來自官方 NCI‑EVS SDTM Controlled Terminology，只是候選；需由使用者確認後才寫回 YAML。
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - generic [ref=e119]: CDISC 搜尋字詞
+              - textbox "CDISC 搜尋字詞" [ref=e120]:
+                - /placeholder: 例如 age unit、MMSE total score
+                - text: age unit
+            - button "取得可能編碼" [ref=e121] [cursor=pointer]
+          - generic [ref=e122]:
+            - generic [ref=e123]:
+              - generic [ref=e124]: 對應狀態
+              - combobox "對應狀態" [ref=e125]:
+                - option "待確認 unresolved"
+                - option "已確認 matched" [selected]
+                - option "不適用 not-applicable"
+            - generic [ref=e126]:
+              - generic [ref=e127]: Mapping 信心（%）
+              - spinbutton "Mapping 信心（%）" [ref=e128]: "95"
+            - generic [ref=e129]:
+              - generic [ref=e130]: Model
+              - textbox "Model" [ref=e131]:
+                - /placeholder: SDTM
+                - text: SDTM
+            - generic [ref=e132]:
+              - generic [ref=e133]: Implementation Guide
+              - textbox "Implementation Guide" [ref=e134]:
+                - /placeholder: SDTMIG v3.4
+                - text: SDTMIG v3.4
+            - generic [ref=e135]:
+              - generic [ref=e136]: Domain
+              - textbox "Domain" [ref=e137]:
+                - /placeholder: DM
+                - text: DM
+            - generic [ref=e138]:
+              - generic [ref=e139]: Variable
+              - textbox "Variable" [ref=e140]:
+                - /placeholder: AGE
+                - text: AGE
+            - generic [ref=e141]:
+              - generic [ref=e142]: Terminology version
+              - textbox "Terminology version" [ref=e143]:
+                - /placeholder: 2026-03-27
+                - text: "3.4"
+            - generic [ref=e144]:
+              - generic [ref=e145]: Source URL
+              - textbox "Source URL" [ref=e146]:
+                - /placeholder: https://…
+                - text: https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-4
+            - generic [ref=e147]:
+              - generic [ref=e148]: Codelist name
+              - textbox "Codelist name" [ref=e149]:
+                - /placeholder: 留白表示不使用 codelist
+            - generic [ref=e150]:
+              - generic [ref=e151]: Codelist submission value / NCIt
+              - generic [ref=e152]:
+                - textbox "Codelist submission value / NCIt" [ref=e153]:
+                  - /placeholder: SEX
+                - textbox "C66731" [ref=e154]
+          - generic [ref=e254]:
+            - generic [ref=e255]:
+              - strong [ref=e256]: 可能的 CDISC／NCIt 候選
+              - generic [ref=e257]: 2026-03-27 · 依文字相關性排序，非自動判定
+            - article [ref=e258]:
+              - generic [ref=e259]:
+                - generic [ref=e260]:
+                  - generic [ref=e261]: AGEU
+                  - generic [ref=e262]: C66781
+                  - generic [ref=e263]: Codelist
+                - strong [ref=e264]: CDISC SDTM Age Unit Terminology
+                - generic [ref=e265]: AGEU
+                - paragraph [ref=e266]: Those units of time that are routinely used to express the age of a subject.
+                - text: Age Unit
+              - button "採用並寫入" [ref=e267] [cursor=pointer]
+            - article [ref=e268]:
+              - generic [ref=e269]:
+                - generic [ref=e270]:
+                  - generic [ref=e271]: UNIT
+                  - generic [ref=e272]: C48520
+                - strong [ref=e273]: Package Dosing Unit
+                - generic [ref=e274]: PACKAGE
+                - paragraph [ref=e275]: A dosing measurement based on the package unit.(NCI)
+                - text: Unit
+              - button "採用並寫入" [ref=e276] [cursor=pointer]
+            - article [ref=e277]:
+              - generic [ref=e278]:
+                - generic [ref=e279]:
+                  - generic [ref=e280]: UNIT
+                  - generic [ref=e281]: C189642
+                - strong [ref=e282]: Armour Unit
+                - generic [ref=e283]: ARMOUR UNIT
+                - paragraph [ref=e284]: A unit of proteolytic activity for trypsin and/or chymotrypsin that, upon incubation with the hemoglobin substrate, will release a quantity of phenolic substances that react with Folin-Ciocalteu phenol reagent to produce a colorimetric change of equal intensity to that produced from the reaction of one microgram of tyrosine with Folin-Ciocalteu phenol reagent.
+                - text: Unit
+              - button "採用並寫入" [ref=e285] [cursor=pointer]
+            - article [ref=e286]:
+              - generic [ref=e287]:
+                - generic [ref=e288]:
+                  - generic [ref=e289]: UNIT
+                  - generic [ref=e290]: C71321
+                - strong [ref=e291]: Fingertip Dosing Unit
+                - generic [ref=e292]: FINGERTIP UNIT
+                - paragraph [ref=e293]: An arbitrary dosing unit used predominantly for semisolid topical formulations such as cream, ointment, paste, etc. One fingertip unit is the amount of a product that is squeezed out from a standard tube with 5-millimeter diameter nozzle along an adult's fingertip. A fingertip length is defined from the tip of the index finger to the first finger crease. A fingertip dosing unit varies with age and size of the body. The average fingertip unit is equal to approximately 0.5 gram for an adult male and 0.4 gram for an adult female.(NCI)
+                - text: Unit
+              - button "採用並寫入" [ref=e294] [cursor=pointer]
+            - article [ref=e295]:
+              - generic [ref=e296]:
+                - generic [ref=e297]:
+                  - generic [ref=e298]: UNIT
+                  - generic [ref=e299]: C73716
+                - strong [ref=e300]: Gram per Cage
+                - generic [ref=e301]: g/cage
+                - paragraph [ref=e302]: A unit of measure expressed in gram(s) per cage.
+                - text: Unit
+              - button "採用並寫入" [ref=e303] [cursor=pointer]
+            - article [ref=e304]:
+              - generic [ref=e305]:
+                - generic [ref=e306]:
+                  - generic [ref=e307]: UNIT
+                  - generic [ref=e308]: C73717
+                - strong [ref=e309]: Gram per Cage per Day
+                - generic [ref=e310]: g/cage/day
+                - paragraph [ref=e311]: A unit of measure expressed in gram(s) per cage per period of time equal to twenty-four hours.
+                - text: Unit
+              - button "採用並寫入" [ref=e312] [cursor=pointer]
+            - article [ref=e313]:
+              - generic [ref=e314]:
+                - generic [ref=e315]:
+                  - generic [ref=e316]: UNIT
+                  - generic [ref=e317]: C73718
+                - strong [ref=e318]: Gram per Cage per Week
+                - generic [ref=e319]: g/cage/wk
+                - paragraph [ref=e320]: A unit of measure expressed in gram(s) per cage per period of time equal to seven days.
+                - text: Unit
+              - button "採用並寫入" [ref=e321] [cursor=pointer]
+            - article [ref=e322]:
+              - generic [ref=e323]:
+                - generic [ref=e324]:
+                  - generic [ref=e325]: UNIT
+                  - generic [ref=e326]: C48579
+                - strong [ref=e327]: International Unit
+                - generic [ref=e328]: IU
+                - paragraph [ref=e329]: The unitage assigned by the WHO (World Health Organization) to International Biological Standards - substances, classed as biological according to the criteria provided by WHO Expert Committee on Biological Standardization, to enable the results of biological and immunological assay procedures to be expressed in the same way throughout the world. The definition of an international unit is generally arbitrary and technical, and has to be officially approved by the International Conference for Unification of Formulae.(NCI)
+                - text: Unit
+              - button "採用並寫入" [ref=e330] [cursor=pointer]
+            - article [ref=e331]:
+              - generic [ref=e332]:
+                - generic [ref=e333]:
+                  - generic [ref=e334]: UNIT
+                  - generic [ref=e335]: C73750
+                - strong [ref=e336]: Milliliter per Cage
+                - generic [ref=e337]: mL/cage
+                - paragraph [ref=e338]: A unit of measure expressed in milliliter(s) per cage.
+                - text: Unit
+              - button "採用並寫入" [ref=e339] [cursor=pointer]
+            - article [ref=e340]:
+              - generic [ref=e341]:
+                - generic [ref=e342]:
+                  - generic [ref=e343]: UNIT
+                  - generic [ref=e344]: C73751
+                - strong [ref=e345]: Milliliter per Cage per Day
+                - generic [ref=e346]: mL/cage/day
+                - paragraph [ref=e347]: A unit of measure expressed in milliliter(s) per cage per period of time equal to twenty-four hours.
+                - text: Unit
+              - button "採用並寫入" [ref=e348] [cursor=pointer]
+            - article [ref=e349]:
+              - generic [ref=e350]:
+                - generic [ref=e351]:
+                  - generic [ref=e352]: UNIT
+                  - generic [ref=e353]: C73752
+                - strong [ref=e354]: Milliliter per Cage per Week
+                - generic [ref=e355]: mL/cage/wk
+                - paragraph [ref=e356]: A unit of measure expressed in milliliter(s) per cage expressed per period of time equal to seven days.
+                - text: Unit
+              - button "採用並寫入" [ref=e357] [cursor=pointer]
+            - article [ref=e358]:
+              - generic [ref=e359]:
+                - generic [ref=e360]:
+                  - generic [ref=e361]: UNIT
+                  - generic [ref=e362]: C117974
+                - strong [ref=e363]: Nanomole Bone Collagen Equivalent per Liter
+                - generic [ref=e364]: nmol BCE/L
+                - paragraph [ref=e365]: A unit of relative amount of substance concentration equal to nanomoles of bone collagen equivalent weight per unit of volume equal to one liter.
+                - text: Unit
+              - button "採用並寫入" [ref=e366] [cursor=pointer]
+            - article [ref=e367]:
+              - generic [ref=e368]:
+                - generic [ref=e369]:
+                  - generic [ref=e370]: UNIT
+                  - generic [ref=e371]: C118137
+                - strong [ref=e372]: Nanomole Bone Collagen Equivalent per Millimole
+                - generic [ref=e373]: nmol BCE/mmol
+                - paragraph [ref=e374]: A unit of relative amount of substance concentration equal to nanomoles of bone collagen equivalent weight per unit of substance concentration equal to one millimole.
+                - text: Unit
+              - button "採用並寫入" [ref=e375] [cursor=pointer]
+            - article [ref=e376]:
+              - generic [ref=e377]:
+                - generic [ref=e378]:
+                  - generic [ref=e379]: UNIT
+                  - generic [ref=e380]: C122217
+                - strong [ref=e381]: Nanomole Bone Collagen Equivalents per Nanomole
+                - generic [ref=e382]: nmol BCE/nmol
+                - paragraph [ref=e383]: A unit of relative amount of substance concentration equal to nanomoles of bone collagen equivalent weight per unit of substance concentration equal to one nanomole.
+                - text: Unit
+              - button "採用並寫入" [ref=e384] [cursor=pointer]
+            - article [ref=e385]:
+              - generic [ref=e386]:
+                - generic [ref=e387]:
+                  - generic [ref=e388]: UNIT
+                  - generic [ref=e389]: C62653
+                - strong [ref=e390]: Pack Dosage Form
+                - generic [ref=e391]: PACK
+                - paragraph [ref=e392]: A number of individual items packaged as a unit.
+                - text: Unit
+              - button "採用並寫入" [ref=e393] [cursor=pointer]
+            - article [ref=e394]:
+              - generic [ref=e395]:
+                - generic [ref=e396]:
+                  - generic [ref=e397]: UNIT
+                  - generic [ref=e398]: C25613
+                - strong [ref=e399]: Percentage
+                - generic [ref=e400]: "%"
+                - paragraph [ref=e401]: One hundred times the quotient of one quantity divided by another, with the same units of measurement.
+                - text: Unit
+              - button "採用並寫入" [ref=e402] [cursor=pointer]
+            - article [ref=e403]:
+              - generic [ref=e404]:
+                - generic [ref=e405]:
+                  - generic [ref=e406]: UNIT
+                  - generic [ref=e407]: C187981
+                - strong [ref=e408]: Percentage times Minute per Hour
+                - generic [ref=e409]: "%*min/h"
+                - paragraph [ref=e410]: A unit of measurement expressed as the percentage times minutes divided by hours.
+                - text: Unit
+              - button "採用並寫入" [ref=e411] [cursor=pointer]
+            - article [ref=e412]:
+              - generic [ref=e413]:
+                - generic [ref=e414]:
+                  - generic [ref=e415]: UNIT
+                  - generic [ref=e416]: C65132
+                - strong [ref=e417]: Tuberculin Unit
+                - generic [ref=e418]: tuberculin unit
+                - paragraph [ref=e419]: An arbitrary unit of tuberculin dosage defined by comparison of clinical response with a preparation of the purified protein derivative standardized for use in humans for tuberculin skin test reaction.(NCI)
+                - text: Unit
+              - button "採用並寫入" [ref=e420] [cursor=pointer]
+            - article [ref=e421]:
+              - generic [ref=e422]:
+                - generic [ref=e423]:
+                  - generic [ref=e424]: UNIT
+                  - generic [ref=e425]: C71620
+                  - generic [ref=e426]: Codelist
+                - strong [ref=e427]: CDISC SDTM Unit of Measure Terminology
+                - generic [ref=e428]: UNIT
+                - paragraph [ref=e429]: Terminology codelist used for units within CDISC.
+                - text: Unit
+              - button "採用並寫入" [ref=e430] [cursor=pointer]
+            - article [ref=e431]:
+              - generic [ref=e432]:
+                - generic [ref=e433]:
+                  - generic [ref=e434]: UNIT
+                  - generic [ref=e435]: C71185
+                - strong [ref=e436]: 100 International Units per Milliliter
+                - generic [ref=e437]: 100 IU/mL
+                - paragraph [ref=e438]: A unit of arbitrary substance concentration (biologic activity concentration) defined as the concentration of one hundred international units per one milliliter of system volume.(NCI)
+                - text: Unit
+              - button "採用並寫入" [ref=e439] [cursor=pointer]
+    - complementary "預覽與驗證" [ref=e155]:
+      - tablist "右側面板" [ref=e156]:
+        - tab "表單預覽" [selected] [ref=e157] [cursor=pointer]
+        - tab "驗證 0" [ref=e158] [cursor=pointer]:
+          - text: 驗證
+          - generic [ref=e159]: "0"
+        - tab "Submission" [ref=e160] [cursor=pointer]
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - generic [ref=e166]:
+              - generic [ref=e167]: 合成 Demo
+              - generic [ref=e168]: 資料填寫
+            - heading "基準評估表" [level=1] [ref=e169]
+            - paragraph [ref=e170]: 收集受試者基準資料。
+          - generic [ref=e171]:
+            - generic [ref=e172]:
+              - term [ref=e173]: 表單
+              - definition [ref=e174]: baseline-assessment
+            - generic [ref=e175]:
+              - term [ref=e176]: Schema
+              - definition [ref=e177]: v0.1.0
+        - note [ref=e178]:
+          - generic [ref=e179]: ⓘ
+          - paragraph [ref=e180]: 本表單僅供 Demo／研究設計審查，不代表臨床正確性、法規提交適用性或 QMS 驗證完成。
+        - region [ref=e182]:
+          - generic [ref=e183]:
+            - generic [ref=e184]: "01"
+            - generic [ref=e185]:
+              - heading "基準評估表" [level=2] [ref=e186]
+              - paragraph [ref=e187]: 收集受試者基準資料。
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - generic [ref=e190]: 受試者年齡（必填）
+              - paragraph [ref=e192]: 記錄同意時的年齡。
+              - generic [ref=e193]:
+                - spinbutton "受試者年齡（必填）" [ref=e252]
+                - generic [ref=e195]: years
+              - generic "受試者年齡 CDISC coding" [ref=e253]:
+                - generic [ref=e197]:
+                  - term [ref=e198]: CDISC
+                  - definition [ref=e199]: SDTM · DM.AGE
+                - generic [ref=e200]:
+                  - term [ref=e201]: 版本
+                  - definition [ref=e202]: "3.4"
+            - generic [ref=e203]:
+              - generic [ref=e204]: 生理性別（必填）
+              - paragraph [ref=e206]: 記錄 protocol 指定的生理性別選項。
+              - radiogroup "生理性別（必填）" [ref=e207]:
+                - generic [ref=e208] [cursor=pointer]:
+                  - radio "女 F · C16576" [ref=e209]
+                  - generic [ref=e210]:
+                    - text: 女
+                    - generic [ref=e211]: F · C16576
+                - generic [ref=e212] [cursor=pointer]:
+                  - radio "男 M · C20197" [ref=e213]
+                  - generic [ref=e214]:
+                    - text: 男
+                    - generic [ref=e215]: M · C20197
+                - generic [ref=e216] [cursor=pointer]:
+                  - radio "未知 U · C17998" [ref=e217]
+                  - generic [ref=e218]:
+                    - text: 未知
+                    - generic [ref=e219]: U · C17998
+              - generic "生理性別 CDISC coding" [ref=e220]:
+                - generic [ref=e221]:
+                  - term [ref=e222]: CDISC
+                  - definition [ref=e223]: SDTM · DM.SEX
+                - generic [ref=e224]:
+                  - term [ref=e225]: Codelist
+                  - definition [ref=e226]: SEX · NCIt C66731
+                - generic [ref=e227]:
+                  - term [ref=e228]: 版本
+                  - definition [ref=e229]: 2026-03-27
+            - generic [ref=e230]:
+              - generic [ref=e231]: 研究備註
+              - paragraph [ref=e233]: 記錄不含直接識別資訊的研究備註。
+              - textbox "研究備註" [ref=e235]
+              - generic "研究備註 CDISC coding" [ref=e236]:
+                - generic [ref=e237]:
+                  - term [ref=e238]: CDISC
+                  - definition [ref=e239]: 不適用
+                - generic [ref=e240]:
+                  - term [ref=e241]: 說明
+                  - definition [ref=e242]: 研究作業備註不對應提交用 CDISC 變數。
+        - generic [ref=e243]:
+          - generic [ref=e244]:
+            - strong [ref=e245]: 送出前會再次驗證所有目前有效欄位
+            - generic [ref=e246]: 隱藏或停用欄位不會包含在 payload。
+          - generic [ref=e247]:
+            - button "驗證並送出" [ref=e248] [cursor=pointer]
+            - generic [ref=e249]:
+              - text: "API URL:"
+              - textbox "API URL:" [ref=e250]:
+                - /placeholder: https://example.com/api/forms

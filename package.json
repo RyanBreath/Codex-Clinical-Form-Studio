@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node sites/build-static-site.mjs"
+    "build": "node sites/build-static-site.mjs",
+    "studio": "npm --prefix template/crf run studio",
+    "studio:build": "npm --prefix template/crf run studio:build",
+    "studio:test": "npm --prefix template/crf run studio:test"
   }
 }

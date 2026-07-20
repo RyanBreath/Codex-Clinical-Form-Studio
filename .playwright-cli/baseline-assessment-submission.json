@@ -1,0 +1,58 @@
+{
+  "formId": "baseline-assessment",
+  "schemaVersion": "0.1.0",
+  "contractVersion": "1.1.0",
+  "rendererVersion": "studio-standalone-1.0.0",
+  "locale": "zh-TW",
+  "data": {
+    "ageYears": 42,
+    "biologicalSex": "F"
+  },
+  "derivedPaths": [],
+  "coding": {
+    "standard": "CDISC",
+    "fields": {
+      "/ageYears": {
+        "mapping": {
+          "status": "matched",
+          "standard": "CDISC",
+          "model": "SDTM",
+          "implementationGuide": "SDTMIG v3.4",
+          "domain": "DM",
+          "variable": "AGE",
+          "version": "3.4",
+          "source": "https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-4"
+        }
+      },
+      "/biologicalSex": {
+        "mapping": {
+          "status": "matched",
+          "standard": "CDISC",
+          "model": "SDTM",
+          "implementationGuide": "SDTMIG v3.4",
+          "domain": "DM",
+          "variable": "SEX",
+          "version": "2026-03-27",
+          "source": "https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.txt",
+          "codelist": {
+            "name": "Sex",
+            "submissionValue": "SEX",
+            "ncitCode": "C66731",
+            "extensible": false
+          }
+        },
+        "selectedTerms": [
+          {
+            "system": "https://ncit.nci.nih.gov",
+            "code": "C16576",
+            "submissionValue": "F",
+            "display": {
+              "zh-TW": "Female"
+            },
+            "version": "2026-03-27"
+          }
+        ]
+      }
+    }
+  }
+}

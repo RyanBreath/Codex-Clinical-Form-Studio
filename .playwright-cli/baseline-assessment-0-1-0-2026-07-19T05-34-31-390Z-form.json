@@ -1,0 +1,206 @@
+{
+  "artifactType": "crf-schema",
+  "downloadedAt": "2026-07-19T05:34:31.390Z",
+  "rendererVersion": "0.2.0",
+  "traceability": {
+    "traceabilityVersion": "1.0.0",
+    "projectId": "prj_demo-studio",
+    "prj_id": "prj_demo-studio",
+    "protocolFileName": "protocol.pdf",
+    "formId": "baseline-assessment",
+    "schemaVersion": "0.1.0",
+    "contractVersion": "1.1.0",
+    "schemaComment": "projectId=prj_demo-studio; protocol=protocol.pdf; sha256=0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://airwayai.example/forms/baseline-assessment/0.1.0",
+    "$comment": "projectId=prj_demo-studio; protocol=protocol.pdf; sha256=0000000000000000000000000000000000000000000000000000000000000000",
+    "title": "基準評估表",
+    "description": "收集受試者基準資料。",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "ageYears": {
+        "type": "integer",
+        "minimum": 18,
+        "maximum": 85
+      },
+      "biologicalSex": {
+        "type": "string",
+        "enum": [
+          "F",
+          "M",
+          "U"
+        ]
+      },
+      "investigatorNote": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "ageYears",
+      "biologicalSex"
+    ],
+    "x-airwayai": {
+      "contractVersion": "1.1.0",
+      "formId": "baseline-assessment",
+      "schemaVersion": "0.1.0",
+      "status": "demo",
+      "defaultLocale": "zh-TW",
+      "locales": [
+        "zh-TW"
+      ],
+      "title": {
+        "zh-TW": "基準評估表"
+      },
+      "description": {
+        "zh-TW": "收集受試者基準資料。"
+      },
+      "disclaimer": {
+        "zh-TW": "本表單僅供 Demo／研究設計審查，不代表臨床正確性、法規提交適用性或 QMS 驗證完成。"
+      },
+      "fields": {
+        "/ageYears": {
+          "label": {
+            "zh-TW": "受試者年齡"
+          },
+          "description": {
+            "zh-TW": "記錄同意時的年齡。"
+          },
+          "widget": "integer",
+          "unit": {
+            "code": "years",
+            "display": {
+              "zh-TW": "years"
+            }
+          },
+          "coding": {
+            "status": "matched",
+            "standard": "CDISC",
+            "model": "SDTM",
+            "implementationGuide": "SDTMIG v3.4",
+            "domain": "DM",
+            "variable": "AGE",
+            "version": "3.4",
+            "source": "https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-4"
+          }
+        },
+        "/biologicalSex": {
+          "label": {
+            "zh-TW": "生理性別"
+          },
+          "description": {
+            "zh-TW": "記錄 protocol 指定的生理性別選項。"
+          },
+          "widget": "radio",
+          "options": [
+            {
+              "value": "F",
+              "label": {
+                "zh-TW": "女"
+              },
+              "coding": {
+                "system": "https://ncit.nci.nih.gov",
+                "code": "C16576",
+                "submissionValue": "F",
+                "display": {
+                  "zh-TW": "Female"
+                },
+                "version": "2026-03-27"
+              }
+            },
+            {
+              "value": "M",
+              "label": {
+                "zh-TW": "男"
+              },
+              "coding": {
+                "system": "https://ncit.nci.nih.gov",
+                "code": "C20197",
+                "submissionValue": "M",
+                "display": {
+                  "zh-TW": "Male"
+                },
+                "version": "2026-03-27"
+              }
+            },
+            {
+              "value": "U",
+              "label": {
+                "zh-TW": "未知"
+              },
+              "coding": {
+                "system": "https://ncit.nci.nih.gov",
+                "code": "C17998",
+                "submissionValue": "U",
+                "display": {
+                  "zh-TW": "Unknown"
+                },
+                "version": "2026-03-27"
+              }
+            }
+          ],
+          "coding": {
+            "status": "matched",
+            "standard": "CDISC",
+            "model": "SDTM",
+            "implementationGuide": "SDTMIG v3.4",
+            "domain": "DM",
+            "variable": "SEX",
+            "version": "2026-03-27",
+            "source": "https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.txt",
+            "codelist": {
+              "name": "Sex",
+              "submissionValue": "SEX",
+              "ncitCode": "C66731",
+              "extensible": false
+            }
+          }
+        },
+        "/investigatorNote": {
+          "label": {
+            "zh-TW": "研究備註"
+          },
+          "description": {
+            "zh-TW": "記錄不含直接識別資訊的研究備註。"
+          },
+          "widget": "text",
+          "coding": {
+            "status": "not-applicable",
+            "rationale": {
+              "zh-TW": "研究作業備註不對應提交用 CDISC 變數。"
+            }
+          }
+        }
+      },
+      "layout": [
+        {
+          "type": "section",
+          "id": "collected-fields",
+          "title": {
+            "zh-TW": "基準評估表"
+          },
+          "description": {
+            "zh-TW": "收集受試者基準資料。"
+          },
+          "items": [
+            {
+              "type": "field",
+              "path": "/ageYears"
+            },
+            {
+              "type": "field",
+              "path": "/biologicalSex"
+            },
+            {
+              "type": "field",
+              "path": "/investigatorNote"
+            }
+          ]
+        }
+      ],
+      "computed": {}
+    }
+  }
+}

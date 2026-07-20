@@ -1,0 +1,280 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: A
+      - generic [ref=e7]:
+        - strong [ref=e8]: AirwayAI eCRF Studio
+        - generic [ref=e9]: Protocol YAML → CDISC review → coded form
+    - generic [ref=e10]:
+      - button "Choose File" [ref=e11]
+      - button "載入 YAML" [ref=e12] [cursor=pointer]
+      - button "編輯原始 YAML" [ref=e13] [cursor=pointer]
+      - button "下載 YAML" [ref=e14] [cursor=pointer]
+      - button "下載整包 ZIP" [disabled] [ref=e15]
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: prj_demo-studio
+      - heading "基準評估表" [level=1] [ref=e19]
+      - paragraph [ref=e20]: 示範用睡眠研究計畫書
+    - generic "審核 Gate" [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]: Gate A · 臨床意義
+        - combobox "Gate A · 臨床意義" [ref=e24]:
+          - option "待核准"
+          - option "已核准" [selected]
+      - generic [ref=e25]:
+        - generic [ref=e26]: Gate B · 表單合約
+        - combobox "Gate B · 表單合約" [ref=e27]:
+          - option "待核准" [selected]
+          - option "已核准"
+  - main [ref=e28]:
+    - complementary "欄位清單" [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]: Schema fields
+          - heading "欄位清單" [level=2] [ref=e33]
+        - button "新增欄位" [ref=e34] [cursor=pointer]: ＋
+      - generic [ref=e35]:
+        - generic [ref=e36]: 搜尋欄位
+        - textbox "搜尋欄位" [ref=e37]:
+          - /placeholder: 搜尋名稱或 ID
+      - navigation [ref=e38]:
+        - button "年齡 age_years 已對應" [ref=e39] [cursor=pointer]:
+          - generic [ref=e41]:
+            - strong [ref=e42]: 年齡
+            - generic [ref=e43]: age_years
+          - emphasis [ref=e44]: 已對應
+        - button "生理性別 biological_sex 已對應" [ref=e45] [cursor=pointer]:
+          - generic [ref=e47]:
+            - strong [ref=e48]: 生理性別
+            - generic [ref=e49]: biological_sex
+          - emphasis [ref=e50]: 已對應
+        - button "研究備註 investigator_note 不適用" [ref=e51] [cursor=pointer]:
+          - generic [ref=e53]:
+            - strong [ref=e54]: 研究備註
+            - generic [ref=e55]: investigator_note
+          - emphasis [ref=e56]: 不適用
+    - region "欄位編輯器" [ref=e57]:
+      - generic [ref=e58]:
+        - region [ref=e59]:
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - generic [ref=e62]: Field definition
+              - heading "欄位資訊" [level=2] [ref=e63]
+            - button "刪除欄位" [ref=e64] [cursor=pointer]
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - generic [ref=e67]: Concept ID
+              - textbox "Concept ID 使用 snake_case；會轉成 JSON field path。" [ref=e68]: age_years
+              - generic [ref=e69]: 使用 snake_case；會轉成 JSON field path。
+            - generic [ref=e70]:
+              - generic [ref=e71]: 顯示名稱
+              - textbox "顯示名稱" [ref=e72]: 年齡
+            - generic [ref=e73]:
+              - generic [ref=e74]: 欄位目的／臨床意義
+              - textbox "欄位目的／臨床意義" [ref=e75]: 記錄同意時的年齡。
+            - generic [ref=e76]:
+              - generic [ref=e77]: 資料型別
+              - combobox "資料型別" [ref=e78]:
+                - option "文字 string"
+                - option "整數 integer" [selected]
+                - option "數值 number"
+                - option "是／否 boolean"
+                - option "日期 date"
+                - option "待確認 unresolved"
+            - generic [ref=e79]:
+              - generic [ref=e80]: 必填性
+              - combobox "必填性" [ref=e81]:
+                - option "必填" [selected]
+                - option "選填"
+                - option "待確認"
+            - generic [ref=e82]:
+              - generic [ref=e83]: 單位
+              - textbox "單位" [ref=e84]:
+                - /placeholder: "例如 years、{events}/h"
+                - text: years
+            - generic [ref=e85]:
+              - generic [ref=e86]:
+                - generic [ref=e87]: 最小值
+                - spinbutton "最小值" [ref=e88]: "18"
+              - generic [ref=e89]:
+                - generic [ref=e90]: 最大值
+                - spinbutton "最大值" [ref=e91]: "85"
+            - generic [ref=e92]:
+              - generic [ref=e93]: 選項
+              - textbox "選項 左側是 submission value，右側是顯示文字；無選項可留白。" [ref=e94]:
+                - /placeholder: "每行一個：F | 女\nM | 男"
+              - generic [ref=e95]: 左側是 submission value，右側是顯示文字；無選項可留白。
+        - region [ref=e96]:
+          - generic [ref=e98]:
+            - generic [ref=e99]: Traceability
+            - heading "來源與推論" [level=2] [ref=e100]
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - generic [ref=e103]: Protocol 定位
+              - textbox "Protocol 定位" [ref=e104]:
+                - /placeholder: Section 8.2, page 42, Table 6 row AHI
+                - text: Section 8.2, page 42
+            - generic [ref=e105]:
+              - generic [ref=e106]: 來源信心
+              - combobox "來源信心" [ref=e107]:
+                - option "High" [selected]
+                - option "Medium"
+                - option "Low"
+            - generic [ref=e108]:
+              - generic [ref=e109]: 概念來源
+              - combobox "概念來源" [ref=e110]:
+                - option "Protocol 明示" [selected]
+                - option "推論輔助欄位"
+        - region [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e113]:
+              - generic [ref=e114]: Review-gated mapping
+              - heading "CDISC 編碼" [level=2] [ref=e115]
+            - button "取得可能編碼" [ref=e116] [cursor=pointer]
+          - generic [ref=e117]: 搜尋結果來自官方 NCI‑EVS SDTM Controlled Terminology，只是候選；需由使用者確認後才寫回 YAML。
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - generic [ref=e120]: 對應狀態
+              - combobox "對應狀態" [ref=e121]:
+                - option "待確認 unresolved"
+                - option "已確認 matched" [selected]
+                - option "不適用 not-applicable"
+            - generic [ref=e122]:
+              - generic [ref=e123]: Mapping 信心（%）
+              - spinbutton "Mapping 信心（%）" [ref=e124]: "95"
+            - generic [ref=e125]:
+              - generic [ref=e126]: Model
+              - textbox "Model" [ref=e127]:
+                - /placeholder: SDTM
+                - text: SDTM
+            - generic [ref=e128]:
+              - generic [ref=e129]: Implementation Guide
+              - textbox "Implementation Guide" [ref=e130]:
+                - /placeholder: SDTMIG v3.4
+                - text: SDTMIG v3.4
+            - generic [ref=e131]:
+              - generic [ref=e132]: Domain
+              - textbox "Domain" [ref=e133]:
+                - /placeholder: DM
+                - text: DM
+            - generic [ref=e134]:
+              - generic [ref=e135]: Variable
+              - textbox "Variable" [ref=e136]:
+                - /placeholder: AGE
+                - text: AGE
+            - generic [ref=e137]:
+              - generic [ref=e138]: Terminology version
+              - textbox "Terminology version" [ref=e139]:
+                - /placeholder: 2026-03-27
+                - text: "3.4"
+            - generic [ref=e140]:
+              - generic [ref=e141]: Source URL
+              - textbox "Source URL" [ref=e142]:
+                - /placeholder: https://…
+                - text: https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-4
+            - generic [ref=e143]:
+              - generic [ref=e144]: Codelist name
+              - textbox "Codelist name" [ref=e145]:
+                - /placeholder: 留白表示不使用 codelist
+            - generic [ref=e146]:
+              - generic [ref=e147]: Codelist submission value / NCIt
+              - generic [ref=e148]:
+                - textbox "Codelist submission value / NCIt" [ref=e149]:
+                  - /placeholder: SEX
+                - textbox "C66731" [ref=e150]
+    - complementary "預覽與驗證" [ref=e151]:
+      - tablist "右側面板" [ref=e152]:
+        - tab "表單預覽" [selected] [ref=e153] [cursor=pointer]
+        - tab "驗證 0" [ref=e154] [cursor=pointer]:
+          - text: 驗證
+          - generic [ref=e155]: "0"
+        - tab "Submission" [ref=e156] [cursor=pointer]
+      - generic [ref=e159]:
+        - generic [ref=e160]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - generic [ref=e163]: 合成 Demo
+              - generic [ref=e164]: 資料填寫
+            - heading "基準評估表" [level=1] [ref=e165]
+            - paragraph [ref=e166]: 收集受試者基準資料。
+          - generic [ref=e167]:
+            - generic [ref=e168]:
+              - term [ref=e169]: 表單
+              - definition [ref=e170]: baseline-assessment
+            - generic [ref=e171]:
+              - term [ref=e172]: Schema
+              - definition [ref=e173]: v0.1.0
+        - note [ref=e174]:
+          - generic [ref=e175]: ⓘ
+          - paragraph [ref=e176]: 本表單僅供 Demo／研究設計審查，不代表臨床正確性、法規提交適用性或 QMS 驗證完成。
+        - region [ref=e178]:
+          - generic [ref=e179]:
+            - generic [ref=e180]: "01"
+            - generic [ref=e181]:
+              - heading "基準評估表" [level=2] [ref=e182]
+              - paragraph [ref=e183]: 收集受試者基準資料。
+          - generic [ref=e184]:
+            - generic [ref=e185]:
+              - generic [ref=e186]: 年齡（必填）
+              - paragraph [ref=e188]: 記錄同意時的年齡。
+              - generic [ref=e189]:
+                - spinbutton "年齡（必填）" [ref=e190]
+                - generic [ref=e191]: years
+              - generic "年齡 CDISC coding" [ref=e192]:
+                - generic [ref=e193]:
+                  - term [ref=e194]: CDISC
+                  - definition [ref=e195]: SDTM · DM.AGE
+                - generic [ref=e196]:
+                  - term [ref=e197]: 版本
+                  - definition [ref=e198]: "3.4"
+            - generic [ref=e199]:
+              - generic [ref=e200]: 生理性別（必填）
+              - paragraph [ref=e202]: 記錄 protocol 指定的生理性別選項。
+              - radiogroup "生理性別（必填）" [ref=e203]:
+                - generic [ref=e204] [cursor=pointer]:
+                  - radio "女 F · C16576" [ref=e205]
+                  - generic [ref=e206]:
+                    - text: 女
+                    - generic [ref=e207]: F · C16576
+                - generic [ref=e208] [cursor=pointer]:
+                  - radio "男 M · C20197" [ref=e209]
+                  - generic [ref=e210]:
+                    - text: 男
+                    - generic [ref=e211]: M · C20197
+                - generic [ref=e212] [cursor=pointer]:
+                  - radio "未知 U · C17998" [ref=e213]
+                  - generic [ref=e214]:
+                    - text: 未知
+                    - generic [ref=e215]: U · C17998
+              - generic "生理性別 CDISC coding" [ref=e216]:
+                - generic [ref=e217]:
+                  - term [ref=e218]: CDISC
+                  - definition [ref=e219]: SDTM · DM.SEX
+                - generic [ref=e220]:
+                  - term [ref=e221]: Codelist
+                  - definition [ref=e222]: SEX · NCIt C66731
+                - generic [ref=e223]:
+                  - term [ref=e224]: 版本
+                  - definition [ref=e225]: 2026-03-27
+            - generic [ref=e226]:
+              - generic [ref=e227]: 研究備註
+              - paragraph [ref=e229]: 記錄不含直接識別資訊的研究備註。
+              - textbox "研究備註" [ref=e231]
+              - generic "研究備註 CDISC coding" [ref=e232]:
+                - generic [ref=e233]:
+                  - term [ref=e234]: CDISC
+                  - definition [ref=e235]: 不適用
+                - generic [ref=e236]:
+                  - term [ref=e237]: 說明
+                  - definition [ref=e238]: 研究作業備註不對應提交用 CDISC 變數。
+        - generic [ref=e239]:
+          - generic [ref=e240]:
+            - strong [ref=e241]: 送出前會再次驗證所有目前有效欄位
+            - generic [ref=e242]: 隱藏或停用欄位不會包含在 payload。
+          - generic [ref=e243]:
+            - button "驗證並送出" [ref=e244] [cursor=pointer]
+            - generic [ref=e245]:
+              - text: "API URL:"
+              - textbox "API URL:" [ref=e246]:
+                - /placeholder: https://example.com/api/forms

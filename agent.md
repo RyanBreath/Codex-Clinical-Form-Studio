@@ -39,3 +39,26 @@
 * **Git 庫內禁止包含個人健康資訊 (PHI/PII)**：嚴禁將患者的隱私資訊或直接識別碼放入此儲存庫。必須使用合成或去識別化的測試數據。
 * **確定性運算**：所有統計終點（如 AHI 下降百分比、受試者療效判定）必須由確定性的 Python/R 程式碼計算，並通過單元測試驗證。LLM 絕不能對數據進行口算或推測。
 * **預測性而非診斷性**：CBCT 結構表型僅作為治療反應與規劃的預測性生物標誌物，CBCT 本身不能獨立診斷阻塞性睡眠呼吸暫停 (OSA)。
+
+---
+
+## 5. 專案技能與總控流程
+
+所有臨床表單工作必須優先使用專案內 `.codex/skills/` 的版本，避免依賴個人電腦上的全域 skill：
+
+* `.codex/skills/orchestrate-clinical-forms/`：跨階段需求的唯一總控入口。
+* `.codex/skills/protocol-to-ecrf/`：Protocol 正規化、追溯、eCRF contract、審查 gate 與 release。
+* `.codex/skills/map-cdashig-fields/`：依 CDASHIG v2.1 官方表格搜尋候選，經專人確認後才可寫入映射。
+* `.codex/skills/test-yaml-forms/`：僅驗證 YAML Form Specification 1.0。
+* `.codex/skills/test-html-forms/`：驗證已渲染的單頁 HTML 表單。
+
+執行規則：
+
+1. 涉及兩個以上階段，或需求尚未明確時，先讀取並使用 `orchestrate-clinical-forms`。
+2. 使用任何 skill 前，完整讀取其 `SKILL.md` 及該次工作要求的 references。
+3. 缺少 protocol、YAML/HTML 路徑、`project_id`/`prj_id`、selected form、source locator、CDASHIG 版本、審查核准或提交授權時，必須先詢問使用者並備妥資料；禁止自行猜測。
+4. `protocol-to-ecrf` 的 `program.yaml` 不等於 YAML Form Specification 1.0；未完成明確轉換前，禁止直接交給 `test-yaml-forms`。
+5. CDASH 搜尋結果只能是候選。只有專人明確選擇後才可標記 `matched`；有歧義時維持 `unresolved`。
+6. HTML QA 預設禁止真實提交；除非使用者明確授權，僅執行不送出的驗證。
+7. 所有測試使用合成資料，嚴禁將 PHI/PII 寫入 repository、YAML、HTML、Excel、截圖或測試紀錄。
+8. 產生確認版 YAML 時，必須把經驗證的登入者身分寫入既有 approval 的 `approved_by`，並以 ISO 8601 寫入 `approved_at`；無法取得經驗證的登入資訊時維持 `pending` 並先詢問使用者，禁止由 Git、作業系統帳號或自由文字猜測身分。

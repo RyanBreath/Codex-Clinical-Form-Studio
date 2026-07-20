@@ -1,0 +1,4 @@
+interface:
+  display_name: "YAML 表單 QA"
+  short_description: "驗證 YAML 表單規格並產生風險導向 QA 測試資料與結果"
+  default_prompt: "使用 $test-yaml-forms 驗證這份 YAML 表單規格，產生測試案例並輸出 Excel QA 結果。"

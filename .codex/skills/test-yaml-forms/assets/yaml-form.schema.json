@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/test-yaml-forms/yaml-form.schema.json",
+  "title": "YAML Form Specification 1.0",
+  "type": "object",
+  "required": ["spec_version", "prj_id", "forms"],
+  "properties": {
+    "spec_version": { "const": "1.0" },
+    "prj_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$" },
+    "title": { "type": "string" },
+    "locale": { "type": "string" },
+    "description": { "type": "string" },
+    "forms": { "type": "array", "minItems": 1, "maxItems": 50, "items": { "$ref": "#/$defs/form" } },
+    "metadata": { "type": "object" }
+  },
+  "patternProperties": { "^x-": true },
+  "additionalProperties": false,
+  "$defs": {
+    "condition": {
+      "type": "object",
+      "required": ["field", "operator"],
+      "properties": {
+        "field": { "$ref": "#/$defs/id" },
+        "operator": { "enum": ["equals", "not_equals", "in", "not_in", "is_empty", "not_empty", "greater_than", "greater_than_or_equal", "less_than", "less_than_or_equal"] },
+        "value": true
+      },
+      "additionalProperties": false
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "min_length": { "type": "integer", "minimum": 0 },
+        "max_length": { "type": "integer", "minimum": 0 },
+        "pattern": { "type": "string" },
+        "minimum": { "type": ["number", "string"] },
+        "maximum": { "type": ["number", "string"] },
+        "exclusive_minimum": { "type": "boolean" },
+        "exclusive_maximum": { "type": "boolean" },
+        "multiple_of": { "type": "number", "exclusiveMinimum": 0 },
+        "min_items": { "type": "integer", "minimum": 0 },
+        "max_items": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "field": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "type": "string" },
+        "type": { "enum": ["text", "textarea", "email", "tel", "url", "integer", "number", "date", "time", "datetime", "select", "radio", "checkbox", "boolean"] },
+        "description": { "type": "string" },
+        "required": { "type": "boolean" },
+        "read_only": { "type": "boolean" },
+        "disabled": { "type": "boolean" },
+        "sensitive": { "type": "boolean" },
+        "default": true,
+        "placeholder": { "type": "string" },
+        "options": { "type": "array", "items": { "anyOf": [{ "$ref": "#/$defs/option" }, { "type": ["string", "number", "boolean"] }] } },
+        "constraints": { "$ref": "#/$defs/constraints" },
+        "visible_when": { "$ref": "#/$defs/condition" },
+        "required_when": { "$ref": "#/$defs/condition" },
+        "metadata": { "type": "object" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "form": {
+      "type": "object",
+      "required": ["id", "fields"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "fields": { "type": "array", "minItems": 1, "maxItems": 200, "items": { "$ref": "#/$defs/field" } },
+        "rules": { "type": "array", "items": { "$ref": "#/$defs/rule" } },
+        "metadata": { "type": "object" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$" },
+    "option": {
+      "type": "object",
+      "required": ["value"],
+      "properties": {
+        "value": { "type": ["string", "number", "boolean"] },
+        "label": { "type": "string" },
+        "disabled": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "enum": ["compare", "at_least_one", "all_or_none"] },
+        "left": { "$ref": "#/$defs/id" },
+        "operator": { "enum": ["equals", "not_equals", "greater_than", "greater_than_or_equal", "less_than", "less_than_or_equal"] },
+        "right": { "$ref": "#/$defs/id" },
+        "fields": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/id" } },
+        "message": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -211,7 +211,7 @@ export default function StudioClient({ actor }: { actor: Actor }) {
         ...current?.coding,
         status: "matched",
         standard: "CDISC",
-        model: "CDASH",
+        model: "CDASHIG v2.1",
         domain: candidate.domain,
         variable: candidate.variable,
         source: candidate.source,
@@ -413,6 +413,18 @@ export default function StudioClient({ actor }: { actor: Actor }) {
                       })
                     }
                   />
+                </label>
+                <label>
+                  CDASHIG v2.1 domain
+                  <input value={current.coding?.domain ?? ""} placeholder="e.g. VS" onChange={(e) => update({ coding: { ...current.coding, standard: "CDISC", model: "CDASHIG v2.1", domain: e.target.value.toUpperCase() || undefined } })} />
+                </label>
+                <label>
+                  CDASHIG v2.1 variable
+                  <input value={current.coding?.variable ?? ""} placeholder="e.g. VSTEST" onChange={(e) => update({ coding: { ...current.coding, standard: "CDISC", model: "CDASHIG v2.1", variable: e.target.value.toUpperCase() || undefined } })} />
+                </label>
+                <label className="wide">
+                  CDASHIG v2.1 table reference
+                  <input value={current.coding?.source ?? ""} placeholder="Metadata-table row or CDISC Library URL" onChange={(e) => update({ coding: { ...current.coding, standard: "CDISC", model: "CDASHIG v2.1", source: e.target.value || undefined } })} />
                 </label>
               </div>
               <div className="cdash-tools">

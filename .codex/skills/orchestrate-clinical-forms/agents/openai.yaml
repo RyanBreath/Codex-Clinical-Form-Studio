@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clinical Forms Orchestrator"
+  short_description: "Route protocol, YAML, HTML, and CDASH reviews"
+  default_prompt: "Use $orchestrate-clinical-forms to choose and run the correct clinical form workflow."

@@ -1,0 +1,55 @@
+spec_version: "1.0"
+prj_id: prj_demo-001
+title: 臨床試驗篩選表
+locale: zh-TW
+forms:
+  - id: screening
+    title: 受試者篩選
+    fields:
+      - id: subject_code
+        label: 受試者代碼
+        type: text
+        required: true
+        constraints:
+          min_length: 6
+          max_length: 12
+          pattern: "^[A-Z0-9-]+$"
+      - id: age
+        label: 年齡
+        type: integer
+        required: true
+        constraints:
+          minimum: 18
+          maximum: 85
+      - id: contact_method
+        label: 聯絡方式
+        type: radio
+        required: true
+        options:
+          - value: email
+            label: 電子郵件
+          - value: phone
+            label: 電話
+      - id: email
+        label: 電子郵件
+        type: email
+        required_when:
+          field: contact_method
+          operator: equals
+          value: email
+      - id: phone
+        label: 電話
+        type: tel
+        required_when:
+          field: contact_method
+          operator: equals
+          value: phone
+      - id: consent
+        label: 已取得同意
+        type: boolean
+        required: true
+    rules:
+      - id: contact_required
+        type: at_least_one
+        fields: [email, phone]
+        message: 至少填寫一種聯絡方式

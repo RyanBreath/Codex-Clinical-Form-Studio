@@ -1,0 +1,4 @@
+interface:
+  display_name: "Map CDASHIG Fields"
+  short_description: "Map reviewed form fields to CDASHIG v2.1"
+  default_prompt: "Use $map-cdashig-fields to find and review CDASHIG v2.1 candidates for these form fields."

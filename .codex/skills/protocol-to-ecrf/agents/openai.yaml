@@ -1,0 +1,4 @@
+interface:
+  display_name: "Protocol to eCRF"
+  short_description: "Build CDISC-coded, review-gated React eCRFs"
+  default_prompt: "Use $protocol-to-ecrf to analyze a local clinical protocol and build a traceable CDISC-coded React eCRF with coded submission payloads."

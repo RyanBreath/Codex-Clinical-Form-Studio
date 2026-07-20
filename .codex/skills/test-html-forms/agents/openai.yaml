@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML 表單 QA"
+  short_description: "分析 HTML 表單、執行驗證並產生可追溯的 Excel QA 結果"
+  default_prompt: "使用 $test-html-forms 分析這份 HTML 表單，以 Playwright 執行驗證並輸出 Excel 測試結果。"

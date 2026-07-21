@@ -2,90 +2,109 @@ import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-const templateRoot = new URL("../", import.meta.url);
-const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
+const projectRoot = new URL("../", import.meta.url);
 
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
+async function builtClientText() {
+  const assets = new URL("../dist/client/assets/", import.meta.url);
+  const names = await readdir(assets);
+  const javascript = names.filter((name) => name.endsWith(".js"));
+  return Promise.all(javascript.map((name) => readFile(new URL(name, assets), "utf8"))).then((parts) => parts.join("\n"));
 }
 
-test("server-renders the starter loading skeleton", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+async function loadWorker() {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  return (await import(workerUrl.href)).default;
+}
 
-  const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<title>Your site is taking shape<\/title>/i);
-  assert.match(html, /Building your site/);
-  assert.match(html, /Your site is taking shape/);
-  assert.match(
-    html,
-    /Your first version will appear here automatically when it’s ready\./,
-  );
-  assert.doesNotMatch(html, /Codex/);
-  assert.match(html, /react-loading-skeleton/);
-  assert.match(html, /role="status"/);
+test("emits a precompiled HTML, JavaScript, CSS, manifest, and checksum bundle", async () => {
+  const [html, manifest, checksums] = await Promise.all([
+    readFile(new URL("../dist/client/index.html", import.meta.url), "utf8"),
+    readFile(new URL("../dist/asset-manifest.json", import.meta.url), "utf8"),
+    readFile(new URL("../dist/checksums.sha256", import.meta.url), "utf8"),
+  ]);
+  assert.match(html, /<title>AirwayAI eCRF Studio<\/title>/);
+  assert.match(html, /<script[^>]+type="module"[^>]+src="\/assets\//);
+  assert.equal(JSON.parse(manifest).renderingMode, "precompiled-static-react");
+  assert.match(checksums, /client\/index\.html/);
+  await access(new URL("../dist/client/cdash-model-v1.3.json", import.meta.url));
+  await access(new URL("../dist/server/index.js", import.meta.url));
+  await assert.rejects(access(new URL("../dist/server/ssr/index.js", import.meta.url)));
 });
 
-test("keeps the loading skeleton scoped and disposable", async () => {
-  const [preview, css, page, layout, packageJson, files] = await Promise.all([
-    readFile(new URL("SkeletonPreview.tsx", previewRoot), "utf8"),
-    readFile(new URL("preview.css", previewRoot), "utf8"),
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readdir(previewRoot),
-  ]);
+test("ships the CDASH review and selection UI in the static client", async () => {
+  const text = await builtClientText();
+  assert.match(text, /Search CDASH/);
+  assert.match(text, /Use and write to YAML/);
+  assert.match(text, /CDASH Model v1\.3/);
+  assert.match(text, /Add as unresolved field/);
+});
 
-  assert.deepEqual(files.sort(), ["SkeletonPreview.tsx", "preview.css"]);
-  assert.match(preview, /from "react-loading-skeleton"/);
-  assert.match(preview, /baseColor="#eceae7"/);
-  assert.match(preview, /highlightColor="#f9f8f6"/);
-  assert.match(preview, /duration=\{2\.8\}/);
-  assert.match(preview, /sites-skeleton-search-placeholder/);
-  assert.match(packageJson, /"react-loading-skeleton": "3\.5\.0"/);
+test("worker delegates HTML to static assets instead of rendering it", async () => {
+  const worker = await loadWorker();
+  const sentinel = "<!doctype html><title>precompiled sentinel</title>";
+  const response = await worker.fetch(new Request("https://example.test/"), {
+    ASSETS: {
+      fetch: async () => new Response(sentinel, { headers: { "content-type": "text/html" } }),
+    },
+  });
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), sentinel);
+});
 
-  const shellIndex = preview.indexOf('className="sites-skeleton-shell"');
-  const statusIndex = preview.indexOf('className="sites-skeleton-status"');
-  assert.ok(shellIndex >= 0 && statusIndex > shellIndex);
-  assert.match(css, /position:\s*fixed/);
-  assert.match(css, /inset:\s*0/);
-  assert.match(css, /opacity:\s*0\.52/);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(css, /#020617|canvas|pets|progress/i);
-  assert.doesNotMatch(
-    preview,
-    /loading-spinner|status-mark|status-progress|canvas|cookie|random/i,
+test("confirmation requires authenticated identity and complete CDASH review", async () => {
+  const worker = await loadWorker();
+  const program = {
+    project_id: "prj-test",
+    selected_form: {
+      candidate_id: "baseline",
+      approval_status: "pending",
+      fields: [
+        {
+          concept_id: "age",
+          label: "Age",
+          data_type: "number",
+          required: true,
+          source_refs: [{ locator: "Protocol p. 4" }],
+          coding: {
+            status: "matched",
+            rationale: "Reviewer selected DM.AGE from CDASH Model v1.3.",
+            standard: "CDISC",
+            model: "CDASH",
+            version: "1.3",
+            domain: "DM",
+            variable: "AGE",
+            source_url: "https://www.cdisc.org/standards/foundational/cdash/cdash-model-v1-3",
+          },
+        },
+      ],
+    },
+    unresolved_items: [],
+  };
+  const unauthenticated = await worker.fetch(
+    new Request("https://example.test/api/confirm", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ yaml: JSON.stringify(program) }),
+    }),
+    {},
   );
+  assert.equal(unauthenticated.status, 401);
 
-  assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
-  assert.match(page, /<SkeletonPreview \/>/);
-  assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
-
-  await assert.rejects(
-    access(new URL("public/_sites-preview", templateRoot)),
+  const authenticated = await worker.fetch(
+    new Request("https://example.test/api/confirm", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "oai-authenticated-user-email": "reviewer@example.test",
+        "oai-authenticated-user-full-name": "Clinical%20Reviewer",
+        "oai-authenticated-user-full-name-encoding": "percent-encoded-utf-8",
+      },
+      body: JSON.stringify({ yaml: JSON.stringify(program) }),
+    }),
+    {},
   );
+  assert.equal(authenticated.status, 200);
+  const body = await authenticated.json();
+  assert.match(body.yaml, /approved_by: Clinical Reviewer <reviewer@example\.test>/);
 });

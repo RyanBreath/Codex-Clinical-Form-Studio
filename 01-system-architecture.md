@@ -2,7 +2,7 @@
 
 **Document ID:** DOC-01  
 **Document Type:** System Architecture  
-**Document Version:** 2.0  
+**Document Version:** 2.1
 **Status:** Draft  
 **Primary Audience:** Product Owner, Clinical Reviewer, Clinic Agent Owner, Solution Architect, Software Developer, QA Engineer  
 **Last Updated:** 2026-07-21  
@@ -31,8 +31,9 @@ The architecture contains:
 - JSON as the runtime and HTTP-friendly representation
 - A reusable HTML Render Engine
 - A YAML HTML workspace for clinical field review and editing
+- React-based static site compilation that emits HTML, JavaScript, and CSS before deployment
 - Two levels of Playwright-based automated testing
-- GitHub-based source control and CI/CD publishing
+- GitHub-based source control, CI/CD, and OpenAI Sites publishing
 - Human review checkpoints and traceable project artifacts
 
 ---
@@ -45,13 +46,17 @@ Clinical Form Studio converts a protocol into a deployable eCRF through a contro
 Protocol
   → Clinic Analysis
   → Protocol-to-YAML Generation
+  → YAML-to-React Static Review Site Build
+  → Precompiled HTML / JavaScript / CSS
   → YAML HTML Review and Field Editing
   → YAML HTML QA
   → YAML-to-JSON Transformation
-  → JSON-to-HTML Runtime Rendering
+  → JSON-to-React Static Runtime Site Build
+  → Precompiled HTML / JavaScript / CSS
   → JSON HTML QA
   → Human Approval
-  → GitHub and CI/CD Publishing
+  → GitHub Versioning
+  → OpenAI Sites Deployment
 ```
 
 The core value is not only automated form generation.
@@ -60,11 +65,11 @@ The system provides a governed process that can:
 
 1. Understand protocol-specific data collection requirements.
 2. Generate an initial YAML form specification.
-3. Present YAML-defined fields through an interactive HTML review interface.
+3. Compile YAML-defined fields into a React static review bundle before deployment.
 4. Allow clinical users to validate, add, edit, and remove fields.
 5. Transform approved YAML into a runtime JSON model.
-6. Render deterministic HTML from the runtime model.
-7. Test both the YAML review interface and the JSON-driven runtime form.
+6. Compile deterministic React runtime bundles from the JSON model.
+7. Test the precompiled HTML, JavaScript, and CSS for both the YAML review interface and the JSON-driven runtime form.
 8. Route defects to the correct professional role.
 9. Preserve traceability across protocol, YAML, JSON, HTML, tests, GitHub, and deployment.
 10. Support future workflow scenario testing, dashboards, and study operations features.
@@ -228,6 +233,31 @@ This principle is required for reliable QA, regression testing, version comparis
 
 ---
 
+### 3.9 Precompiled React delivery
+
+YAML-to-HTML and JSON-to-HTML are **build-time frontend compilation workflows**, not request-time backend rendering workflows.
+
+Both site types must follow this sequence:
+
+```text
+Approved or structurally valid source Artifact
+  → Validate source and transformation contract
+  → Bind source to the versioned React Render Engine
+  → Run the React production build
+  → Emit index.html + JavaScript bundles + CSS bundles + static assets
+  → Record build manifest and checksums
+  → Run QA against the built static bundle
+  → Deploy the exact validated bundle with OpenAI Sites
+```
+
+`template/crf/` is the reference implementation for the React and Vite build pattern. A project may use the Sites-compatible build tooling required by its hosting project, but the resulting page must not depend on server-side React rendering, request-time YAML／JSON conversion, or backend HTML generation.
+
+Backend endpoints may still be used for non-rendering concerns such as authenticated approval, CDASH lookup, authorized persistence, or audit records. Those endpoints must not transform the clinical source Artifact into HTML or construct the React form tree.
+
+If Sites requires a Worker entry point, the Worker may serve static files and non-rendering APIs only. The browser-facing form must load from the precompiled HTML, JavaScript, and CSS bundle.
+
+---
+
 ## 4. Logical Architecture
 
 ```mermaid
@@ -246,14 +276,14 @@ flowchart TB
     C4[Protocol Amendment Impact Skill]
 
     SA1[YAML Schema and Validation Skill]
-    SA2[YAML Review HTML Rendering Skill]
+    SA2[YAML React Static Review Site Skill]
     SA3[YAML-to-JSON Conversion Skill]
-    SA4[JSON-to-HTML Render Engine Skill]
+    SA4[JSON React Static Runtime Site Skill]
     SA5[Transformation Repair Skill]
 
     SD1[GitHub Repository Skill]
-    SD2[CI/CD Build and Publish Skill]
-    SD3[Deployment Verification Skill]
+    SD2[Sites Bundle Packaging and Publish Skill]
+    SD3[Sites Deployment Verification Skill]
     SD4[Dashboard and Platform Skill]
 
     QA1[YAML HTML Playwright QA Skill]
@@ -438,12 +468,15 @@ This layer is owned by the Solution Architect Agent and contains:
 - JSON schema validation
 - YAML review HTML rendering
 - JSON runtime HTML rendering
+- React and Vite production build configuration
+- Precompiled HTML, JavaScript, and CSS bundles
+- Static asset manifest and build checksums
 - Shared form components
 - Validation rule execution
 - Conditional display behavior
 - Stable selectors for Playwright
 
-The Render Engine is a reusable platform component, not a one-time generated page.
+The Render Engine is a reusable React platform component, not a one-time generated page. It is executed as part of a controlled frontend build and in the browser; it must not require request-time server-side rendering or backend YAML／JSON-to-HTML conversion.
 
 ---
 
@@ -451,8 +484,8 @@ The Render Engine is a reusable platform component, not a one-time generated pag
 
 The Quality Layer contains two current automated gates and one future expansion area:
 
-1. **YAML HTML QA** — validates the YAML-driven review and editing experience.
-2. **JSON HTML QA** — validates the runtime HTML generated from JSON.
+1. **YAML HTML QA** — validates the precompiled YAML-driven React review bundle and editing experience.
+2. **JSON HTML QA** — validates the precompiled React runtime bundle generated from JSON.
 3. **Scenario Flow QA** — future capability for testing complete clinical workflows and user journeys.
 
 Quality is enforced throughout the workflow rather than represented by one final test.
@@ -467,7 +500,8 @@ The Delivery Layer is owned by the Software Developer Agent and contains:
 - Branch, commit, and pull request workflow
 - Build automation
 - CI/CD pipeline
-- Static HTML or application publishing
+- OpenAI Sites project and `.openai/hosting.json` management
+- Packaging and publishing of the exact validated static bundle
 - Environment configuration
 - Deployment verification
 - Rollback references
@@ -553,7 +587,7 @@ The Clinic Agent may use the YAML HTML workspace, but the technical rendering en
 
 ### Mission
 
-Transform the approved YAML specification into deterministic, reusable, and runtime-ready JSON and HTML artifacts through a governed Render Engine.
+Transform the approved YAML specification into deterministic, reusable, and runtime-ready JSON plus precompiled React website artifacts through a governed Render Engine.
 
 ### Primary responsibilities
 
@@ -564,8 +598,11 @@ Transform the approved YAML specification into deterministic, reusable, and runt
 - Preserve all approved clinical meaning during transformation.
 - Define and validate the JSON runtime schema.
 - Own the HTML Render Engine architecture.
-- Render the YAML HTML review workspace used by Clinic.
-- Render the JSON-driven runtime HTML used by the deployed eCRF.
+- Use `template/crf/` as the reference React／Vite architecture.
+- Compile the YAML HTML review workspace used by Clinic into a static frontend bundle.
+- Compile the JSON-driven runtime eCRF into a static frontend bundle.
+- Emit deployable `index.html`, JavaScript, CSS, and static assets before QA and deployment.
+- Ensure the site does not depend on request-time server-side rendering or backend YAML／JSON transformation.
 - Define stable element identifiers and test hooks for QA.
 - Implement validation rules, conditional display logic, repeatable sections, and component behavior.
 - Ensure deterministic and versioned transformation.
@@ -581,6 +618,8 @@ Transform the approved YAML specification into deterministic, reusable, and runt
 - JSON Schema Validation Skill
 - JSON-to-HTML Generation Skill
 - HTML Render Engine Skill
+- React Static Site Build Skill
+- Static Asset Manifest Skill
 - Form Component Architecture Skill
 - Validation and Conditional Logic Skill
 - Cross-Artifact Consistency Skill
@@ -603,6 +642,9 @@ Transform the approved YAML specification into deterministic, reusable, and runt
 - JSON runtime model
 - JSON validation result
 - Runtime HTML
+- YAML review React static bundle
+- JSON runtime React static bundle
+- Build manifest and asset checksums
 - Render Engine source or configuration
 - Transformation traceability record
 - Architecture change report
@@ -614,7 +656,7 @@ The Solution Architect Agent answers:
 
 > How should approved YAML be transformed into a valid JSON runtime model and consistently rendered as HTML?
 
-The Solution Architect Agent owns the **conversion and rendering architecture**.
+The Solution Architect Agent owns the **conversion, React rendering, and static site compilation architecture**.
 
 It does not independently change clinical meaning. Any change that affects field meaning, required status, terminology, range, visit, endpoint, or safety intent must be returned to Clinic.
 
@@ -622,6 +664,7 @@ It also does not own:
 
 - GitHub release workflow
 - Production deployment
+- OpenAI Sites hosting operations
 - Operational dashboard development
 - Independent test approval
 
@@ -631,16 +674,19 @@ It also does not own:
 
 ### Mission
 
-Deliver, publish, operate, and extend the Clinical Form Studio implementation through GitHub, CI/CD, deployment automation, and future platform features.
+Deliver, publish, operate, and extend the Clinical Form Studio implementation through GitHub, CI/CD, OpenAI Sites, deployment automation, and future platform features.
 
 ### Primary responsibilities
 
 - Create and maintain the GitHub repository structure.
 - Manage branches, commits, pull requests, and version tags.
-- Integrate generated YAML, JSON, HTML, tests, and reports into source control.
+- Integrate generated YAML, JSON, React source, precompiled HTML／JavaScript／CSS bundles, tests, and reports into source control or the immutable release package.
 - Configure build and packaging workflows.
 - Implement GitHub Actions or equivalent CI/CD pipelines.
-- Publish the generated HTML review site and runtime eCRF.
+- Use Sites hosting only after the React production build and QA have succeeded.
+- Publish the exact validated static YAML review bundle and JSON runtime bundle through OpenAI Sites.
+- Reuse the existing Sites `project_id` from `.openai/hosting.json` when present.
+- Prevent the deployment layer from performing request-time YAML／JSON conversion or React server rendering.
 - Manage environment-specific configuration.
 - Verify deployment results and published URLs.
 - Preserve deployment evidence and rollback references.
@@ -657,6 +703,7 @@ Deliver, publish, operate, and extend the Clinical Form Studio implementation th
 - Build and Packaging Skill
 - GitHub Actions CI/CD Skill
 - HTML Publish Skill
+- OpenAI Sites Hosting Skill
 - Deployment Verification Skill
 - Rollback Preparation Skill
 - Environment Configuration Skill
@@ -666,7 +713,8 @@ Deliver, publish, operate, and extend the Clinical Form Studio implementation th
 
 ### Primary inputs
 
-- Approved YAML, JSON, and HTML artifacts
+- Approved YAML, JSON, React source, and precompiled HTML／JavaScript／CSS bundles
+- Static build manifest and checksums
 - Render Engine source
 - Playwright test suite and QA reports
 - Repository configuration
@@ -680,6 +728,7 @@ Deliver, publish, operate, and extend the Clinical Form Studio implementation th
 - Build artifact
 - CI/CD execution result
 - Published HTML or application URL
+- OpenAI Sites version and deployment status
 - Deployment report
 - Rollback reference
 - Future dashboards and operational features
@@ -688,7 +737,7 @@ Deliver, publish, operate, and extend the Clinical Form Studio implementation th
 
 The Software Developer Agent answers:
 
-> How should the approved and tested artifacts be versioned, built, published, operated, and extended as a software platform?
+> How should the approved and tested static React bundles be versioned, published through OpenAI Sites, operated, and extended as a software platform?
 
 The Software Developer Agent owns **delivery and platform implementation**.
 
@@ -828,8 +877,8 @@ The QA Agent must not:
 |---|---|---|---|
 | Orchestrator | Workflow control | Initialize project, inspect state, select Agent, enforce gates, route defects | Multi-project coordination, policy-driven workflow |
 | Clinic | Protocol and clinical YAML ownership | Protocol analysis, Protocol-to-YAML, YAML HTML field review and edit | CDASH review, amendment intelligence, clinical rule assistant |
-| Solution Architect | Transformation and rendering | YAML validation, YAML review HTML, YAML-to-JSON, JSON-to-HTML, Render Engine | Multi-renderer support, schema registry, reusable component marketplace |
-| Software Developer | Delivery and platform | GitHub, CI/CD, HTML publishing, deployment verification | Dashboards, monitoring, user management, audit and study operations |
+| Solution Architect | Transformation and static React compilation | YAML validation, YAML React review bundle, YAML-to-JSON, JSON React runtime bundle, Render Engine | Multi-renderer support, schema registry, reusable component marketplace |
+| Software Developer | Delivery and platform | GitHub, CI/CD, Sites packaging, Sites publishing, deployment verification | Dashboards, monitoring, user management, audit and study operations |
 | QA | Automated verification | YAML HTML QA, JSON HTML QA, regression and evidence | Scenario flow design, AI test generation, cross-study test suites |
 
 ---
@@ -840,13 +889,13 @@ The QA Agent must not:
 |---|---|---|---|
 | Protocol interpretation | Clinic | Orchestrator, human reviewer | Human clinical review when required |
 | YAML clinical content | Clinic | SA, QA | Clinic or human clinical approval |
-| YAML HTML review workspace | SA | Clinic | QA YAML HTML tests |
+| YAML React static review bundle | SA | Clinic | QA YAML HTML tests and static bundle integrity checks |
 | YAML schema | SA | Clinic, QA | QA structural tests |
 | YAML-to-JSON transformation | SA | QA, SD | QA cross-artifact tests |
 | JSON runtime schema | SA | QA, SD | QA JSON validation |
-| HTML Render Engine | SA | Clinic, QA, SD | QA behavior tests |
+| React Render Engine and production static build | SA | Clinic, QA, SD | QA behavior, asset, and no-backend-rendering tests |
 | GitHub repository | SD | All roles | CI checks |
-| CI/CD and publishing | SD | User, Orchestrator | Deployment verification |
+| CI/CD and OpenAI Sites publishing | SD | User, Orchestrator | Manifest／checksum and Sites deployment verification |
 | YAML HTML test suite | QA | Orchestrator, Clinic, SA | QA evidence |
 | JSON HTML test suite | QA | Orchestrator, SA, SD | QA evidence |
 | Scenario flow tests | QA | Product owner, clinical reviewer | Future QA evidence |
@@ -875,7 +924,10 @@ flowchart TD
     YAMLSCHEMAQ{YAML structurally valid?}
     YAMLSTRUCTFIX[Clinic and SA: Correct YAML Structure]
 
-    REVIEWHTML[SA: Render YAML HTML Review Workspace]
+    YAMLSTATIC[SA: Build YAML React Static Bundle]
+    YAMLSTATICQ{HTML / JavaScript / CSS build passed?}
+    YAMLSTATICFIX[SA: Repair YAML React Build]
+    REVIEWHTML[Open Precompiled YAML Review Site]
     CLINICREVIEW[Clinic / Human Reviewer: Validate and Edit Fields]
     CLINICAPPROVEQ{Clinical YAML approved?}
     CLINICEDIT[Clinic: Update YAML]
@@ -888,7 +940,9 @@ flowchart TD
     JSONQ{JSON valid and traceable?}
     JSONFIX[SA: Repair Transformation]
 
-    HTML[SA: Render Runtime HTML from JSON]
+    HTML[SA: Build JSON React Static Bundle]
+    HTMLQ{HTML / JavaScript / CSS build passed?}
+    HTMLFIX[SA: Repair JSON React Build]
 
     JSONQA[QA: Run JSON HTML Playwright QA]
     JSONQAQ{JSON HTML QA passed?}
@@ -899,7 +953,7 @@ flowchart TD
     RELEASECHANGES[Route Requested Changes]
 
     GIT[SD: Commit Approved Artifacts to GitHub]
-    PUBLISH[SD: Run CI/CD and Publish]
+    PUBLISH[SD: Deploy Validated Static Bundle with Sites]
     PUBLISHQ{Deployment successful?}
     PUBLISHFIX[SD: Diagnose Build or Publish Failure]
 
@@ -923,7 +977,12 @@ flowchart TD
     YAMLSCHEMA --> YAMLSCHEMAQ
     YAMLSCHEMAQ -- No --> YAMLSTRUCTFIX
     YAMLSTRUCTFIX --> YAMLSCHEMA
-    YAMLSCHEMAQ -- Yes --> REVIEWHTML
+    YAMLSCHEMAQ -- Yes --> YAMLSTATIC
+
+    YAMLSTATIC --> YAMLSTATICQ
+    YAMLSTATICQ -- No --> YAMLSTATICFIX
+    YAMLSTATICFIX --> YAMLSTATIC
+    YAMLSTATICQ -- Yes --> REVIEWHTML
 
     REVIEWHTML --> CLINICREVIEW
     CLINICREVIEW --> CLINICAPPROVEQ
@@ -934,7 +993,7 @@ flowchart TD
     YAMLQA --> YAMLQAQ
     YAMLQAQ -- No --> YAMLDEFECT
     YAMLDEFECT --> CLINICEDIT
-    YAMLDEFECT --> REVIEWHTML
+    YAMLDEFECT --> YAMLSTATIC
     YAMLQAQ -- Yes --> JSON
 
     JSON --> JSONQ
@@ -942,7 +1001,10 @@ flowchart TD
     JSONFIX --> JSON
     JSONQ -- Yes --> HTML
 
-    HTML --> JSONQA
+    HTML --> HTMLQ
+    HTMLQ -- No --> HTMLFIX
+    HTMLFIX --> HTML
+    HTMLQ -- Yes --> JSONQA
     JSONQA --> JSONQAQ
     JSONQAQ -- No --> RUNTIMEDEFECT
     RUNTIMEDEFECT --> JSONFIX
@@ -973,15 +1035,15 @@ flowchart TD
 | Protocol Analysis | Clinic | Protocol | Protocol analysis | Ambiguities resolved or recorded |
 | Protocol-to-YAML | Clinic | Protocol analysis | Initial YAML | Required clinical concepts represented |
 | YAML Structural Validation | SA | YAML | Validation result | YAML conforms to platform schema |
-| YAML HTML Rendering | SA | Valid YAML | Review workspace | Workspace loads successfully |
+| YAML React Static Build | SA | Valid YAML and versioned React Render Engine | Precompiled review bundle: HTML, JavaScript, CSS, assets, manifest | Production build succeeds without request-time rendering dependency |
 | Clinical Field Review | Clinic / Human Reviewer | YAML review workspace | Approved or revised YAML | Clinical YAML approved |
-| YAML HTML QA | QA | YAML and review workspace | QA evidence | Review and edit tests passed |
+| YAML HTML QA | QA | YAML and the exact precompiled review bundle | QA evidence | Static bundle, review, and edit tests passed |
 | YAML-to-JSON | SA | Approved YAML | JSON runtime model | JSON valid and traceable |
-| JSON-to-HTML Runtime Rendering | SA | JSON runtime model | Runtime HTML | Rendering completed |
-| JSON HTML QA | QA | JSON and runtime HTML | QA evidence | Runtime tests passed |
+| JSON React Static Build | SA | Valid JSON and versioned React Render Engine | Precompiled runtime bundle: HTML, JavaScript, CSS, assets, manifest | Production build succeeds without request-time rendering dependency |
+| JSON HTML QA | QA | JSON and the exact precompiled runtime bundle | QA evidence | Runtime and static-delivery tests passed |
 | Human Release Approval | Human Reviewer | Complete tested package | Approval record | Explicit approval |
 | GitHub Versioning | SD | Approved artifacts | Commit, tag, or pull request | Source controlled |
-| CI/CD Publish | SD | Versioned build | Published environment | Deployment verified |
+| OpenAI Sites Publish | SD | Versioned and validated static bundle | Sites version and published environment | Sites deployment verified against the validated build manifest |
 | Dashboard and Operations | SD | Deployed project data | Dashboard or operational view | Future capability-specific gate |
 
 ---
@@ -1045,28 +1107,32 @@ flowchart LR
     PA[Protocol Analysis]
     YD[Initial YAML Draft]
     YV[YAML Structural Validation]
+    YS[YAML React Static Bundle<br/>HTML + JavaScript + CSS]
     YH[YAML HTML Review Workspace]
     YE[Clinical Field Edits]
     YA[Approved YAML]
     YQR[YAML HTML QA Report]
     J[JSON Runtime Model]
+    JS[JSON React Static Bundle<br/>HTML + JavaScript + CSS]
     H[Runtime HTML]
     JQR[JSON HTML QA Report]
     AR[Human Approval Record]
     GR[Git Commit / Release Tag]
-    DP[Published Environment]
+    DP[OpenAI Sites Environment]
     DB[Future Dashboard]
 
     P --> PA
     PA --> YD
     YD --> YV
-    YV --> YH
+    YV --> YS
+    YS --> YH
     YH --> YE
     YE --> YD
     YH --> YA
     YA --> YQR
     YQR --> J
-    J --> H
+    J --> JS
+    JS --> H
     H --> JQR
     JQR --> AR
     AR --> GR
@@ -1155,7 +1221,7 @@ SA owns the schema and transformation contract that consume it.
 
 ### 13.3 YAML HTML review workspace
 
-The YAML HTML review workspace is an interactive interface used by Clinic and human reviewers.
+The YAML HTML review workspace is an interactive React interface used by Clinic and human reviewers. Before it is deployed, the YAML input and versioned Render Engine must be compiled into a static frontend bundle containing `index.html`, JavaScript, CSS, static assets, and a build manifest.
 
 It should support:
 
@@ -1170,8 +1236,10 @@ It should support:
 - Saving changes back to YAML
 - Stable selectors for Playwright testing
 - Clear validation and error feedback
+- No dependency on request-time backend YAML-to-HTML conversion or React server rendering
+- A reproducible production build based on the patterns in `template/crf/`
 
-The workspace is technically rendered by SA-owned components but operationally used by Clinic.
+The workspace is technically rendered by SA-owned components but operationally used by Clinic. Optional backend APIs may authenticate approval or persist authorized changes, but they must not render the form or transform YAML into HTML.
 
 ---
 
@@ -1193,7 +1261,7 @@ It should:
 
 ### 13.5 Runtime HTML
 
-The runtime HTML output should:
+The runtime HTML output is a precompiled React static bundle. It should:
 
 - Render all approved fields.
 - Use stable element identifiers.
@@ -1204,6 +1272,9 @@ The runtime HTML output should:
 - Preserve accessibility semantics.
 - Identify project, schema, renderer, and build versions.
 - Be reproducible from the JSON model and renderer version.
+- Include versioned HTML, JavaScript, CSS, static assets, a build manifest, and checksums.
+- Load and render without request-time backend JSON-to-HTML conversion or React server rendering.
+- Be deployable as the exact validated bundle through OpenAI Sites.
 
 ---
 
@@ -1253,11 +1324,15 @@ The delivery record should include:
 - Pull request or release tag
 - CI/CD workflow run
 - Build artifact reference
+- Static asset manifest and checksums
+- Sites project ID and site version
 - Target environment
 - Published URL
 - Deployment status
 - Deployment timestamp
 - Rollback reference
+
+The deployment record must prove that the Sites version was created from the same static bundle that passed QA. A backend-rendered response or an unverified rebuild is not an acceptable substitute.
 
 ---
 
@@ -1294,13 +1369,15 @@ Defects must be routed according to their root cause.
 | YAML-to-JSON data loss | SA | QA |
 | Invalid JSON runtime structure | SA | QA |
 | HTML rendering defect | SA | QA |
+| React production build or static asset generation failure | SA | QA; SD when caused by Sites packaging constraints |
+| Deployed page depends on backend YAML／JSON conversion or React SSR | SA | SD and QA |
 | Incorrect conditional behavior caused by renderer | SA | QA |
 | Incorrect conditional requirement in YAML | Clinic | SA and QA |
 | Test implementation error | QA | SA or SD depending on environment |
 | Test coverage gap | QA | Clinic or SA for acceptance criteria |
 | Git, branch, commit, or merge failure | SD | Orchestrator |
-| CI/CD build failure | SD | SA when caused by renderer integration |
-| Publish or deployment failure | SD | Orchestrator |
+| CI/CD or Sites packaging failure | SD | SA when caused by renderer or static bundle integration |
+| Sites publish or deployment failure | SD | Orchestrator |
 | Dashboard or operational platform defect | SD | QA |
 | Workflow state or routing error | Orchestrator | Owning Agent |
 
@@ -1329,11 +1406,11 @@ The Orchestrator should trigger:
 2. Clinical impact analysis by Clinic.
 3. Targeted YAML updates by Clinic.
 4. YAML schema and render impact analysis by SA.
-5. Focused YAML HTML QA by QA.
-6. YAML-to-JSON and JSON-to-HTML regeneration by SA.
-7. Focused and regression JSON HTML QA by QA.
+5. YAML React static bundle regeneration and focused YAML HTML QA.
+6. YAML-to-JSON conversion and JSON React static bundle regeneration by SA.
+7. Focused and regression JSON HTML QA against the precompiled bundle.
 8. Human approval.
-9. GitHub versioning and publishing by SD.
+9. GitHub versioning and OpenAI Sites publishing of the validated bundle by SD.
 
 ```mermaid
 flowchart TD
@@ -1344,11 +1421,11 @@ flowchart TD
     N[Record No-Change Decision]
     E[Clinic: Update YAML]
     F[SA: Validate Schema and Render Impact]
-    G[QA: Focused YAML HTML QA]
-    H[SA: Regenerate JSON and HTML]
+    G[SA + QA: Rebuild Static YAML Site and Run Focused QA]
+    H[SA: Regenerate JSON and Static React Runtime Site]
     I[QA: Focused and Regression JSON HTML QA]
     J[Human Approval]
-    K[SD: Commit, Tag, and Publish New Version]
+    K[SD: Commit, Tag, and Publish Validated Bundle with Sites]
 
     A --> B
     B --> C
@@ -1409,14 +1486,18 @@ artifacts:
     version: "1.2"
     status: clinical_approved
   yamlReviewHtml:
-    path: projects/PR-20260721/review/index.html
+    path: projects/PR-20260721/review/dist/index.html
+    assetManifest: projects/PR-20260721/review/dist/asset-manifest.json
+    renderingMode: precompiled_static_react
     status: qa_passed
   json:
     path: projects/PR-20260721/runtime/form.json
     status: generated
   html:
-    path: projects/PR-20260721/output/index.html
-    status: generated
+    path: projects/PR-20260721/output/dist/index.html
+    assetManifest: projects/PR-20260721/output/dist/asset-manifest.json
+    renderingMode: precompiled_static_react
+    status: generated_and_built
 
 quality:
   yamlHtmlQaStatus: passed
@@ -1426,6 +1507,8 @@ quality:
 release:
   humanApproval: pending
   gitCommit: null
+  sitesProjectId: null
+  sitesVersion: null
   deploymentStatus: not_started
   publishedUrl: null
 
@@ -1528,6 +1611,9 @@ openDefects: []
 │  ├─ render-engine/
 │  ├─ yaml-review-ui/
 │  ├─ runtime-web/
+│  ├─ sites-build/
+│  │  ├─ yaml-review/
+│  │  └─ json-runtime/
 │  └─ dashboard/
 │
 ├─ tests/
@@ -1638,16 +1724,17 @@ An MVP project is complete only when:
 - Clinic has completed protocol analysis.
 - Clinic has generated the YAML specification.
 - SA has validated the YAML structure.
-- SA has rendered the YAML HTML review workspace.
+- SA has compiled the YAML HTML review workspace into a production React static bundle containing HTML, JavaScript, and CSS.
 - Clinic or the human clinical reviewer has approved the YAML fields.
 - YAML HTML Playwright QA passes.
 - SA has generated a valid JSON runtime model.
-- SA has generated runtime HTML through the Render Engine.
+- SA has compiled the JSON runtime form into a production React static bundle containing HTML, JavaScript, and CSS.
 - JSON HTML Playwright QA passes.
+- QA has verified that both bundles load without request-time backend transformation or React server rendering.
 - Human release approval is recorded.
 - SD has committed the approved artifacts to GitHub.
-- CI/CD publishing succeeds.
-- Deployment is verified.
+- OpenAI Sites publishing of the exact validated static bundle succeeds.
+- Sites deployment is verified against the recorded build manifest and checksums.
 - The published environment reference is recorded.
 - The project state is marked as completed.
 
@@ -1666,12 +1753,12 @@ Future completion criteria may additionally require:
 |---|---:|---:|
 | Protocol analysis | Yes | Enhanced amendment comparison |
 | Protocol-to-YAML | Yes | Standard-aware auto-mapping |
-| YAML HTML field review and editing | Yes | Collaborative review and comments |
+| YAML-to-React static review site | Yes | Collaborative review and comments |
 | YAML-to-JSON conversion | Yes | Versioned schema migration |
-| JSON-to-HTML Render Engine | Yes | Multiple themes and deployment targets |
+| JSON-to-React static runtime site | Yes | Multiple themes and deployment targets |
 | YAML HTML Playwright QA | Yes | Risk-based test selection |
 | JSON HTML Playwright QA | Yes | Cross-browser and accessibility expansion |
-| GitHub and CI/CD publishing | Yes | Controlled multi-environment promotion |
+| GitHub, CI/CD, and OpenAI Sites publishing | Yes | Controlled multi-environment promotion |
 | Clinical scenario-flow testing | Basic design only | Full AI-generated end-to-end scenarios |
 | Dashboard | Architecture placeholder | Project, QA, release, and audit dashboards |
 | Operational monitoring | No | Health, usage, error, and performance monitoring |
@@ -1688,15 +1775,15 @@ It is an AI-coordinated clinical form engineering system modeled as a focused de
 Clinic
     interprets the protocol,
     creates clinical YAML,
-    and validates fields through the YAML HTML workspace
+    and validates fields through the precompiled YAML React workspace
 
 Solution Architect
-    owns YAML, JSON, and HTML transformation,
-    and maintains the reusable HTML Render Engine
+    owns YAML, JSON, and React transformation,
+    and compiles versioned HTML, JavaScript, and CSS bundles
 
 Software Developer
-    owns GitHub, CI/CD, HTML publishing,
-    deployment, and future dashboards
+    owns GitHub, Sites packaging and publishing,
+    deployment verification, and future dashboards
 
 QA Engineer
     verifies YAML HTML and JSON HTML behavior,
@@ -1716,8 +1803,9 @@ This separation enables:
 - Better defect routing
 - Clinical control over form content
 - Reusable transformation and rendering
+- Precompiled frontend delivery without request-time form rendering
 - Independent automated verification
-- Traceable GitHub delivery
+- Traceable GitHub and OpenAI Sites delivery
 - Safer deployment
 - Controlled protocol revisions
 - A clear path from MVP to a complete clinical form platform

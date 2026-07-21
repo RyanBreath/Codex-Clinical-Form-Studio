@@ -55,12 +55,15 @@ Show:
 
 Wait for explicit approval.
 
-## Phase 4 — Preview and optional release
+## Phase 4 — Static React build, preview, and optional Sites release
 
-- Ask whether to create no server package, IIS, NGINX, or both.
-- Ask for intended root or subpath mount.
-- Produce relative-asset static files and requested server examples.
-- Never copy to a live server or invoke external deployment without separate authorization.
+- Bind the approved `crf-schema.json` to the versioned React renderer and run the production build.
+- Produce relative-asset `index.html`, JavaScript, CSS, static assets, an asset manifest, and checksums before QA.
+- Do not perform JSON-to-HTML conversion, React SSR／RSC, or backend HTML generation at request time.
+- Test the built static bundle from an HTTP static origin.
+- Ask whether the user wants local preview only or OpenAI Sites deployment.
+- For deployment, use `sites-building` and then `sites-hosting`; deploy the exact bundle that passed QA.
+- Never invoke external deployment without separate authorization; prefer private Sites access.
 
 ## Project layout
 
@@ -78,8 +81,10 @@ Wait for explicit approval.
 │  └─ validation-report.md
 └─ releases/<formId>/<schemaVersion>/
    ├─ site/
-   ├─ web.config
-   ├─ nginx.conf.example
+   │  ├─ index.html
+   │  └─ assets/
+   ├─ asset-manifest.json
+   ├─ checksums.json
    ├─ release-manifest.json
    └─ <formId>-<schemaVersion>.zip
 ```

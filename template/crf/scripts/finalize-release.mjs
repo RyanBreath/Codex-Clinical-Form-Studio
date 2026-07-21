@@ -6,8 +6,10 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  readdirSync,
   renameSync,
   rmSync,
+  statSync,
   writeFileSync,
 } from "node:fs";
 import { basename, dirname, isAbsolute, relative, resolve } from "node:path";
@@ -38,6 +40,20 @@ function readJson(path, label) {
 
 function hashFile(path) {
   return createHash("sha256").update(readFileSync(path)).digest("hex");
+}
+
+function collectStaticFiles(root, current = root) {
+  return readdirSync(current, { withFileTypes: true })
+    .flatMap((entry) => {
+      const absolutePath = resolve(current, entry.name);
+      return entry.isDirectory() ? collectStaticFiles(root, absolutePath) : [absolutePath];
+    })
+    .map((absolutePath) => ({
+      path: relative(root, absolutePath).replaceAll("\\", "/"),
+      bytes: statSync(absolutePath).size,
+      sha256: hashFile(absolutePath),
+    }))
+    .sort((left, right) => (left.path < right.path ? -1 : left.path > right.path ? 1 : 0));
 }
 
 function runCommand(command, args, options = {}) {
@@ -81,6 +97,21 @@ location ${mountPath} {
 }
 
 function deploymentGuide(state) {
+  if (state.target === "none") {
+    return `# OpenAI Sites deployment
+
+This package is a precompiled static Demo artifact, not a validated clinical data collection system.
+
+Deploy the exact contents of \`site/\` through the existing OpenAI Sites project after QA. The directory contains precompiled HTML, JavaScript, CSS, \`asset-manifest.json\`, and \`checksums.json\`.
+
+- Rendering mode: \`precompiled_static_react\`
+- Intended mount path: \`${state.mountPath}\`
+- Do not perform JSON-to-HTML conversion, React SSR／RSC, or backend HTML generation at request time.
+- If the bundle changes after QA, rebuild and repeat QA before saving a Sites version.
+
+Only \`site/\` is public deployable content. Keep \`program.yaml\`, schema, manifests, and reports outside the public web root.
+`;
+  }
   return `# Deployment
 
 This package is a static Demo artifact, not a validated clinical data collection system.
@@ -136,6 +167,29 @@ try {
   const npmVersion = npmCliPath
     ? runCommand(process.execPath, [npmCliPath, "--version"], { capture: true })
     : "unknown";
+  const rendererPackage = readJson(resolve(rendererRoot, "package.json"), "renderer package");
+  if (typeof rendererPackage.version !== "string" || rendererPackage.version.length === 0) {
+    throw new Error("Renderer package version is missing.");
+  }
+  const staticFiles = collectStaticFiles(state.siteRoot);
+  if (!staticFiles.some((file) => file.path.endsWith(".js"))) {
+    throw new Error("Prepared static site is missing a compiled JavaScript bundle.");
+  }
+  if (!staticFiles.some((file) => file.path.endsWith(".css"))) {
+    throw new Error("Prepared static site is missing a compiled CSS bundle.");
+  }
+  const assetManifest = {
+    manifestVersion: 1,
+    renderingMode: "precompiled_static_react",
+    entry: "index.html",
+    rendererVersion: rendererPackage.version,
+    files: staticFiles,
+  };
+  const checksums = Object.fromEntries(staticFiles.map((file) => [file.path, file.sha256]));
+  const assetManifestPath = resolve(state.siteRoot, "asset-manifest.json");
+  const checksumsPath = resolve(state.siteRoot, "checksums.json");
+  writeFileSync(assetManifestPath, `${JSON.stringify(assetManifest, null, 2)}\n`, "utf8");
+  writeFileSync(checksumsPath, `${JSON.stringify(checksums, null, 2)}\n`, "utf8");
   const releaseManifest = {
     formId: state.formId,
     schemaVersion: state.schemaVersion,
@@ -148,6 +202,11 @@ try {
     builtAt: new Date().toISOString(),
     nodeVersion: process.version,
     npmVersion,
+    renderingMode: assetManifest.renderingMode,
+    assetManifest: "site/asset-manifest.json",
+    assetManifestSha256: hashFile(assetManifestPath),
+    checksums: "site/checksums.json",
+    checksumsSha256: hashFile(checksumsPath),
     target: state.target,
     mountPath: state.mountPath,
     checks: [
@@ -162,7 +221,7 @@ try {
   writeFileSync(resolve(state.candidateRoot, "release-manifest.json"), `${JSON.stringify(releaseManifest, null, 2)}\n`, "utf8");
   writeFileSync(
     resolve(state.candidateRoot, "release-validation-report.md"),
-    `# Release validation report\n\n- Project: \`${releaseManifest.projectId}\`\n- Form: \`${state.formId}\`\n- Schema version: \`${state.schemaVersion}\`\n- Built at: \`${releaseManifest.builtAt}\`\n- Target schema compiler: passed\n- TypeScript and engine checks: passed\n- Vitest component suite: passed\n- Importable library build: passed\n- Static Demo build: passed\n- Chromium／Firefox／WebKit release smoke: passed\n\nThese checks do not establish clinical correctness or QMS validation.\n`,
+    `# Release validation report\n\n- Project: \`${releaseManifest.projectId}\`\n- Form: \`${state.formId}\`\n- Schema version: \`${state.schemaVersion}\`\n- Built at: \`${releaseManifest.builtAt}\`\n- Rendering mode: \`${releaseManifest.renderingMode}\`\n- Static asset manifest: \`${releaseManifest.assetManifest}\`\n- Static checksum set: \`${releaseManifest.checksums}\`\n- Target schema compiler: passed\n- TypeScript and engine checks: passed\n- Vitest component suite: passed\n- Importable library build: passed\n- Static Demo build: passed\n- Chromium／Firefox／WebKit release smoke: passed\n\nThese checks do not establish clinical correctness or QMS validation.\n`,
     "utf8",
   );
 

@@ -1,11 +1,11 @@
 ---
 name: publish-yaml-form-editor
-description: Convert a reviewed protocol-to-eCRF program.yaml into an English-default, Chinese-switchable browser form editor, render an HTML preview, optionally invoke CDASHIG v2.1 candidate mapping, and publish the validated editor with Sites. Use when Codex must turn YAML fields into an editable web form, update the repository's yaml-form-studio, deploy that editor, or let authenticated reviewers confirm and download approved YAML.
+description: Convert a reviewed protocol-to-eCRF program.yaml into an English-default, Chinese-switchable React form editor, precompile its HTML, JavaScript, and CSS, optionally invoke CDASHIG v2.1 candidate mapping, and publish the validated static bundle with Sites. Use when Codex must turn YAML fields into an editable web form, update the repository's yaml-form-studio, deploy that editor, or let authenticated reviewers confirm and download approved YAML.
 ---
 
 # Publish YAML Form Editor
 
-Turn one supported `program.yaml` into an editable, review-gated web experience and publish the validated `yaml-form-studio` through Sites.
+Turn one supported `program.yaml` into an editable, review-gated React web experience, compile it into a production static bundle, and publish that exact validated bundle through Sites.
 
 ## Resolve inputs
 
@@ -23,7 +23,21 @@ Reject unsupported YAML instead of guessing a conversion. `program.yaml` is not 
 
 ## Build the editor
 
-Use the existing `yaml-form-studio/` Sites project. Preserve its package manager, lockfile, Vinext structure, `.openai/hosting.json`, authentication helper, and renderer style.
+Use the existing `yaml-form-studio/` Sites project and preserve its `.openai/hosting.json` project identity. Use `template/crf/` as the reference React／Vite static-build implementation. Preserve the package manager, lockfile, authentication behavior, and renderer style unless the static-build migration requires an intentional update.
+
+The browser-facing editor must be precompiled before deployment:
+
+```text
+program.yaml + versioned React renderer
+  → safe parse and validation
+  → production frontend build
+  → index.html + JavaScript + CSS + static assets
+  → asset manifest and checksums
+  → QA
+  → Sites deployment
+```
+
+Do not use request-time React SSR／RSC, Worker HTML generation, or backend YAML-to-HTML conversion. A Sites Worker may serve static assets and non-rendering API routes only.
 
 1. Parse YAML safely and display structural errors without dropping the user's source text.
 2. Render each selected field as accessible HTML and provide a synchronized field editor and renderer preview.
@@ -31,6 +45,8 @@ Use the existing `yaml-form-studio/` Sites project. Preserve its package manager
 4. Keep English as the default UI and form-content language. Provide an explicit Chinese switch and preserve bilingual YAML content when supplied.
 5. Never add protocol-unsupported options, units, ranges, calculations, visits, conditions, or requiredness.
 6. Keep preview and download behavior available without treating a draft as approved.
+7. Make the production bundle use relative or Sites-compatible asset paths and record the renderer／build version.
+8. Keep authentication, confirmation, CDASH lookup, and optional persistence as API concerns; none of them may render the form or transform YAML into HTML.
 
 ## Map CDASH fields
 
@@ -50,11 +66,13 @@ Preserve the original YAML until confirmation succeeds. Download the resulting f
 
 ## Validate and publish
 
-Invoke `sites-building` for the existing `yaml-form-studio/` capability path, including its authentication guidance and persistence guidance when durable editing is requested. Run the project build and tests, then use `test-html-forms` when browser-form QA is requested or required by the orchestrator.
+Invoke `sites-building` for the existing `yaml-form-studio/` capability path, including its authentication guidance and persistence guidance when durable editing is requested. Run the React production build first and require a deployable bundle containing HTML, JavaScript, CSS, static assets, an asset manifest, and checksums. Fail if the page requires request-time YAML rendering, React SSR／RSC, or backend-generated HTML.
 
-After validation, invoke `sites-hosting`. Reuse the existing Sites `project_id`, publish privately by default, and obtain explicit user approval before any shared or public deployment. Keep credentials and temporary archives out of source, YAML, logs, and responses.
+Run project tests against the built static bundle, not only the development server. Use `test-html-forms` when browser-form QA is requested or required by the orchestrator. Record the bundle manifest and checksum in the QA／release evidence.
 
-Return the deployed Sites URL, supported YAML type, enabled editing and language behavior, authentication status, CDASH mapping limitations, unresolved items, and whether drafts are local or durable.
+After validation, invoke `sites-hosting`. Reuse the existing Sites `project_id` and deploy the same validated static bundle. If the source or bundle changes after QA, rebuild and repeat QA before hosting. Publish privately by default, and obtain explicit user approval before any shared or public deployment. Keep credentials and temporary archives out of source, YAML, logs, and responses.
+
+Return the deployed Sites URL, static bundle manifest／checksum, rendering mode, supported YAML type, enabled editing and language behavior, authentication status, CDASH mapping limitations, unresolved items, and whether drafts are local or durable.
 
 ## Safety
 

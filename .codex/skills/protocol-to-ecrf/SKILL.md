@@ -1,6 +1,6 @@
 ---
 name: protocol-to-ecrf
-description: Convert a local clinical trial protocol in PDF, DOCX, Markdown, or text into a traceable CDISC-mapped program.yaml draft, a review-gated AirwayAI JSON eCRF contract, coded HTML, coded download/API payloads, and an optional IIS/NGINX-ready React static release. Use when a user asks Codex to analyze a protocol, map fields to CDISC/NCIt terminology, generate one eCRF, validate an eCRF schema, preview the React form, or package the generated form for deployment.
+description: Convert a local clinical trial protocol in PDF, DOCX, Markdown, or text into a traceable CDISC-mapped program.yaml draft, a review-gated AirwayAI JSON eCRF contract, coded HTML, coded download/API payloads, and a precompiled React static release ready for OpenAI Sites. Use when a user asks Codex to analyze a protocol, map fields to CDISC/NCIt terminology, generate one eCRF, validate an eCRF schema, preview the React form, or package the generated form for deployment.
 ---
 
 # Protocol to eCRF
@@ -76,16 +76,16 @@ Remove-Item Env:\AIRWAYAI_CRF_SCHEMA_PATH
 10. Confirm that HTML exposes coding and that `onSubmit`, downloaded answers JSON, and the built-in API body contain the same full coded `FormSubmission`.
 11. Stop for explicit Gate B approval before preview/release.
 
-## Preview or package
+## Build, preview, or publish
 
-After Gate B approval, ask for:
+After Gate B approval, always produce the React production build before deployment. Use `template/crf/` as the reference implementation and bind the approved JSON contract at build time. The release must contain `index.html`, compiled JavaScript, compiled CSS, static assets, a manifest, and checksums.
 
-- local preview only;
-- IIS package;
-- NGINX package; or
-- both IIS and NGINX;
+Do not defer JSON-to-HTML conversion, JSX／TypeScript transpilation, or React rendering to a Sites backend request. Do not use React SSR／RSC or Worker-generated HTML for the eCRF. A Worker may only serve static assets or non-rendering APIs.
 
-and ask for root or subpath mounting.
+Ask whether the user wants:
+
+- local static preview only; or
+- OpenAI Sites deployment.
 
 For local preview:
 
@@ -96,17 +96,19 @@ npm run dev
 
 Remove the environment variable after the server stops. Visually verify model/domain/variable, codelist/NCIt identity, terminology version, and option codes. Submit a test record and verify `coding.fields` in the Last submission inspector and downloaded answers JSON. If testing the built-in API URL, verify the API receives the full `FormSubmission`, not bare active data.
 
-For packaging:
+For the static production package:
 
 ```powershell
 npm run release -- `
   --schema '<absolute-crf-schema-path>' `
   --project '<absolute-prj-directory>' `
-  --target both `
-  --mount-path '/forms/example/'
+  --target none `
+  --mount-path '/'
 ```
 
-Use `iis`, `nginx`, `both`, or `none`. Never deploy externally or copy into a live web root without separate authorization.
+Run QA against the built `site/` output rather than the development server. Record the asset manifest, checksums, renderer version, build tool version, and `precompiled_static_react` rendering mode.
+
+When Sites deployment is requested, invoke `sites-building` to validate the existing project integration and then `sites-hosting` to deploy the exact QA-validated bundle. Reuse the existing `.openai/hosting.json` project ID where applicable, publish privately by default, and require separate authorization for shared or public access.
 
 ## Completion report
 
@@ -118,6 +120,7 @@ Report absolute paths to:
 - artifact manifest and tracked exports;
 - CDISC mapping summary and coded submission structure;
 - preview instructions and optional release artifacts.
+- static bundle manifest／checksums, rendering mode, and optional OpenAI Sites URL／version.
 
 State that automated checks validate the software contract and Renderer behavior, not clinical correctness, regulatory submission fitness, or QMS validation.
 

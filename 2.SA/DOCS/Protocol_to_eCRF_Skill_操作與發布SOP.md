@@ -1,6 +1,6 @@
 # Protocol to eCRF Skill：操作、審核與發布 SOP
 
-> 本文件說明如何在 Codex 指定一份 Protocol，依序產生 `program.yaml`、AirwayAI eCRF JSON、React 靜態網站與選配的 IIS／NGINX 部署包。所有產出一律是 **Demo 工程產物**，不可視為臨床核准、Production release 或 QMS validation 證據。
+> 本文件說明如何在 Codex 指定一份 Protocol，依序產生 `program.yaml`、AirwayAI eCRF JSON、預先編譯完成的 React HTML／JavaScript／CSS 靜態網站，並選擇性發布至 OpenAI Sites。所有產出一律是 **Demo 工程產物**，不可視為臨床核准、Production release 或 QMS validation 證據。
 
 ## 一、目前是否已能完成整條流程？
 
@@ -13,10 +13,10 @@
 | 產生 `program.yaml` | Codex Skill | 建立可追溯的中介臨床規格，先停下等待人工確認 |
 | 產生 `crf-schema.json` | Codex Skill | 只把已確認內容映射成 JSON Schema 與 `x-airwayai` UI 合約 |
 | 合約與程式檢查 | npm／Vitest／AJV | 檢查 JSON Schema、AirwayAI meta-schema、語意規則、型別與 Renderer 行為 |
-| React HTML 建置 | Vite | 將選定 schema 編譯進可攜式靜態網站 |
+| React 靜態建置 | Vite | 在部署前將選定 schema 編譯成 HTML、JavaScript、CSS 與 assets |
 | 瀏覽器驗收 | Playwright | 對 Chromium、Firefox、WebKit 執行 release smoke test |
-| IIS／NGINX 包裝 | release script | 產生 `site/`、設定範本、manifest、驗證報告與 ZIP |
-| 外部部署 | 使用者／維運人員 | Skill 不會自行登入或複製到正式伺服器；必須另行授權與執行 |
+| Sites 包裝 | release script／Sites | 產生 `site/`、manifest、checksums、驗證報告與 ZIP |
+| OpenAI Sites 部署 | Sites | 使用通過 QA 的同一份靜態 bundle；共享或公開存取必須另行授權 |
 
 這不是「瀏覽器上傳平台」。它是 Codex 內的受控開發流程：使用者指定 Protocol 後，Codex 讀取、分析、詢問、產檔並呼叫專案內的測試與建置工具。
 
@@ -107,9 +107,11 @@ flowchart TD
     F --> G["合約、型別、單元與 build 驗證"]
     G --> H{"Gate B：表單契約確認"}
     H -- "退回" --> F
-    H -- "核准" --> I{"詢問發布方式"}
-    I -- "本機預覽" --> J["Vite dev server"]
-    I -- "IIS／NGINX／both" --> K["release site + config + ZIP"]
+    H -- "核准" --> I["Vite production build：HTML + JavaScript + CSS"]
+    I --> J["Playwright 驗證靜態 bundle"]
+    J --> K{"詢問發布方式"}
+    K -- "本機預覽" --> L["Static HTTP preview"]
+    K -- "OpenAI Sites" --> M["Sites 儲存版本並部署驗證"]
 ```
 
 ### 步驟 1：解析 Protocol
@@ -246,15 +248,20 @@ Remove-Item Env:\AIRWAYAI_CRF_SCHEMA_PATH
 
 不可直接雙擊 `index.html`，因為 `file://` 無法提供 Vite／ES Module 所需的 HTTP origin。
 
-## 六、建立 IIS／NGINX 部署包
+## 六、建立 React 靜態部署包
 
-Gate B 核准後，Skill 必須先問：
+Gate B 核准後一律先建立 production static bundle，再詢問是否發布至 OpenAI Sites。不得在 Sites backend、React SSR／RSC 或 HTTP request 階段轉譯 JSON。
 
-1. 是否需要部署包。
-2. 目標為 IIS、NGINX、兩者或只要一般靜態包。
-3. 掛載在網站根目錄 `/` 或子路徑，例如 `/forms/baseline/`。
+使用 `template/crf/` 的 React／Vite 建置模式，輸出至少包含：
 
-使用者回答後執行：
+- `index.html`
+- `assets/*.js`
+- `assets/*.css`
+- 其他 static assets
+- `asset-manifest.json`
+- `checksums.json`
+
+執行：
 
 ```powershell
 Set-Location 'C:\Users\ryan\我的雲端硬碟\專案\Hackathon-ClinicalTrail\template\crf'
@@ -262,18 +269,9 @@ Set-Location 'C:\Users\ryan\我的雲端硬碟\專案\Hackathon-ClinicalTrail\te
 npm run release -- `
   --schema '<crf-schema.json 絕對路徑>' `
   --project '<prj_yyyyMMdd-HHmm 絕對路徑>' `
-  --target both `
-  --mount-path '/forms/baseline/'
+  --target none `
+  --mount-path '/'
 ```
-
-`--target` 可用：
-
-| 值 | 產出 |
-| --- | --- |
-| `none` | 一般靜態 `site/`、證據與 ZIP，不附 server config |
-| `iis` | 加入 `web.config`，並在 `site/` 內放置可直接使用的副本 |
-| `nginx` | 加入 `nginx.conf.example` |
-| `both` | 同時加入 IIS 與 NGINX 範本 |
 
 Release 會重新執行：
 
@@ -286,27 +284,24 @@ Release 會重新執行：
 
 任一步驟失敗都不會建立正式 release 目錄。
 
-## 七、部署到 IIS
+## 七、部署到 OpenAI Sites
 
-1. 建立 IIS Website、Application 或 Virtual Directory。
-2. 將 release 中 `site/` 的**內容**複製到實際 web root。
-3. 確認 IIS Static Content 功能已啟用。
-4. 若產出包含 `web.config`，保留 `site/web.config`。
-5. 以實際 HTTP／HTTPS 網址開啟，不要用 `file://`。
-6. 若放在子路徑，使用建立 release 時相同的 `--mount-path` 進行驗收。
+1. 先以 `sites-building` 驗證 React production build 與 Sites integration。
+2. 確認 `.openai/hosting.json`，重用既有 `project_id`，不得建立重複 Sites project。
+3. 將通過 Playwright QA 的同一份 `site/` 連同 manifest 與 checksums 封裝成 Sites version。
+4. 使用 `sites-hosting` 儲存版本並部署；預設使用 private access。
+5. 若只能共享或公開，先取得使用者明確核准。
+6. Sites 回報成功後，驗證 published URL、版本識別及 HTML／JavaScript／CSS assets。
+7. 確認部署 bundle 的 checksum 與 QA evidence 完全一致。
 
 此 Demo 沒有後端 API、登入、資料庫、audit trail 或正式安全邊界；不得直接當成正式臨床收案系統。
 
-## 八、部署到 NGINX
+## 八、前後端責任邊界
 
-1. 將 `site/` 複製到伺服器的唯讀靜態目錄。
-2. 開啟 `nginx.conf.example`。
-3. 將 `alias` 改為伺服器上的 `site/` 絕對路徑。
-4. 將 `location` 保持為建置時指定的 mount path。
-5. 執行 `nginx -t`，確認設定正確後再 reload。
-6. 以實際 HTTP／HTTPS 網址驗收表單與 `assets/` 載入。
-
-Vite 建置後會把入口 asset URL 改為 `./assets/...`，因此同一份 `site/` 可部署在根目錄或子路徑。
+- JSON-to-HTML、schema-to-component mapping、JSX／TypeScript 轉譯與 CSS 打包必須在 build 階段完成。
+- Sites Worker 只能提供 static assets 或非渲染 API，不得在 request time 產生表單 HTML。
+- 若未來加入登入、核准、CDASH 查詢或 persistence，API 只處理該項責任，不得接管 React form rendering。
+- QA 必須從 static HTTP origin 測試 production bundle，不得只驗證 Vite dev server 或 SSR response。
 
 ## 九、版本、不覆寫與 Protocol amendment
 
@@ -340,6 +335,8 @@ Vite 建置後會把入口 asset URL 改為 `./assets/...`，因此同一份 `si
 - [ ] JSON 是 Demo 狀態、版本化且未覆寫舊版。
 - [ ] `validate:schema`、`check`、`test`、`build` 通過。
 - [ ] 使用者已檢閱欄位、條件、計算與 active data，通過 Gate B。
-- [ ] Skill 已詢問是否建立部署包及目標／mount path。
-- [ ] Release manifest、驗證報告與 ZIP 已產生。
-- [ ] 只把 `site/` 部署到 web root，Protocol 不進公開網站。
+- [ ] React production build 已產生 HTML、JavaScript、CSS、assets、manifest 與 checksums。
+- [ ] QA 測試的是準備部署的同一份 static bundle，且確認不依賴 request-time rendering。
+- [ ] Skill 已詢問是否發布至 OpenAI Sites；非 private access 已取得明確核准。
+- [ ] Release manifest、Sites version、驗證報告與 ZIP 已產生。
+- [ ] 只有 `site/` 靜態產物進入 Sites，Protocol 不進公開網站。

@@ -2,7 +2,7 @@
 
 > 適用範圍：`template/crf/` 的 React／Vite 展示程式，以及 `template/data-dictionaries/` 的 AirwayAI 合成 eCRF 合約。本專案是可展示、可測試的工程基線，**不可用於正式臨床資料蒐集或宣稱已完成 QMS validation**。
 
-若要從 Protocol 開始，經人工確認後產生 JSON、React 靜態網站與 IIS／NGINX 部署包，請見 [Protocol to eCRF Skill 操作與發布 SOP](./Protocol_to_eCRF_Skill_操作與發布SOP.md)。
+若要從 Protocol 開始，經人工確認後產生 JSON、預先編譯的 React HTML／JavaScript／CSS 靜態網站並發布至 OpenAI Sites，請見 [Protocol to eCRF Skill 操作與發布 SOP](./Protocol_to_eCRF_Skill_操作與發布SOP.md)。
 
 ## 先解決：為什麼直接開 `index.html` 會出現 CORS 錯誤？
 

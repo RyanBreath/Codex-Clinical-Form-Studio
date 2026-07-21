@@ -1,6 +1,6 @@
 ---
 name: orchestrate-clinical-forms
-description: Orchestrate this repository's protocol-to-eCRF, CDASHIG v2.1 mapping, YAML-to-editable-HTML Sites publishing, YAML specification QA, and rendered HTML form QA skills. Use when a request spans multiple clinical-form stages, when Codex must choose the correct project skill, or when required protocol, YAML, HTML, project ID, approval, identity, deployment, or submission inputs may be missing.
+description: Orchestrate this repository's protocol-to-eCRF, CDASHIG v2.1 mapping, precompiled React YAML/JSON sites, Sites publishing, YAML specification QA, and rendered HTML form QA skills. Use when a request spans multiple clinical-form stages, when Codex must choose the correct project skill, or when required protocol, YAML, JSON, static bundle, project ID, approval, identity, deployment, or submission inputs may be missing.
 ---
 
 # Orchestrate Clinical Forms
@@ -28,7 +28,8 @@ Read the selected project-local `SKILL.md` completely and follow its required re
 
 - Use `protocol-to-ecrf` for protocol normalization, traceability, contract compilation, preview, or release packaging.
 - Use `map-cdashig-fields` for CDASHIG v2.1 table search and specialist-reviewed candidate selection.
-- Use `publish-yaml-form-editor` to render supported YAML as an editable browser form and publish `yaml-form-studio` with Sites.
+- Use `publish-yaml-form-editor` to compile supported YAML as an editable React static bundle and publish `yaml-form-studio` with Sites.
+- Use `protocol-to-ecrf` to compile an approved JSON eCRF contract with the `template/crf/` React renderer into a static bundle before Sites deployment.
 - Use `test-yaml-forms` only for YAML Form Specification 1.0 contract QA.
 - Use `test-html-forms` for rendered single-page form/browser validation.
 
@@ -41,10 +42,13 @@ Do not pass `protocol-to-ecrf` `program.yaml` directly to `test-yaml-forms`; the
 3. Obtain explicit clinical and mapping approval.
 4. For a confirmed YAML, copy the verified login identity and confirmation time into the applicable approval record; if identity is unavailable, keep approval pending.
 5. Compile and validate the eCRF contract with `protocol-to-ecrf`; stop at Gate B.
-6. Use `publish-yaml-form-editor` when reviewers need a deployed field editor; route every CDASH lookup through `map-cdashig-fields`.
+6. Use `publish-yaml-form-editor` when reviewers need a deployed field editor; require its HTML／JavaScript／CSS production bundle before QA or Sites hosting, and route every CDASH lookup through `map-cdashig-fields`.
 7. Run `test-yaml-forms` only when a YAML Form Specification 1.0 artifact exists.
-8. Run `test-html-forms` on the rendered HTML when requested; keep real submission disabled unless authorized.
-9. Report artifact paths, deployed URL, approvals, unresolved items, test limitations, and next required input.
+8. For approved JSON, use the `template/crf/` React production build and require a static HTML／JavaScript／CSS bundle before QA or Sites hosting.
+9. Run `test-html-forms` on the built static HTML when requested; keep real submission disabled unless authorized.
+10. Report source and bundle paths, manifests／checksums, deployed Sites URL, approvals, unresolved items, test limitations, and next required input.
+
+Never route YAML-to-HTML or JSON-to-HTML through request-time backend rendering, React SSR／RSC, or Worker-generated HTML. Sites may host static assets and non-rendering APIs only.
 
 ## Safety
 

@@ -1,0 +1,50 @@
+- generic [active] [ref=e1]:
+  - heading "OSA Eligibility Screening and Baseline Characteristics" [level=1] [ref=e2]
+  - paragraph [ref=e3]: Field-validation page generated from the approved eCRF schema. Use synthetic data only. Do not enter direct identifiers.
+  - generic [ref=e4]:
+    - group "Eligibility screening" [ref=e5]:
+      - generic [ref=e7]:
+        - checkbox "Written informed consent obtained" [ref=e8]
+        - text: Written informed consent obtained
+      - generic [ref=e9]: Protocol inclusion criterion 1.
+      - generic [ref=e10]:
+        - checkbox "All protocol inclusion criteria met" [ref=e11]
+        - text: All protocol inclusion criteria met
+      - generic [ref=e12]: Verify all six protocol inclusion criteria.
+      - generic [ref=e13]:
+        - checkbox "No protocol exclusion criterion present" [ref=e14]
+        - text: No protocol exclusion criterion present
+      - generic [ref=e15]: Verify all 16 protocol exclusion criteria.
+    - group "Baseline characteristics" [ref=e16]:
+      - generic [ref=e18]:
+        - text: Age
+        - spinbutton "Age" [ref=e19]
+      - generic [ref=e20]: Required; 30 to 65 years.
+      - generic [ref=e21]: Sex
+      - generic [ref=e22]:
+        - radio "Female" [ref=e23]
+        - text: Female
+      - generic [ref=e24]:
+        - radio "Male" [ref=e25]
+        - text: Male
+      - generic [ref=e26]:
+        - radio "Unknown" [ref=e27]
+        - text: Unknown
+      - generic [ref=e28]:
+        - text: Years of education
+        - spinbutton "Years of education" [ref=e29]
+      - generic [ref=e30]: Optional non-negative integer.
+      - generic [ref=e31]:
+        - text: Medical history summary
+        - textbox "Medical history summary" [ref=e32]
+      - generic [ref=e33]: Optional; 2,000 characters maximum; no direct identifiers.
+      - generic [ref=e34]:
+        - text: Medication use summary
+        - textbox "Medication use summary" [ref=e35]
+      - generic [ref=e36]: Optional; 2,000 characters maximum; no direct identifiers.
+      - generic [ref=e37]:
+        - text: Occupation
+        - textbox "Occupation" [ref=e38]
+      - generic [ref=e39]: Optional; 200 characters maximum.
+    - button "Validate fields" [ref=e40] [cursor=pointer]
+    - status

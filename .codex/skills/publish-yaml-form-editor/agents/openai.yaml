@@ -1,0 +1,10 @@
+interface:
+  display_name: "Publish YAML Form Editor"
+  short_description: "Turn reviewed YAML into a published field editor"
+  default_prompt: "Use $publish-yaml-form-editor to render my reviewed YAML as an editable form and publish it with Sites."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "sites"
+      description: "Build and publish the YAML form editor with Sites"

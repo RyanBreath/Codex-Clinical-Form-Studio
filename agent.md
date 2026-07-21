@@ -49,6 +49,7 @@
 * `.codex/skills/orchestrate-clinical-forms/`：跨階段需求的唯一總控入口。
 * `.codex/skills/protocol-to-ecrf/`：Protocol 正規化、追溯、eCRF contract、審查 gate 與 release。
 * `.codex/skills/map-cdashig-fields/`：依 CDASHIG v2.1 官方表格搜尋候選，經專人確認後才可寫入映射。
+* `.codex/skills/publish-yaml-form-editor/`：將 `program.yaml` 渲染成可編輯 HTML，逐欄調用 CDASH 映射流程，並透過 Sites 發布。
 * `.codex/skills/test-yaml-forms/`：僅驗證 YAML Form Specification 1.0。
 * `.codex/skills/test-html-forms/`：驗證已渲染的單頁 HTML 表單。
 
@@ -62,3 +63,5 @@
 6. HTML QA 預設禁止真實提交；除非使用者明確授權，僅執行不送出的驗證。
 7. 所有測試使用合成資料，嚴禁將 PHI/PII 寫入 repository、YAML、HTML、Excel、截圖或測試紀錄。
 8. 產生確認版 YAML 時，必須把經驗證的登入者身分寫入既有 approval 的 `approved_by`，並以 ISO 8601 寫入 `approved_at`；無法取得經驗證的登入資訊時維持 `pending` 並先詢問使用者，禁止由 Git、作業系統帳號或自由文字猜測身分。
+9. 需要把 `program.yaml` 轉成可編輯網站或以 Sites 發布時，必須使用 `publish-yaml-form-editor`；其中每個 CDASH 查詢必須再調用 `map-cdashig-fields`，候選未經專人選定不得寫成 `matched`。
+10. Sites 發布預設採私人存取；若只能使用共享或公開存取，必須先取得使用者明確核准。

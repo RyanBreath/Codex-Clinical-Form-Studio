@@ -1,0 +1,14 @@
+{
+  "mode": "test-results",
+  "sheets": [
+    {
+      "name": "測試摘要",
+      "rows": 19,
+      "columns": 8,
+      "preview": "C:\\Users\\ryan\\我的雲端硬碟\\專案\\Hackathon-ClinicalTrail\\output\\playwright\\prj_20260721-1447\\20260721-162204\\workbook-preview\\test-results-測試摘要.png",
+      "inspect": "{\"kind\":\"table\",\"sheet\":\"測試摘要\",\"address\":\"A1:H19\",\"rows\":19,\"cols\":8,\"values\":[[\"HTML 表單 QA 測試報告\",\"HTML 表單 QA 測試報告\",\"HTML 表單 QA 測試報告\",\"HTML 表單 QA 測試報告\",\"HTML 表單 QA 測試報告\",\"HTML 表單 QA 測試報告\",null,null],[null,null,null,null,null,null,null,null],[\"項目\",\"內容\",null,\"測試類型\",\"案例數\",null,\"執行狀態\",\"案例數\"],[\"prj_id\",\"prj_20260721-1447\",null,\"合法基準\",0,null,\"PASS\",0],[\"來源\",\"http://127.0.0.1:4174/\",null,\"必填\",0,null,\"FAIL\",0],[\"頁面標題\",\"AirwayAI eCRF Studio\",null,\"格式\",0,null,\"需人工確認\",0],[\"HTML SHA-256\",\"d53fab53a00faa575966d5587013515b70792310e240761fbce63b965bdc2223\",null,\"邊界值\",0,null,\"技術錯誤\",0],[\"產生時間\",46224.682916666665,null,\"長度\",0,null,null,null],[\"表單數\",0,null,\"步進值\",0,null,null,null],[\"欄位數\",0,null,\"條件式欄位\",0,null,null,null],[\"測試案例數\",0,null,\"唯讀或停用\",0,null,null,null],[\"跳過／裁減紀錄數\",0,null,\"布林抽樣\",0,null,null,null],[\"正式送出\",\"未授權，只驗證送出前狀態\",null,\"Pairwise\",0,null,null,null],[null,null,null,\"Unicode\",0,null,null,null],[null,null,null,\"前後空白\",0,null,null,null],[\"表單\",\"布林欄位總數\",\"已抽樣\",\"未抽樣\",0,null,null,null],[null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null],[\"表單\",\"欄位／案例\",\"跳過或裁減原因\",null,null,null,null,null]]}"
+    }
+  ],
+  "formulaErrors": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "caseCount": 0
+}

@@ -1,0 +1,14 @@
+127.0.0.1 - - [21/Jul/2026 16:58:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jul/2026 16:58:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jul/2026 16:58:49] "GET /assets/index-DaPCzN6S.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jul/2026 16:58:49] "GET /assets/index-DTnq_U-2.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jul/2026 16:58:49] "GET /program.yaml HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jul/2026 16:58:49] code 404, message File not found
+127.0.0.1 - - [21/Jul/2026 16:58:49] "GET /api/me HTTP/1.1" 404 -
+127.0.0.1 - - [21/Jul/2026 16:58:49] "GET /favicon.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jul/2026 17:09:32] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [21/Jul/2026 17:09:32] "GET /assets/index-DaPCzN6S.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Jul/2026 17:09:32] "GET /assets/index-DTnq_U-2.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Jul/2026 17:09:32] "GET /program.yaml HTTP/1.1" 200 -
+127.0.0.1 - - [21/Jul/2026 17:09:32] code 404, message File not found
+127.0.0.1 - - [21/Jul/2026 17:09:33] "GET /api/me HTTP/1.1" 404 -

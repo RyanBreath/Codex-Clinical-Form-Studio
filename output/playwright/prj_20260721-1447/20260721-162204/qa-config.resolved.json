@@ -1,0 +1,9 @@
+{
+  "prj_id": "prj_20260721-1447",
+  "allow_submit": false,
+  "max_cases": 12,
+  "selectors": {
+    "form": ".preview form"
+  },
+  "ignore_fields": []
+}

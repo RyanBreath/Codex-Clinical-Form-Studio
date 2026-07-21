@@ -1,0 +1,41 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: AirwayAI eCRF Studio
+      - generic [ref=e7]: Editable protocol-to-eCRF YAML review
+    - generic [ref=e8]:
+      - button "Open YAML" [ref=e9] [cursor=pointer]
+      - button "Save" [disabled] [ref=e10]
+      - button "Confirm reviewed YAML" [disabled] [ref=e11]
+      - button "繁體中文" [ref=e12] [cursor=pointer]
+    - button "Choose File" [ref=e13]
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]: GATE A EDITOR
+      - heading "YAML field review" [level=1] [ref=e17]
+      - paragraph [ref=e18]: Checking reviewer identity…
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - text: "0"
+        - generic [ref=e21]: FIELDS
+      - generic [ref=e22]:
+        - text: "1"
+        - generic [ref=e23]: BLOCKERS
+    - button "Download draft" [disabled] [ref=e24]
+  - main [ref=e25]:
+    - complementary [ref=e26]:
+      - heading "Field inventory" [level=2] [ref=e27]
+      - textbox "Filter fields" [ref=e29]:
+        - /placeholder: Filter fields…
+    - article [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: SOURCE-CONTROLLED INPUT
+          - heading "program.yaml" [level=2] [ref=e35]
+        - generic [ref=e36]: Invalid YAML
+      - textbox "Raw YAML" [ref=e37]: "# Open, upload, or paste a protocol-to-eCRF program.yaml."
+    - complementary [ref=e38]:
+      - navigation [ref=e39]:
+        - text: Renderer preview
+        - generic [ref=e40]: Diagnostics (0)
+      - paragraph [ref=e42]: A program.yaml mapping is required.

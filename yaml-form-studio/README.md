@@ -1,22 +1,29 @@
-# vinext-starter
+# AirwayAI eCRF YAML Studio
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+A static React editor for the repository's protocol-to-eCRF `program.yaml` contract.
+It preloads the Screening/Eligibility project, supports synchronized raw YAML and
+field-level editing, renders an accessible preview, and downloads draft YAML.
+
+Formal confirmation remains a server-side Sites action. It requires an authenticated
+workspace identity, complete field definitions, evidence-backed mapping decisions,
+and no unresolved blocking items.
 
 ## Prerequisites
 
 - Node.js `>=22.13.0`
 
-## Quick Start
+## Local use
 
 ```bash
 npm install
 npm run dev
 npm run build
+npm test
 ```
 
-This starter does not use `wrangler.jsonc`.
+The development server supports draft editing and download. Authenticated confirmation
+is available only through the Sites worker because local browser state is never trusted
+as reviewer identity.
 
 ## Included Shape
 

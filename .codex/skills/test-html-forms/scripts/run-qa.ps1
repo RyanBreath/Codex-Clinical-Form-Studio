@@ -105,7 +105,7 @@ function Invoke-Pw {
 
 function Convert-ResultPayload {
     param($Response)
-    $hasError = $Response.PSObject.Properties.Name -contains "isError"
+    $hasError = $null -ne $Response -and $null -ne $Response.PSObject.Properties["isError"]
     if ($hasError -and $Response.isError) {
         throw [string]$Response.error
     }
@@ -283,7 +283,7 @@ try {
         Pop-Location
     }
 
-    $configPrjId = if ($resolvedConfig.PSObject.Properties.Name -contains "prj_id") {
+    $configPrjId = if ($null -ne $resolvedConfig -and $null -ne $resolvedConfig.PSObject.Properties["prj_id"]) {
         [string]$resolvedConfig.prj_id
     }
     else {
@@ -305,7 +305,7 @@ try {
         throw "prj_id is required."
     }
 
-    $configuredOutput = if ($resolvedConfig.PSObject.Properties.Name -contains "output_root") {
+    $configuredOutput = if ($null -ne $resolvedConfig -and $null -ne $resolvedConfig.PSObject.Properties["output_root"]) {
         [string]$resolvedConfig.output_root
     }
     else {
@@ -326,7 +326,7 @@ try {
     New-Item -ItemType Directory -Force -Path (Join-Path $runDirectory "screenshots") | Out-Null
     New-Item -ItemType Directory -Force -Path (Join-Path $runDirectory "workbook-preview") | Out-Null
 
-    $allowSubmitFromConfig = if ($resolvedConfig.PSObject.Properties.Name -contains "allow_submit") {
+    $allowSubmitFromConfig = if ($null -ne $resolvedConfig -and $null -ne $resolvedConfig.PSObject.Properties["allow_submit"]) {
         [bool]$resolvedConfig.allow_submit
     }
     else {
@@ -370,7 +370,7 @@ try {
         "--output",
         (Join-Path $runDirectory "test-cases.json")
     )
-    $configuredMaxCases = if ($resolvedConfig.PSObject.Properties.Name -contains "max_cases") {
+    $configuredMaxCases = if ($null -ne $resolvedConfig -and $null -ne $resolvedConfig.PSObject.Properties["max_cases"]) {
         [int]$resolvedConfig.max_cases
     }
     else {
@@ -494,7 +494,7 @@ try {
                 "--filename",
                 $mainPath
             ) -IgnoreFailure
-            $screenHasError = $screenResponse.PSObject.Properties.Name -contains "isError"
+            $screenHasError = $null -ne $screenResponse -and $null -ne $screenResponse.PSObject.Properties["isError"]
             if ((-not $screenHasError -or -not $screenResponse.isError) -and
                 (Test-Path -LiteralPath $mainPath)) {
                 $screenshotFiles += $mainName

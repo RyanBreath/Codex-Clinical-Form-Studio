@@ -1,0 +1,17 @@
+{
+    "prjId":  "prj_20260721-1447",
+    "source":  "http://127.0.0.1:4174/",
+    "startedAt":  "2026-07-21T16:23:51.7709343+08:00",
+    "allowSubmit":  false,
+    "browser":  "chromium",
+    "viewport":  "1440x900",
+    "results":  [
+
+                ],
+    "totals":  {
+                   "cases":  0,
+                   "PASS":  0,
+                   "FAIL":  0
+               },
+    "finishedAt":  "2026-07-21T16:24:30.3953795+08:00"
+}

@@ -1,0 +1,1328 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="prj_id" content="prj_20260721-1447">
+    <meta name="description" content="Edit, preview, validate, and review a protocol-to-eCRF program.yaml with authenticated confirmation controls.">
+    <link rel="icon" href="/favicon.svg">
+    <title>AirwayAI eCRF Studio</title>
+    <script type="module" crossorigin="" src="/assets/index-DTnq_U-2.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-DaPCzN6S.css">
+  </head>
+  <body>
+    <div id="root"><div class="studio-shell" data-prj-id="prj_20260721-1447"><header class="topbar"><div class="brand"><b>AirwayAI eCRF Studio</b><small>Editable protocol-to-eCRF YAML review</small></div><div class="topbar-actions"><button type="button" class="ghost">Open YAML</button><button type="button" class="ghost">Save</button><button type="button" class="primary" disabled="" title="Resolve all blockers and sign in before confirmation.">Confirm reviewed YAML</button><button type="button" class="ghost">繁體中文</button></div><input class="hidden" accept=".yaml,.yml" type="file"></header><section class="contextbar"><div><i>GATE A EDITOR</i><h1>Screening and Eligibility</h1><p>Draft editing is available. Sign-in is required only for confirmation.</p></div><div class="summary"><b>37<small>FIELDS</small></b><b class="bad">73<small>BLOCKERS</small></b></div><button type="button" class="secondary">Download draft</button></section><main class="workspace"><aside><h2>Field inventory</h2><div class="field-filter"><input aria-label="Filter fields" placeholder="Filter fields…" value=""></div><button type="button" class="field active"><span class="dot unresolved"></span><b>Study identifier<small>study_identifier</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Site identifier<small>site_identifier</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Pseudonymous screening record code<small>screening_record_code</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Screening date<small>screening_date</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Informed consent inclusion criterion met<small>inc01_informed_consent</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Age<small>age_years</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Height<small>height_cm</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Weight<small>weight_kg</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Body mass index (BMI)<small>bmi</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Age 30-65 years inclusion criterion met<small>inc02_age_30_to_65</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Newly diagnosed obstructive sleep apnoea<small>newly_diagnosed_osa</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Full-night in-laboratory polysomnography completed<small>full_night_lab_psg_completed</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Screening apnoea-hypopnoea index<small>screening_ahi</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Newly diagnosed OSA with qualifying PSG AHI inclusion criterion met<small>inc03_osa_diagnostic_criterion</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>CPAP use during one-night tolerance assessment<small>cpap_one_night_use_hours</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>CPAP tolerance inclusion criterion met<small>inc04_cpap_tolerance</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>No participation in another clinical trial during the past 3 months<small>inc05_no_other_trial_last_3_months</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Able to complete relevant tests and follow-up<small>inc06_able_complete_tests_followup</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Severe systemic disease exclusion criterion present<small>exc01_severe_systemic_disease</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Psychiatric condition exclusion criterion present<small>exc02_psychiatric_condition</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Neurological disease exclusion criterion present<small>exc03_neurological_disease</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Sleep disorder other than OSA exclusion criterion present<small>exc04_other_sleep_disorder</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Alcoholism, drug addiction, or restricted medication exclusion criterion present<small>exc05_substance_or_restricted_medication</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Prior OSA therapy exclusion criterion present<small>exc06_prior_osa_therapy</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Mini-Mental State Examination score<small>mmse_score</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>MMSE score below 24 exclusion criterion present<small>exc07_mmse_below_24</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Left-handed exclusion criterion present<small>exc08_left_handed</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>MRI contraindication exclusion criterion present<small>exc09_mri_contraindication</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Gastrointestinal surgery during the last year exclusion criterion present<small>exc10_recent_gastrointestinal_surgery</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Pregnancy exclusion criterion present<small>exc11_pregnancy</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Intestinal flora regulator use during the previous 8 weeks exclusion criterion present<small>exc12_recent_intestinal_flora_regulator</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Recent treatment for a protocol-listed condition exclusion criterion present<small>exc13_recent_treatment_listed_condition</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Infectious disease exclusion criterion present<small>exc14_infectious_disease</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Commercial driver or driving-related accident risk exclusion criterion present<small>exc15_driving_risk</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Investigator deems participant unsuitable<small>exc16_investigator_unsuitable</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Reason participant is deemed unsuitable<small>investigator_unsuitable_reason</small></b><em>unresolved</em></button><button type="button" class="field"><span class="dot unresolved"></span><b>Eligible for randomisation<small>eligible_for_randomisation</small></b><em>unresolved</em></button></aside><section class="editor"><article><header><div><i>SOURCE-CONTROLLED INPUT</i><h2>program.yaml</h2></div><b class="ok">Parsed</b></header><textarea aria-label="Raw YAML" spellcheck="false">contract_version: "1.0.0"
+project_id: "prj_20260721-1447"
+source:
+  file_name: "2017_BMJOpen_CPAP_OSA_StudyProtocol.pdf"
+  sha256: "09e25d403eefc7335ee8caea073b9aa0e26c882d83d1afc73ee952dc00f890ce"
+  protocol_title: "Effects of continuous positive airway pressure on neurocognitive architecture and function in patients with obstructive sleep apnoea: study protocol for a multicentre randomised controlled trial"
+  protocol_version: "unresolved"
+  protocol_date: "unresolved"
+  publication_citation: "BMJ Open 2017;7:e014932"
+  trial_registration: "NCT02886156"
+  extraction_method: "native-text"
+  extracted_at: "2026-07-21T06:50:10.4577228Z"
+
+terminology_sources:
+  - standard: "CDISC"
+    model: "CDASHIG"
+    publication: "Clinical Data Acquisition Standards Harmonization Implementation Guide for Human Clinical Trials"
+    version: "2.1"
+    publication_date: "2019-11-01"
+    source_url: "https://www.cdisc.org/standards/foundational/cdashig-v2-1"
+    retrieved_at: "2026-07-21T07:02:36.5931875Z"
+  - standard: "CDISC"
+    model: "Controlled Terminology"
+    publication: "CDISC Controlled Terminology - CDASH and SDTM"
+    version: "2026-03-27"
+    source_url: "https://www.cdisc.org/standards/terminology/controlled-terminology"
+    retrieved_at: "2026-07-21T07:02:36.5931875Z"
+  - standard: "CDISC"
+    model: "QRS Supplement"
+    publication: "Mini-Mental State Examination"
+    version: "1.0"
+    publication_date: "2024-12-12"
+    source_url: "https://www.cdisc.org/standards/foundational/qrs/mini-mental-state-examination"
+    retrieved_at: "2026-07-21T07:02:36.5931875Z"
+    access_note: "The official page confirms the FT domain, MMSE category, version, and release date; detailed supplement files require authenticated CDISC access."
+  - standard: "CDISC/NCI EVS"
+    model: "SDTM Controlled Terminology"
+    publication: "SDTM Terminology"
+    version: "2026-03-27"
+    source_url: "https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.txt"
+    retrieved_at: "2026-07-21T07:02:36.5931875Z"
+    sha256: "bf463677654171d701d09ffcb0a122e9523029b42d542269f45fb496a35ecef9"
+
+study_summary:
+  design: "Multicentre, evaluator-blinded, randomised, parallel-controlled trial"
+  planned_enrolment: 148
+  population: "Han adults aged 30-65 years with newly diagnosed moderate-to-severe obstructive sleep apnoea"
+  arms:
+    - "CPAP plus best supportive care"
+    - "Best supportive care only"
+  randomisation_ratio: "1:1"
+  scheduled_assessments:
+    - "baseline before randomisation"
+    - "3 months"
+    - "6 months"
+    - "12 months"
+  primary_endpoint: "Montreal Cognitive Assessment (MoCA)"
+
+candidate_forms:
+  - candidate_id: "screening-eligibility"
+    title: "Screening and Eligibility"
+    purpose: "Document diagnostic, inclusion, and exclusion criteria before enrolment."
+    visit: "screening"
+    source_refs:
+      - locator: "Study population, diagnostic criteria, and eligible participants, pages 2-3"
+        confidence: "high"
+  - candidate_id: "baseline-characteristics"
+    title: "Baseline Characteristics"
+    purpose: "Collect age, sex, education, medical history, medication use, occupation, MoCA, and MMSE before randomisation."
+    visit: "baseline"
+    source_refs:
+      - locator: "Basic characteristics, page 4"
+        confidence: "high"
+  - candidate_id: "randomisation"
+    title: "Randomisation"
+    purpose: "Record equal allocation to CPAP plus BSC or BSC only after eligibility and baseline assessment."
+    visit: "baseline after assessments"
+    source_refs:
+      - locator: "Randomisation, allocation concealment and blinding, page 4"
+        confidence: "high"
+  - candidate_id: "neurocognitive-assessment"
+    title: "Neurocognitive Assessment"
+    purpose: "Capture the primary MoCA endpoint, MMSE, and named neuropsychological test results."
+    visit: "baseline, 3 months, 6 months, and 12 months"
+    source_refs:
+      - locator: "Primary and secondary outcomes, page 4"
+        confidence: "high"
+      - locator: "Neuropsychological tests, page 5"
+        confidence: "high"
+  - candidate_id: "sleep-respiratory-assessment"
+    title: "Sleep Respiratory Assessment"
+    purpose: "Capture protocol-named polysomnography and sleep respiratory outcomes."
+    visit: "baseline, 3 months, 6 months, and 12 months"
+    source_refs:
+      - locator: "Secondary endpoints - sleep variables, page 4"
+        confidence: "high"
+      - locator: "Sleep respiratory variables, page 5"
+        confidence: "high"
+  - candidate_id: "laboratory-biomarkers-specimens"
+    title: "Laboratory, Biomarker, and Specimen Assessment"
+    purpose: "Capture protocol-named biochemical, inflammatory, anti-inflammatory, oxidative-stress, urine, blood, faecal, metabolomic, and microbiome assessments."
+    visit: "baseline, 3 months, 6 months, and 12 months"
+    source_refs:
+      - locator: "Other outcomes - biochemical variables, pages 4-5"
+        confidence: "high"
+      - locator: "Urine, blood, and faecal samples, page 5"
+        confidence: "high"
+  - candidate_id: "anthropometry-cardiopulmonary"
+    title: "Anthropometry and Cardiopulmonary Assessment"
+    purpose: "Capture anthropometry, blood pressure, echocardiography, arterial stiffness, pulmonary function, and ECG assessments."
+    visit: "baseline and follow-up; lung-function and ECG schedule unresolved"
+    source_refs:
+      - locator: "Oxidative stress index and study examination procedures, page 5"
+        confidence: "high"
+  - candidate_id: "auditory-eeg-assessment"
+    title: "Auditory and High-Density EEG Assessment"
+    purpose: "Capture audiometry, DPOAE, central auditory processing tests, and protocol-specified EEG task results."
+    visit: "baseline, 3 months, 6 months, and 12 months"
+    source_refs:
+      - locator: "Auditory testing, pages 4-5"
+        confidence: "high"
+      - locator: "256-channel high-density EEG recording, pages 5-6"
+        confidence: "high"
+  - candidate_id: "brain-imaging-mrs"
+    title: "Brain Imaging and Magnetic Resonance Spectroscopy"
+    purpose: "Capture structural MRI, resting-state fMRI, diffusion imaging, and cerebral metabolite assessment status and results."
+    visit: "baseline, 3 months, 6 months, and 12 months"
+    source_refs:
+      - locator: "Secondary endpoints, page 4"
+        confidence: "high"
+      - locator: "Brain imaging and cerebral metabolites, page 6"
+        confidence: "high"
+  - candidate_id: "cpap-compliance"
+    title: "CPAP Treatment and Compliance"
+    purpose: "Capture CPAP exposure and device-derived adherence information for the CPAP plus BSC group."
+    visit: "during intervention and follow-up"
+    source_refs:
+      - locator: "CPAP plus BSC group and Follow-up, page 4"
+        confidence: "high"
+  - candidate_id: "adverse-events"
+    title: "Adverse Events"
+    purpose: "Capture unexpected adverse events associated with CPAP, including severity, causality, and serious-event reporting."
+    visit: "during the OSA treatment period"
+    source_refs:
+      - locator: "Safety measurements, page 6"
+        confidence: "high"
+  - candidate_id: "withdrawal-disposition"
+    title: "Withdrawal and Disposition"
+    purpose: "Document protocol-specified withdrawal circumstances and study disposition."
+    visit: "as needed"
+    source_refs:
+      - locator: "Withdrawal criteria, page 3"
+        confidence: "high"
+
+selected_form:
+  candidate_id: "screening-eligibility"
+  approval_status: "pending"
+  purpose: "Document diagnostic, inclusion, and exclusion criteria before enrolment and randomisation."
+  visit: "screening"
+  fields:
+    - concept_id: "study_identifier"
+      label: "Study identifier"
+      purpose: "Display or prepopulate the unique study identifier on the screening eCRF."
+      data_type: "string"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Protocol title and trial registration, page 1; multicentre data management, pages 6-7"
+          confidence: "medium"
+      notes:
+        - "The protocol does not identify which value is the sponsor's STUDYID; the trial registration number must not be substituted without approval."
+        - "This should be system-prepopulated rather than manually entered."
+      inference:
+        kind: "inferred_supporting_field"
+        rationale: "A study identifier is directly implied by the named trial and its CRF data-management process."
+        confidence_percent: 95
+      coding:
+        status: "unresolved"
+        rationale: "Official candidate IE.STUDYID identified; specialist selection and the actual sponsor study identifier remain pending."
+    - concept_id: "site_identifier"
+      label: "Site identifier"
+      purpose: "Display or prepopulate the identifier of the participating sleep centre."
+      data_type: "string"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Study design and five participating sleep centres, page 2; data collection and management, pages 6-7"
+          confidence: "high"
+      notes:
+        - "The protocol names the centres but does not define site codes."
+        - "This should be system-prepopulated rather than manually entered."
+      inference:
+        kind: "inferred_supporting_field"
+        rationale: "A site identifier is directly implied by the multicentre design and centre-specific web CRF storage."
+        confidence_percent: 95
+      coding:
+        status: "unresolved"
+        rationale: "Official candidate IE.SITEID identified; specialist selection and site codes remain pending."
+    - concept_id: "screening_record_code"
+      label: "Pseudonymous screening record code"
+      purpose: "Link the screening assessment without collecting a direct participant identifier."
+      data_type: "string"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Recruitment and screening, page 3; data collection and management, pages 6-7"
+          confidence: "medium"
+      notes:
+        - "The protocol does not define the code format."
+        - "Direct identifiers are excluded."
+      inference:
+        kind: "inferred_supporting_field"
+        rationale: "A pseudonymous record key is directly implied by multicentre screening and CRF data management."
+        confidence_percent: 90
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "screening_date"
+      label: "Screening date"
+      purpose: "Record when eligibility screening was performed."
+      data_type: "date"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Recruitment and screening, page 3"
+          confidence: "medium"
+      notes:
+        - "A screening date is implied but not explicitly named as a CRF field."
+      inference:
+        kind: "inferred_supporting_field"
+        rationale: "A dated screening assessment is necessary to evaluate look-back periods stated by the protocol."
+        confidence_percent: 90
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "inc01_informed_consent"
+      label: "Informed consent inclusion criterion met"
+      purpose: "Confirm that informed consent has been obtained."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 1, page 2"
+          confidence: "high"
+        - locator: "Ethical issues and dissemination, page 7"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "age_years"
+      label: "Age"
+      purpose: "Record age in years as evidence for the age eligibility criterion."
+      data_type: "number"
+      required: null
+      unit: "years"
+      range:
+        minimum: null
+        maximum: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 2, page 2"
+          confidence: "high"
+      notes:
+        - "The inclusion interval is 30 through 65 years."
+        - "The form must retain out-of-range values to document screen failures."
+        - "Integer versus fractional-year precision is not stated."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "height_cm"
+      label: "Height"
+      purpose: "Record height in centimetres for the BMI calculation."
+      data_type: "number"
+      required: true
+      unit: "cm"
+      range:
+        minimum: null
+        maximum: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Anthropometric measurements, page 5"
+          confidence: "high"
+      notes:
+        - "The user specified centimetres as the capture unit for this BMI calculation."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "CDASHIG v2.1 mapping review is required for the height result."
+    - concept_id: "weight_kg"
+      label: "Weight"
+      purpose: "Record weight in kilograms for the BMI calculation."
+      data_type: "number"
+      required: true
+      unit: "kg"
+      range:
+        minimum: null
+        maximum: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Anthropometric measurements, page 5"
+          confidence: "high"
+      notes:
+        - "The user specified kilograms as the capture unit for this BMI calculation."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "CDASHIG v2.1 mapping review is required for the weight result."
+    - concept_id: "bmi"
+      label: "Body mass index (BMI)"
+      purpose: "Calculate body mass index from weight in kilograms and height in metres squared."
+      data_type: "number"
+      required: false
+      unit: "kg/m²"
+      range:
+        minimum: null
+        maximum: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation:
+        type: "bmi"
+        height_concept_id: "height_cm"
+        weight_concept_id: "weight_kg"
+        decimal_places: 2
+      source_refs:
+        - locator: "Anthropometric measurements, page 5"
+          confidence: "high"
+      notes:
+        - "The protocol defines BMI as weight (kg) divided by height squared (m²)."
+        - "The user specified rounding the displayed result to two decimal places."
+        - "The user requested these anthropometric fields in the current Screening/Eligibility form; the protocol describes them as study anthropometric measurements rather than an eligibility criterion."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "CDASHIG v2.1 mapping review is required for the derived BMI result."
+    - concept_id: "inc02_age_30_to_65"
+      label: "Age 30-65 years inclusion criterion met"
+      purpose: "Record whether the protocol age criterion is satisfied."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 2, page 2"
+          confidence: "high"
+      notes:
+        - "Consistency check candidate: true only when age is within the inclusive interval 30-65 years."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "newly_diagnosed_osa"
+      label: "Newly diagnosed obstructive sleep apnoea"
+      purpose: "Record newly diagnosed OSA status for the diagnostic inclusion criterion."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 3, page 2"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "full_night_lab_psg_completed"
+      label: "Full-night in-laboratory polysomnography completed"
+      purpose: "Record the diagnostic method used to establish OSA eligibility."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 3, page 2"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "screening_ahi"
+      label: "Screening apnoea-hypopnoea index"
+      purpose: "Record the PSG AHI used to assess diagnostic eligibility."
+      data_type: "number"
+      required: null
+      unit: "events/hour"
+      range:
+        minimum: null
+        maximum: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Diagnostic criteria and Inclusion criteria item 3, page 2"
+          confidence: "high"
+        - locator: "Recruitment and screening, page 3"
+          confidence: "high"
+      notes:
+        - "The qualifying threshold is at least 15 events/hour."
+        - "The field must retain values below 15 to document screen failures."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "inc03_osa_diagnostic_criterion"
+      label: "Newly diagnosed OSA with qualifying PSG AHI inclusion criterion met"
+      purpose: "Record whether the combined diagnostic inclusion criterion is satisfied."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 3, page 2"
+          confidence: "high"
+      notes:
+        - "Consistency check candidate: newly diagnosed OSA, qualifying full-night in-laboratory PSG, and AHI at least 15 events/hour."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "cpap_one_night_use_hours"
+      label: "CPAP use during one-night tolerance assessment"
+      purpose: "Record CPAP use duration supporting the tolerance inclusion criterion."
+      data_type: "number"
+      required: null
+      unit: "hours"
+      range:
+        minimum: null
+        maximum: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 4, page 2"
+          confidence: "high"
+      notes:
+        - "The qualifying threshold is at least 4 hours during one night."
+        - "The field must retain values below 4 hours to document screen failures."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "inc04_cpap_tolerance"
+      label: "CPAP tolerance inclusion criterion met"
+      purpose: "Record whether the participant tolerated at least 4 hours of CPAP during one night."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 4, page 2"
+          confidence: "high"
+      notes:
+        - "Consistency check candidate: true only when one-night CPAP use is at least 4 hours."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "inc05_no_other_trial_last_3_months"
+      label: "No participation in another clinical trial during the past 3 months"
+      purpose: "Record whether the recent clinical-trial participation inclusion criterion is satisfied."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 5, page 2"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "inc06_able_complete_tests_followup"
+      label: "Able to complete relevant tests and follow-up"
+      purpose: "Record whether the participant can complete protocol assessments and follow-up."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Inclusion criteria item 6, page 2"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc01_severe_systemic_disease"
+      label: "Severe systemic disease exclusion criterion present"
+      purpose: "Record severe systemic disease, including the protocol examples of cardiac, hepatic, or renal failure."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 1, page 2"
+          confidence: "high"
+      notes:
+        - "The examples are not treated as an exhaustive controlled list."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc02_psychiatric_condition"
+      label: "Psychiatric condition exclusion criterion present"
+      purpose: "Record a disqualifying psychiatric condition, including the protocol examples."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 2, page 2"
+          confidence: "high"
+      notes:
+        - "Depression, mania, and schizophrenia are examples, not an exhaustive controlled list."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc03_neurological_disease"
+      label: "Neurological disease exclusion criterion present"
+      purpose: "Record a disqualifying neurological disease, including the protocol examples."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 3, page 2"
+          confidence: "high"
+      notes:
+        - "Head trauma, brain tumour, epilepsy, stroke, transient ischaemic attack, and coma are examples, not an exhaustive controlled list."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc04_other_sleep_disorder"
+      label: "Sleep disorder other than OSA exclusion criterion present"
+      purpose: "Record a disqualifying non-OSA sleep disorder or specified central-apnoea/hypoventilation condition."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 4, page 2"
+          confidence: "high"
+      notes:
+        - "The protocol names narcolepsy, insomnia, chronic sleep deprivation, REM behaviour disorder, restless legs syndrome, central sleep apnoea with at least 50% of AHI from central apnoeas, and obesity hypoventilation syndrome."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc05_substance_or_restricted_medication"
+      label: "Alcoholism, drug addiction, or restricted medication exclusion criterion present"
+      purpose: "Record whether the compound substance-use and medication exclusion criterion is present."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 5, pages 2-3"
+          confidence: "high"
+      notes:
+        - "Alcohol thresholds are sex-specific and expressed as standard drinks per week or per day."
+        - "The criterion also includes drug addiction, psychotropic-drug use, current sedative use, or narcotic use."
+        - "Whether to split this compound criterion into separate evidence fields requires Gate A approval."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc06_prior_osa_therapy"
+      label: "Prior OSA therapy exclusion criterion present"
+      purpose: "Record prior CPAP, upper-airway surgery, oral-appliance, or other prior OSA therapy."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 6, page 3"
+          confidence: "high"
+      notes:
+        - "The named therapies are not converted into controlled options without approval."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "mmse_score"
+      label: "Mini-Mental State Examination score"
+      purpose: "Record the MMSE score used for the exclusion threshold."
+      data_type: "number"
+      required: null
+      unit: "score"
+      range:
+        minimum: null
+        maximum: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 7, page 3"
+          confidence: "high"
+      notes:
+        - "A score below 24 is exclusionary."
+        - "The protocol does not reproduce the instrument or state the full score range."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official candidate FT.FTORRES with FTCAT=MMSE, FTTESTCD=MMS112, FTTEST=MMS1-Total Score, and NCIt C100586 identified; specialist selection remains pending."
+    - concept_id: "exc07_mmse_below_24"
+      label: "MMSE score below 24 exclusion criterion present"
+      purpose: "Record whether the MMSE exclusion threshold is met."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 7, page 3"
+          confidence: "high"
+      notes:
+        - "Consistency check candidate: true only when MMSE score is below 24."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc08_left_handed"
+      label: "Left-handed exclusion criterion present"
+      purpose: "Record whether the participant is left-handed."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 8, page 3"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc09_mri_contraindication"
+      label: "MRI contraindication exclusion criterion present"
+      purpose: "Record a disqualifying MRI contraindication."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 9, page 3"
+          confidence: "high"
+      notes:
+        - "Claustrophobia and metal implantation are examples, not an exhaustive controlled list."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc10_recent_gastrointestinal_surgery"
+      label: "Gastrointestinal surgery during the last year exclusion criterion present"
+      purpose: "Record gastrointestinal surgery within the look-back period, excluding appendicitis and hernia surgery."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 10, page 3"
+          confidence: "high"
+      notes:
+        - "The protocol wording is retained; whether 'appendicitis surgery' means appendectomy requires clinical confirmation."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc11_pregnancy"
+      label: "Pregnancy exclusion criterion present"
+      purpose: "Record pregnancy status for eligibility."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 11, page 3"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc12_recent_intestinal_flora_regulator"
+      label: "Intestinal flora regulator use during the previous 8 weeks exclusion criterion present"
+      purpose: "Record recent use of an intestinal flora regulator."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 12, page 3"
+          confidence: "high"
+      notes:
+        - "Antibiotics and probiotics are examples, not an exhaustive controlled list."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc13_recent_treatment_listed_condition"
+      label: "Recent treatment for a protocol-listed condition exclusion criterion present"
+      purpose: "Record treatment during the past 3 months for the conditions named by the protocol."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 13, page 3"
+          confidence: "high"
+      notes:
+        - "The protocol names cholecystitis, gallstones, gastrointestinal ulcers, urinary tract infection, acute pyelonephritis, and cystitis."
+        - "Whether to split the compound criterion into separate evidence fields requires Gate A approval."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc14_infectious_disease"
+      label: "Infectious disease exclusion criterion present"
+      purpose: "Record a disqualifying infectious disease."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 14, page 3"
+          confidence: "high"
+      notes:
+        - "Tuberculosis and AIDS are examples, not an exhaustive controlled list."
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc15_driving_risk"
+      label: "Commercial driver or driving-related accident risk exclusion criterion present"
+      purpose: "Record the protocol-specified occupational or driving-risk exclusion."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 15, page 3"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "exc16_investigator_unsuitable"
+      label: "Investigator deems participant unsuitable"
+      purpose: "Record the investigator's protocol-defined unsuitability decision."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 16, page 3"
+          confidence: "high"
+      notes: []
+      inference:
+        kind: "protocol_explicit"
+        rationale: null
+        confidence_percent: 100
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "investigator_unsuitable_reason"
+      label: "Reason participant is deemed unsuitable"
+      purpose: "Document the rationale when the investigator applies the general unsuitability exclusion."
+      data_type: "string"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when:
+        concept_id: "exc16_investigator_unsuitable"
+        equals: true
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Exclusion criteria item 16, page 3"
+          confidence: "medium"
+      notes:
+        - "The protocol does not explicitly require a recorded reason."
+      inference:
+        kind: "inferred_supporting_field"
+        rationale: "A reason is directly implied by an investigator-specific unsuitability determination and supports auditability."
+        confidence_percent: 90
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+    - concept_id: "eligible_for_randomisation"
+      label: "Eligible for randomisation"
+      purpose: "Record the final screening determination after all inclusion and exclusion criteria are reviewed."
+      data_type: "boolean"
+      required: null
+      unit: null
+      range: null
+      options: []
+      visible_when: null
+      required_when: null
+      calculation: null
+      source_refs:
+        - locator: "Flow diagram, page 3; Randomisation, allocation concealment and blinding, page 4"
+          confidence: "medium"
+      notes:
+        - "The field is proposed as a manually confirmed determination because the renderer contract does not support a safe Boolean eligibility calculation."
+      inference:
+        kind: "inferred_supporting_field"
+        rationale: "The protocol explicitly transitions eligible screened patients to randomisation, which directly implies a final determination."
+        confidence_percent: 95
+      coding:
+        status: "unresolved"
+        rationale: "Official CDASHIG v2.1 mapping review completed; specialist candidate selection remains pending."
+
+unresolved_items:
+  - id: "U-001"
+    severity: "warning"
+    question: "Which single candidate form should be generated first?"
+    affected_concepts:
+      - "selected_form"
+    source_refs:
+      - locator: "Protocol-wide candidate-form inventory, pages 2-6"
+    resolution: "The user selected screening-eligibility. This records form selection only and is not Gate A approval."
+    resolved_by: "user"
+    resolved_at: "2026-07-21T06:57:16.5844044Z"
+  - id: "U-002"
+    severity: "warning"
+    question: "What protocol version and protocol date should be recorded? The journal publication year and online publication date are not labelled as the protocol version/date."
+    affected_concepts:
+      - "source.protocol_version"
+      - "source.protocol_date"
+    source_refs:
+      - locator: "Article header, page 1"
+    resolution: null
+    resolved_by: null
+    resolved_at: null
+  - id: "U-003"
+    severity: "blocking"
+    question: "For the selected form, which fields are mandatory? The protocol generally does not state field-level requiredness."
+    affected_concepts:
+      - "selected_form.fields.required"
+    source_refs:
+      - locator: "Outcome assessment and study examination procedures, pages 4-6"
+    resolution: "The user approved the Gate A proposal: all core screening fields are required; investigator_unsuitable_reason is conditionally required when exc16 is Y; calculated BMI is read-only and is not independently required."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-004"
+    severity: "blocking"
+    question: "For the selected form, confirm the data types, units, precision, and edit-check ranges that the protocol does not explicitly define."
+    affected_concepts:
+      - "selected_form.fields.data_type"
+      - "selected_form.fields.unit"
+      - "selected_form.fields.range"
+    source_refs:
+      - locator: "Outcome and procedure descriptions, pages 4-6"
+    resolution: "The user approved the proposed data types, protocol units and threshold consistency checks. Unstated plausible-data ranges and precision remain unset; BMI displays two decimal places per the user's implementation request."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-005"
+    severity: "warning"
+    question: "At which visits are lung function and ECG performed? They are exceptions to the general baseline/3/6/12-month schedule, but the alternative schedule is not stated."
+    affected_concepts:
+      - "lung_function.visit_schedule"
+      - "ecg.visit_schedule"
+    source_refs:
+      - locator: "Study examination procedures, page 5"
+    resolution: null
+    resolved_by: null
+    resolved_at: null
+  - id: "U-006"
+    severity: "blocking"
+    question: "Should MoCA and MMSE be represented as total scores only, or should licensed item-level instruments be supplied separately? The protocol does not reproduce the item-level forms."
+    affected_concepts:
+      - "moca"
+      - "mmse"
+    source_refs:
+      - locator: "Basic characteristics and primary/secondary endpoints, page 4"
+    resolution: "The user approved total-score-only MMSE capture for this screening form. No licensed item text is included."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-007"
+    severity: "warning"
+    question: "Which device-derived CPAP adherence metrics must be collected? The protocol states that usage information is downloaded daily but does not define the variables."
+    affected_concepts:
+      - "cpap_compliance"
+    source_refs:
+      - locator: "Follow-up, page 4"
+    resolution: null
+    resolved_by: null
+    resolved_at: null
+  - id: "U-008"
+    severity: "warning"
+    question: "Which adverse-event data elements and controlled values should be used beyond event occurrence, severity, causality, and serious-event escalation?"
+    affected_concepts:
+      - "adverse_events"
+    source_refs:
+      - locator: "Safety measurements, page 6"
+    resolution: null
+    resolved_by: null
+    resolved_at: null
+  - id: "U-009"
+    severity: "warning"
+    question: "The sleep-variable list ends with 'etc.'; confirm whether only explicitly named variables or an external PSG specification should define the complete form."
+    affected_concepts:
+      - "sleep_respiratory_variables"
+    source_refs:
+      - locator: "Secondary endpoints - sleep variables, page 4"
+    resolution: null
+    resolved_by: null
+    resolved_at: null
+  - id: "U-010"
+    severity: "blocking"
+    question: "Confirm that CDASHIG v2.1 is the required mapping target for this form."
+    affected_concepts:
+      - "selected_form.fields.coding"
+    source_refs:
+      - locator: "User workflow configuration; not a protocol-derived clinical fact"
+    resolution: "The user confirmed CDASHIG v2.1 as the required mapping target."
+    resolved_by: "user"
+    resolved_at: "2026-07-21T07:02:36.5931875Z"
+  - id: "U-011"
+    severity: "blocking"
+    question: "Approve criterion-level Boolean fields plus separate evidence values for age, AHI, one-night CPAP use, and MMSE, so screen failures can be retained."
+    affected_concepts:
+      - "inc02_age_30_to_65"
+      - "inc03_osa_diagnostic_criterion"
+      - "inc04_cpap_tolerance"
+      - "exc07_mmse_below_24"
+    source_refs:
+      - locator: "Eligibility criteria, pages 2-3"
+    resolution: "The user approved the full criterion worksheet plus separate evidence values for age, AHI, one-night CPAP use, and MMSE."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-012"
+    severity: "blocking"
+    question: "Approve criterion-level capture for compound exclusions 5 and 13, or request separate evidence fields for each substance, medication, disease, and treatment."
+    affected_concepts:
+      - "exc05_substance_or_restricted_medication"
+      - "exc13_recent_treatment_listed_condition"
+    source_refs:
+      - locator: "Exclusion criteria items 5 and 13, pages 2-3"
+    resolution: "The user approved retaining exclusions 5 and 13 as single compound protocol-level criteria."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-013"
+    severity: "blocking"
+    question: "Confirm whether the final eligible-for-randomisation field should remain a manual investigator confirmation rather than an automatically calculated value."
+    affected_concepts:
+      - "eligible_for_randomisation"
+    source_refs:
+      - locator: "Flow diagram, page 3; Randomisation, page 4"
+    resolution: "The user approved a manual investigator eligibility determination with consistency checks; the form must not silently overwrite the decision."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-014"
+    severity: "blocking"
+    question: "Provide or approve the sponsor study identifier and the five site identifiers; the trial registration number and institution names must not be silently substituted."
+    affected_concepts:
+      - "study_identifier"
+      - "site_identifier"
+    source_refs:
+      - locator: "Protocol title and trial registration, page 1; multicentre design, page 2"
+    resolution: "The user approved continuing with deployment placeholders. Sponsor STUDYID and the five SITEID values remain required configuration and the registry number or institution names will not be substituted."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-015"
+    severity: "blocking"
+    question: "Provide or approve versioned sponsor IETESTCD values matching the TI criteria metadata for all 22 protocol criteria."
+    affected_concepts:
+      - "inc01_informed_consent"
+      - "inc02_age_30_to_65"
+      - "inc03_osa_diagnostic_criterion"
+      - "inc04_cpap_tolerance"
+      - "inc05_no_other_trial_last_3_months"
+      - "inc06_able_complete_tests_followup"
+      - "exc01_severe_systemic_disease"
+      - "exc02_psychiatric_condition"
+      - "exc03_neurological_disease"
+      - "exc04_other_sleep_disorder"
+      - "exc05_substance_or_restricted_medication"
+      - "exc06_prior_osa_therapy"
+      - "exc07_mmse_below_24"
+      - "exc08_left_handed"
+      - "exc09_mri_contraindication"
+      - "exc10_recent_gastrointestinal_surgery"
+      - "exc11_pregnancy"
+      - "exc12_recent_intestinal_flora_regulator"
+      - "exc13_recent_treatment_listed_condition"
+      - "exc14_infectious_disease"
+      - "exc15_driving_risk"
+      - "exc16_investigator_unsuitable"
+    source_refs:
+      - locator: "Inclusion and exclusion criteria, pages 2-3"
+    resolution: null
+    resolved_by: null
+    resolved_at: null
+  - id: "U-016"
+    severity: "blocking"
+    question: "Select mappings or explicitly approve not-applicable status for the supporting OSA diagnosis, AHI, one-night CPAP-use duration, and investigator-rationale fields."
+    affected_concepts:
+      - "newly_diagnosed_osa"
+      - "screening_ahi"
+      - "cpap_one_night_use_hours"
+      - "investigator_unsuitable_reason"
+    source_refs:
+      - locator: "Inclusion criteria items 3-4, page 2; Exclusion criteria item 16, page 3"
+    resolution: "The user approved the Gate A recommendations: PR.PROCCUR for PSG completion; not-applicable to CDASHIG v2.1 for newly-diagnosed OSA, screening AHI, one-night CPAP-use hours, and investigator rationale, each with the documented rationale."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-017"
+    severity: "blocking"
+    question: "Approve or reject the official MMSE total-score candidate FT.FTORRES with FTCAT=MMSE, FTTESTCD=MMS112, FTTEST=MMS1-Total Score, and NCIt C100586."
+    affected_concepts:
+      - "mmse_score"
+    source_refs:
+      - locator: "Exclusion criteria item 7, page 3"
+    resolution: "The user approved FT.FTORRES with FTCAT=MMSE, FTTESTCD=MMS112, FTTEST=MMS1-Total Score, and NCIt C100586 for total-score capture."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-018"
+    severity: "blocking"
+    question: "Approve replacing software Boolean fields with CDISC-coded string radio fields using Y (Yes, NCIt C49488) and N (No, NCIt C49487) from codelist C66742 for all Yes/No eligibility responses."
+    affected_concepts:
+      - "inc01_informed_consent"
+      - "inc02_age_30_to_65"
+      - "newly_diagnosed_osa"
+      - "full_night_lab_psg_completed"
+      - "inc03_osa_diagnostic_criterion"
+      - "inc04_cpap_tolerance"
+      - "inc05_no_other_trial_last_3_months"
+      - "inc06_able_complete_tests_followup"
+      - "exc01_severe_systemic_disease"
+      - "exc02_psychiatric_condition"
+      - "exc03_neurological_disease"
+      - "exc04_other_sleep_disorder"
+      - "exc05_substance_or_restricted_medication"
+      - "exc06_prior_osa_therapy"
+      - "exc07_mmse_below_24"
+      - "exc08_left_handed"
+      - "exc09_mri_contraindication"
+      - "exc10_recent_gastrointestinal_surgery"
+      - "exc11_pregnancy"
+      - "exc12_recent_intestinal_flora_regulator"
+      - "exc13_recent_treatment_listed_condition"
+      - "exc14_infectious_disease"
+      - "exc15_driving_risk"
+      - "exc16_investigator_unsuitable"
+      - "eligible_for_randomisation"
+    source_refs:
+      - locator: "CDASHIG v2.1 IE and referenced No/Yes response controlled terminology; implementation decision, not a protocol fact"
+    resolution: "The user approved coded string radio values Y and N using the No Yes codelist C66742 and NCIt terms C49488 and C49487."
+    resolved_by: "user decision in Codex task"
+    resolved_at: "2026-07-21"
+  - id: "U-019"
+    severity: "warning"
+    question: "Confirm addition of height in cm, weight in kg, and calculated BMI rounded to two decimal places in the current Screening/Eligibility form."
+    affected_concepts:
+      - "height_cm"
+      - "weight_kg"
+      - "bmi"
+    source_refs:
+      - locator: "Anthropometric measurements, page 5; user implementation request dated 2026-07-21"
+    resolution: "The user requested height in centimetres and weight in kilograms as required inputs, with read-only BMI calculated as weight_kg / (height_cm / 100)^2 and displayed to two decimal places in the current form."
+    resolved_by: "user"
+    resolved_at: "2026-07-21"
+  - id: "U-020"
+    severity: "blocking"
+    question: "Approve the newly researched CDASHIG v2.1 mappings for height, weight, and BMI: VS.VSORRES with VSTESTCD HEIGHT, WEIGHT, and BMI respectively; BMI is flagged as derived."
+    affected_concepts:
+      - "height_cm"
+      - "weight_kg"
+      - "bmi"
+    source_refs:
+      - locator: "CDASHIG v2.1 Vital Signs section and metadata table; mapping evidence retrieved 2026-07-21"
+    resolution: null
+    resolved_by: null
+    resolved_at: null
+
+approvals:
+  clinical_meaning:
+    status: "pending"
+    approved_by: null
+    approved_at: null
+  form_contract:
+    status: "pending"
+    approved_by: null
+    approved_at: null
+</textarea></article><article><header><div><i>FIELD DEFINITION</i><h2>Study identifier</h2></div><span class="status-pill unresolved">unresolved</span></header><div class="grid"><label>Concept ID<input value="study_identifier"></label><label>English display label<input value="Study identifier"></label><label class="wide">Purpose<textarea>Display or prepopulate the unique study identifier on the screening eCRF.</textarea></label><label>Data type<select><option>unresolved</option><option>string</option><option>integer</option><option>number</option><option>date</option><option>boolean</option></select></label><label>Requiredness<select><option value="unresolved">Unresolved</option><option value="true">Required</option><option value="false">Optional</option></select></label><label>Unit<input value=""></label><label>Minimum<input type="number" value=""></label><label>Maximum<input type="number" value=""></label><label class="wide">Source locator<input value="Protocol title and trial registration, page 1; multicentre data management, pages 6-7"></label><label class="wide">Options (JSON array)<textarea class="options-editor">[]</textarea></label><div class="wide inline-action"><button type="button" class="secondary">Apply options</button></div></div><div class="mapping-panel"><header><div><i>CDISC MAPPING</i><h2>Candidate review</h2></div><button type="button" class="secondary">Search CDASHIG v2.1</button></header><p class="mapping-note">This offline action exports field metadata for the project’s <code>map-cdashig-fields</code> workflow. It never invents or silently writes a mapping.</p><div class="grid"><label>CDISC status<select><option>unresolved</option><option>matched</option><option>not-applicable</option></select></label><label>Mapping confidence (%)<input min="0" max="100" type="number" value=""></label><label>Standard<input value=""></label><label>Model<input value=""></label><label>Implementation guide<input value=""></label><label>Version<input value=""></label><label>Domain<input value=""></label><label>Variable<input value=""></label><label class="wide">Evidence URL<input type="url" value=""></label><label class="wide">Rationale<textarea>Official candidate IE.STUDYID identified; specialist selection and the actual sponsor study identifier remain pending.</textarea></label></div></div></article></section><aside class="preview"><nav>Renderer preview<span>Diagnostics (73)</span></nav><form class="form"><i>PREVIEW ONLY · REVIEW-GATED</i><h2>Screening and Eligibility</h2><fieldset><legend>Study identifier</legend><input aria-label="Study identifier" type="text" value=""><small>Source: Protocol title and trial registration, page 1; multicentre data management, pages 6-7</small></fieldset><fieldset><legend>Site identifier</legend><input aria-label="Site identifier" type="text" value=""><small>Source: Study design and five participating sleep centres, page 2; data collection and management, pages 6-7</small></fieldset><fieldset><legend>Pseudonymous screening record code</legend><input aria-label="Pseudonymous screening record code" type="text" value=""><small>Source: Recruitment and screening, page 3; data collection and management, pages 6-7</small></fieldset><fieldset><legend>Screening date</legend><input aria-label="Screening date" type="date" value=""><small>Source: Recruitment and screening, page 3</small></fieldset><fieldset><legend>Informed consent inclusion criterion met</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-4">Yes</label><label><input type="radio" value="false" name="preview-4">No</label></div><small>Source: Inclusion criteria item 1, page 2</small></fieldset><fieldset><legend>Age</legend><input aria-label="Age" step="any" type="number" value=""><small>Unit: years</small><small>Source: Inclusion criteria item 2, page 2</small></fieldset><fieldset><legend>Height<strong> *</strong></legend><input aria-label="Height" required="" step="any" type="number" value=""><small>Unit: cm</small><small>Source: Anthropometric measurements, page 5</small></fieldset><fieldset><legend>Weight<strong> *</strong></legend><input aria-label="Weight" required="" step="any" type="number" value=""><small>Unit: kg</small><small>Source: Anthropometric measurements, page 5</small></fieldset><fieldset><legend>Body mass index (BMI)</legend><input aria-label="Body mass index (BMI)" class="computed-preview" inputmode="decimal" placeholder="Calculated automatically" readonly="" type="text" value=""><small>Unit: kg/m²</small><small aria-live="polite">Enter height and weight to calculate BMI.</small><small>Source: Anthropometric measurements, page 5</small></fieldset><fieldset><legend>Age 30-65 years inclusion criterion met</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-9">Yes</label><label><input type="radio" value="false" name="preview-9">No</label></div><small>Source: Inclusion criteria item 2, page 2</small></fieldset><fieldset><legend>Newly diagnosed obstructive sleep apnoea</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-10">Yes</label><label><input type="radio" value="false" name="preview-10">No</label></div><small>Source: Inclusion criteria item 3, page 2</small></fieldset><fieldset><legend>Full-night in-laboratory polysomnography completed</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-11">Yes</label><label><input type="radio" value="false" name="preview-11">No</label></div><small>Source: Inclusion criteria item 3, page 2</small></fieldset><fieldset><legend>Screening apnoea-hypopnoea index</legend><input aria-label="Screening apnoea-hypopnoea index" step="any" type="number" value=""><small>Unit: events/hour</small><small>Source: Diagnostic criteria and Inclusion criteria item 3, page 2</small></fieldset><fieldset><legend>Newly diagnosed OSA with qualifying PSG AHI inclusion criterion met</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-13">Yes</label><label><input type="radio" value="false" name="preview-13">No</label></div><small>Source: Inclusion criteria item 3, page 2</small></fieldset><fieldset><legend>CPAP use during one-night tolerance assessment</legend><input aria-label="CPAP use during one-night tolerance assessment" step="any" type="number" value=""><small>Unit: hours</small><small>Source: Inclusion criteria item 4, page 2</small></fieldset><fieldset><legend>CPAP tolerance inclusion criterion met</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-15">Yes</label><label><input type="radio" value="false" name="preview-15">No</label></div><small>Source: Inclusion criteria item 4, page 2</small></fieldset><fieldset><legend>No participation in another clinical trial during the past 3 months</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-16">Yes</label><label><input type="radio" value="false" name="preview-16">No</label></div><small>Source: Inclusion criteria item 5, page 2</small></fieldset><fieldset><legend>Able to complete relevant tests and follow-up</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-17">Yes</label><label><input type="radio" value="false" name="preview-17">No</label></div><small>Source: Inclusion criteria item 6, page 2</small></fieldset><fieldset><legend>Severe systemic disease exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-18">Yes</label><label><input type="radio" value="false" name="preview-18">No</label></div><small>Source: Exclusion criteria item 1, page 2</small></fieldset><fieldset><legend>Psychiatric condition exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-19">Yes</label><label><input type="radio" value="false" name="preview-19">No</label></div><small>Source: Exclusion criteria item 2, page 2</small></fieldset><fieldset><legend>Neurological disease exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-20">Yes</label><label><input type="radio" value="false" name="preview-20">No</label></div><small>Source: Exclusion criteria item 3, page 2</small></fieldset><fieldset><legend>Sleep disorder other than OSA exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-21">Yes</label><label><input type="radio" value="false" name="preview-21">No</label></div><small>Source: Exclusion criteria item 4, page 2</small></fieldset><fieldset><legend>Alcoholism, drug addiction, or restricted medication exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-22">Yes</label><label><input type="radio" value="false" name="preview-22">No</label></div><small>Source: Exclusion criteria item 5, pages 2-3</small></fieldset><fieldset><legend>Prior OSA therapy exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-23">Yes</label><label><input type="radio" value="false" name="preview-23">No</label></div><small>Source: Exclusion criteria item 6, page 3</small></fieldset><fieldset><legend>Mini-Mental State Examination score</legend><input aria-label="Mini-Mental State Examination score" step="any" type="number" value=""><small>Unit: score</small><small>Source: Exclusion criteria item 7, page 3</small></fieldset><fieldset><legend>MMSE score below 24 exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-25">Yes</label><label><input type="radio" value="false" name="preview-25">No</label></div><small>Source: Exclusion criteria item 7, page 3</small></fieldset><fieldset><legend>Left-handed exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-26">Yes</label><label><input type="radio" value="false" name="preview-26">No</label></div><small>Source: Exclusion criteria item 8, page 3</small></fieldset><fieldset><legend>MRI contraindication exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-27">Yes</label><label><input type="radio" value="false" name="preview-27">No</label></div><small>Source: Exclusion criteria item 9, page 3</small></fieldset><fieldset><legend>Gastrointestinal surgery during the last year exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-28">Yes</label><label><input type="radio" value="false" name="preview-28">No</label></div><small>Source: Exclusion criteria item 10, page 3</small></fieldset><fieldset><legend>Pregnancy exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-29">Yes</label><label><input type="radio" value="false" name="preview-29">No</label></div><small>Source: Exclusion criteria item 11, page 3</small></fieldset><fieldset><legend>Intestinal flora regulator use during the previous 8 weeks exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-30">Yes</label><label><input type="radio" value="false" name="preview-30">No</label></div><small>Source: Exclusion criteria item 12, page 3</small></fieldset><fieldset><legend>Recent treatment for a protocol-listed condition exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-31">Yes</label><label><input type="radio" value="false" name="preview-31">No</label></div><small>Source: Exclusion criteria item 13, page 3</small></fieldset><fieldset><legend>Infectious disease exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-32">Yes</label><label><input type="radio" value="false" name="preview-32">No</label></div><small>Source: Exclusion criteria item 14, page 3</small></fieldset><fieldset><legend>Commercial driver or driving-related accident risk exclusion criterion present</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-33">Yes</label><label><input type="radio" value="false" name="preview-33">No</label></div><small>Source: Exclusion criteria item 15, page 3</small></fieldset><fieldset><legend>Investigator deems participant unsuitable</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-34">Yes</label><label><input type="radio" value="false" name="preview-34">No</label></div><small>Source: Exclusion criteria item 16, page 3</small></fieldset><fieldset><legend>Reason participant is deemed unsuitable</legend><input aria-label="Reason participant is deemed unsuitable" type="text" value=""><small>Source: Exclusion criteria item 16, page 3</small></fieldset><fieldset><legend>Eligible for randomisation</legend><div class="choice-preview"><label><input type="radio" value="true" name="preview-36">Yes</label><label><input type="radio" value="false" name="preview-36">No</label></div><small>Source: Flow diagram, page 3; Randomisation, allocation concealment and blinding, page 4</small></fieldset><button type="submit" class="primary" disabled="">Submit form</button></form><div class="diagnostics" aria-live="polite"><p class="error">Field 1: requiredness is unresolved.</p><p class="error">Field 1: CDISC status is unresolved.</p><p class="error">Field 2: requiredness is unresolved.</p><p class="error">Field 2: CDISC status is unresolved.</p><p class="error">Field 3: requiredness is unresolved.</p><p class="error">Field 3: CDISC status is unresolved.</p><p class="error">Field 4: requiredness is unresolved.</p><p class="error">Field 4: CDISC status is unresolved.</p><p class="error">Field 5: requiredness is unresolved.</p><p class="error">Field 5: CDISC status is unresolved.</p><p class="error">Field 6: requiredness is unresolved.</p><p class="error">Field 6: CDISC status is unresolved.</p><p class="error">Field 7: CDISC status is unresolved.</p><p class="error">Field 8: CDISC status is unresolved.</p><p class="error">Field 9: CDISC status is unresolved.</p><p class="error">Field 10: requiredness is unresolved.</p><p class="error">Field 10: CDISC status is unresolved.</p><p class="error">Field 11: requiredness is unresolved.</p><p class="error">Field 11: CDISC status is unresolved.</p><p class="error">Field 12: requiredness is unresolved.</p><p class="error">Field 12: CDISC status is unresolved.</p><p class="error">Field 13: requiredness is unresolved.</p><p class="error">Field 13: CDISC status is unresolved.</p><p class="error">Field 14: requiredness is unresolved.</p><p class="error">Field 14: CDISC status is unresolved.</p><p class="error">Field 15: requiredness is unresolved.</p><p class="error">Field 15: CDISC status is unresolved.</p><p class="error">Field 16: requiredness is unresolved.</p><p class="error">Field 16: CDISC status is unresolved.</p><p class="error">Field 17: requiredness is unresolved.</p><p class="error">Field 17: CDISC status is unresolved.</p><p class="error">Field 18: requiredness is unresolved.</p><p class="error">Field 18: CDISC status is unresolved.</p><p class="error">Field 19: requiredness is unresolved.</p><p class="error">Field 19: CDISC status is unresolved.</p><p class="error">Field 20: requiredness is unresolved.</p><p class="error">Field 20: CDISC status is unresolved.</p><p class="error">Field 21: requiredness is unresolved.</p><p class="error">Field 21: CDISC status is unresolved.</p><p class="error">Field 22: requiredness is unresolved.</p><p class="error">Field 22: CDISC status is unresolved.</p><p class="error">Field 23: requiredness is unresolved.</p><p class="error">Field 23: CDISC status is unresolved.</p><p class="error">Field 24: requiredness is unresolved.</p><p class="error">Field 24: CDISC status is unresolved.</p><p class="error">Field 25: requiredness is unresolved.</p><p class="error">Field 25: CDISC status is unresolved.</p><p class="error">Field 26: requiredness is unresolved.</p><p class="error">Field 26: CDISC status is unresolved.</p><p class="error">Field 27: requiredness is unresolved.</p><p class="error">Field 27: CDISC status is unresolved.</p><p class="error">Field 28: requiredness is unresolved.</p><p class="error">Field 28: CDISC status is unresolved.</p><p class="error">Field 29: requiredness is unresolved.</p><p class="error">Field 29: CDISC status is unresolved.</p><p class="error">Field 30: requiredness is unresolved.</p><p class="error">Field 30: CDISC status is unresolved.</p><p class="error">Field 31: requiredness is unresolved.</p><p class="error">Field 31: CDISC status is unresolved.</p><p class="error">Field 32: requiredness is unresolved.</p><p class="error">Field 32: CDISC status is unresolved.</p><p class="error">Field 33: requiredness is unresolved.</p><p class="error">Field 33: CDISC status is unresolved.</p><p class="error">Field 34: requiredness is unresolved.</p><p class="error">Field 34: CDISC status is unresolved.</p><p class="error">Field 35: requiredness is unresolved.</p><p class="error">Field 35: CDISC status is unresolved.</p><p class="error">Field 36: requiredness is unresolved.</p><p class="error">Field 36: CDISC status is unresolved.</p><p class="error">Field 37: requiredness is unresolved.</p><p class="error">Field 37: CDISC status is unresolved.</p><p class="error">U-015: Provide or approve versioned sponsor IETESTCD values matching the TI criteria metadata for all 22 protocol criteria.</p><p class="error">U-020: Approve the newly researched CDASHIG v2.1 mappings for height, weight, and BMI: VS.VSORRES with VSTESTCD HEIGHT, WEIGHT, and BMI respectively; BMI is flagged as derived.</p><p class="info">Authentication is required only for formal confirmation.</p><p class="success">Loaded the project Screening/Eligibility program.yaml.</p></div></aside></main></div></div>
+  
+
+</body></html>

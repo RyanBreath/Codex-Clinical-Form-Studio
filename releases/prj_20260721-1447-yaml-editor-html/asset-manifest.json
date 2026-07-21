@@ -1,0 +1,65 @@
+{
+  "application": "AirwayAI eCRF Studio",
+  "version": "0.3.0",
+  "renderingMode": "precompiled-static-react",
+  "entrypoint": "client/index.html",
+  "supportedYaml": "protocol-to-ecrf program.yaml contract 1.0.0",
+  "sourceProgram": {
+    "file": "program.yaml",
+    "projectId": "prj_20260721-1447",
+    "sha256": "273a5fbf798ceabc8a42dc99055de4233fae60f507bd172dd92a8b46b53f1461",
+    "modifiedAt": "2026-07-21T08:06:30.297Z"
+  },
+  "assets": [
+    {
+      "path": "client/.vite/manifest.json",
+      "bytes": 185,
+      "sha256": "c6162011c0e4ee3b8cf0f955c8cb9663bf515072b56cb58566e02a08c0d40ac1"
+    },
+    {
+      "path": "client/assets/index-DTnq_U-2.js",
+      "bytes": 306764,
+      "sha256": "a00fecbb6dec5ab062c797e3d1f757a5d5d62bc12fd451a840d191397ef403cd"
+    },
+    {
+      "path": "client/assets/index-DaPCzN6S.css",
+      "bytes": 8633,
+      "sha256": "b72a3af8ca4cd37a13f363bcfe09ace03dd78f5a6f80bbe1860121400b2c91d1"
+    },
+    {
+      "path": "client/favicon.svg",
+      "bytes": 718,
+      "sha256": "3e8863288c2d43dd33d2a71de317dcf9198f09932ea8d61e0def1b846a865435"
+    },
+    {
+      "path": "client/file.svg",
+      "bytes": 391,
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4"
+    },
+    {
+      "path": "client/globe.svg",
+      "bytes": 1035,
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf"
+    },
+    {
+      "path": "client/index.html",
+      "bytes": 675,
+      "sha256": "f6e609f3ef624e53fda27924a73c02dc81ec687d615d703c6ad0b3dc780a7919"
+    },
+    {
+      "path": "client/og.png",
+      "bytes": 1348358,
+      "sha256": "308376fda733de9c873dcf99929ad33bb32050d8251951d66ac7e6985e158c17"
+    },
+    {
+      "path": "client/program.yaml",
+      "bytes": 53797,
+      "sha256": "273a5fbf798ceabc8a42dc99055de4233fae60f507bd172dd92a8b46b53f1461"
+    },
+    {
+      "path": "client/window.svg",
+      "bytes": 385,
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1"
+    }
+  ]
+}

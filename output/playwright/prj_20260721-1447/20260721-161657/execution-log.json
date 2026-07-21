@@ -1,0 +1,266 @@
+{
+    "prjId":  "prj_20260721-1447",
+    "source":  "http://127.0.0.1:4174/",
+    "startedAt":  "2026-07-21T16:19:00.8124667+08:00",
+    "allowSubmit":  false,
+    "browser":  "chromium",
+    "viewport":  "1440x900",
+    "results":  [
+                    {
+                        "id":  "F01-TC001",
+                        "status":  "PASS",
+                        "actualResult":  "HTML 原生驗證通過；未偵測到可見錯誤訊息；未取得正式送出授權，僅執行送出前驗證。",
+                        "note":  "",
+                        "expected":  {
+                                         "kind":  "valid",
+                                         "result":  "所有已知欄位限制應通過；未獲送出授權時僅驗證至送出前。",
+                                         "manualReason":  null
+                                     },
+                        "nativeState":  {
+                                            "valid":  true,
+                                            "invalid":  [
+
+                                                        ],
+                                            "controlCount":  62
+                                        },
+                        "visibleErrors":  [
+
+                                          ],
+                        "actionLog":  [
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(1) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(1) \u003e input:nth-of-type(1)",
+                                              "value":  "QA-0001",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(2) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(2) \u003e input:nth-of-type(1)",
+                                              "value":  "QA-0001",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(3) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(3) \u003e input:nth-of-type(1)",
+                                              "value":  "QA-0001",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(4) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(4) \u003e input:nth-of-type(1)",
+                                              "value":  "2026-01-15",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-4",
+                                              "selector":  "input[name=\"preview-4\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(6) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(6) \u003e input:nth-of-type(1)",
+                                              "value":  10,
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(7) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(7) \u003e input:nth-of-type(1)",
+                                              "value":  10,
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(8) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(8) \u003e input:nth-of-type(1)",
+                                              "value":  10,
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-9",
+                                              "selector":  "input[name=\"preview-9\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-10",
+                                              "selector":  "input[name=\"preview-10\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-11",
+                                              "selector":  "input[name=\"preview-11\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(13) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(13) \u003e input:nth-of-type(1)",
+                                              "value":  10,
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-13",
+                                              "selector":  "input[name=\"preview-13\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(15) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(15) \u003e input:nth-of-type(1)",
+                                              "value":  10,
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-15",
+                                              "selector":  "input[name=\"preview-15\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-16",
+                                              "selector":  "input[name=\"preview-16\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-17",
+                                              "selector":  "input[name=\"preview-17\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-18",
+                                              "selector":  "input[name=\"preview-18\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-19",
+                                              "selector":  "input[name=\"preview-19\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-20",
+                                              "selector":  "input[name=\"preview-20\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-21",
+                                              "selector":  "input[name=\"preview-21\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-22",
+                                              "selector":  "input[name=\"preview-22\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-23",
+                                              "selector":  "input[name=\"preview-23\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(25) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(25) \u003e input:nth-of-type(1)",
+                                              "value":  10,
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-25",
+                                              "selector":  "input[name=\"preview-25\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-26",
+                                              "selector":  "input[name=\"preview-26\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-27",
+                                              "selector":  "input[name=\"preview-27\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-28",
+                                              "selector":  "input[name=\"preview-28\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-29",
+                                              "selector":  "input[name=\"preview-29\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-30",
+                                              "selector":  "input[name=\"preview-30\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-31",
+                                              "selector":  "input[name=\"preview-31\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-32",
+                                              "selector":  "input[name=\"preview-32\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-33",
+                                              "selector":  "input[name=\"preview-33\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-34",
+                                              "selector":  "input[name=\"preview-34\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(36) \u003e input:nth-of-type(1)",
+                                              "selector":  "#root \u003e div:nth-of-type(1) \u003e main:nth-of-type(1) \u003e aside:nth-of-type(2) \u003e form:nth-of-type(1) \u003e fieldset:nth-of-type(36) \u003e input:nth-of-type(1)",
+                                              "value":  "測試資料",
+                                              "status":  "filled"
+                                          },
+                                          {
+                                              "fieldKey":  "preview-36",
+                                              "selector":  "input[name=\"preview-36\"][type=\"radio\"][value=\"true\"]",
+                                              "value":  "true",
+                                              "status":  "filled"
+                                          }
+                                      ],
+                        "readonlyChecks":  [
+
+                                           ],
+                        "submitted":  false,
+                        "submissionAuthorized":  false,
+                        "submitSignal":  false,
+                        "beforeUrl":  "http://127.0.0.1:4174/",
+                        "afterUrl":  "http://127.0.0.1:4174/",
+                        "testedAt":  "2026-07-21T16:19:44.9709577+08:00",
+                        "screenshotFiles":  [
+                                                "F01-TC001_合法基準_valid_PASS.png"
+                                            ]
+                    }
+                ],
+    "totals":  {
+                   "cases":  95,
+                   "PASS":  1,
+                   "FAIL":  0
+               }
+}

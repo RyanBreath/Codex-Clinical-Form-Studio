@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-07-21T08:23:25.398Z",
+  "prjId": "prj_20260721-1447",
+  "source": {
+    "kind": "url",
+    "value": "http://127.0.0.1:4174/",
+    "testedUrl": "http://127.0.0.1:4174/"
+  },
+  "policy": {
+    "simpleFormMaxCases": 50,
+    "complexFormMaxCases": 100,
+    "explicitMaxCases": 12,
+    "booleanSamplingThreshold": 3
+  },
+  "forms": [],
+  "skipped": [],
+  "totals": {
+    "forms": 0,
+    "fields": 0,
+    "cases": 0,
+    "skipped": 0
+  }
+}

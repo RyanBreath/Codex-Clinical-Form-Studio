@@ -1,0 +1,3 @@
+{
+    "result":  "4. [GET] http://127.0.0.1:4174/program.yaml =\u003e [200] OK\n5. [GET] http://127.0.0.1:4174/api/me =\u003e [404] File not found\n\nNote: 4 static requests not shown, run with --static option to see them."
+}

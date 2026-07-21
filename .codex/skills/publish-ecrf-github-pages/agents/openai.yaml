@@ -1,4 +1,0 @@
-interface:
-  display_name: "Publish eCRF to GitHub Pages"
-  short_description: "QA-gated public eCRF publishing to GitHub Pages"
-  default_prompt: "Use $publish-ecrf-github-pages to package a reviewed eCRF and ask before publishing it to GitHub Pages."

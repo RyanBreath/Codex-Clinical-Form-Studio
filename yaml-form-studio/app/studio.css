@@ -31,11 +31,6 @@
 .brand small {
   display: block;
 }
-.topbar-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
 .brand small {
   color: #a9c2cf;
   font-size: 11px;
@@ -248,10 +243,6 @@ i {
   border: 1px solid #bdcdd5;
   border-radius: 7px;
 }
-.grid input[readonly] {
-  color: #506b7a;
-  background: #f4f7f8;
-}
 .wide {
   grid-column: span 2;
 }
@@ -260,177 +251,26 @@ i {
   padding-top: 15px;
   border-top: 1px solid var(--b);
 }
-.cdash-action-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.cdash-action-row > span {
-  color: var(--m);
-  font-size: 11px;
-}
 .candidate-list {
   display: grid;
-  gap: 12px;
+  gap: 8px;
   margin-top: 12px;
 }
-.candidate-list h3 {
-  margin: 4px 0 0;
-  color: var(--n);
-  font-size: 13px;
-}
 .candidate {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  padding: 14px;
+  padding: 10px;
   border: 1px solid var(--b);
-  border-radius: 10px;
+  border-radius: 8px;
   background: #f8fbfb;
 }
-.candidate.applied {
-  border-color: #65ac9f;
-  background: #effaf7;
-  box-shadow: 0 0 0 2px rgb(8 127 117 / 9%);
-}
-.candidate-heading {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-}
-.candidate-heading > div {
-  min-width: 0;
-}
-.candidate-heading strong {
+.candidate small {
   display: block;
-  margin-top: 8px;
-  color: var(--n);
-  font-size: 14px;
-}
-.candidate-heading p,
-.companion-list p {
-  margin: 5px 0 0;
-  color: var(--m);
-  font-size: 11px;
-  line-height: 1.5;
-}
-.candidate-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.candidate-badges span {
-  padding: 3px 7px;
-  border-radius: 999px;
-  color: #315264;
-  background: #e7eef1;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-.candidate-badges .confidence.high {
-  color: #126149;
-  background: #dff4ec;
-}
-.candidate-badges .confidence.medium {
-  color: #79500b;
-  background: #fff0ca;
-}
-.candidate-badges .confidence.low {
-  color: #76332f;
-  background: #fde7e5;
-}
-.mapping-selected {
-  min-width: 130px;
-  padding: 9px 12px;
-  border: 1px solid #65ac9f;
-  border-radius: 8px;
-  color: #126149;
-  background: #dff4ec;
-  font-weight: 800;
-}
-.candidate-warning {
-  padding: 10px 12px;
-  border-left: 4px solid #d39026;
-  border-radius: 6px;
-  color: #6f490d;
-  background: #fff8e8;
-  font-size: 11px;
-}
-.candidate-warning ul {
-  margin: 5px 0 0;
-  padding-left: 18px;
-}
-.candidate details {
-  border-top: 1px solid var(--b);
-  padding-top: 10px;
-}
-.candidate summary {
-  color: #315b6f;
-  font-size: 11px;
-  font-weight: 800;
-  cursor: pointer;
-}
-.candidate dl {
-  display: grid;
-  gap: 6px;
-  margin: 10px 0 0;
-}
-.candidate dl div {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 10px;
-}
-.candidate dt {
   color: var(--m);
   font-size: 10px;
-  font-weight: 800;
-}
-.candidate dd {
-  margin: 0;
-  color: #29495b;
-  font-size: 10px;
-  line-height: 1.45;
-}
-.companion-list {
-  padding: 11px;
-  border: 1px dashed #9db6c1;
-  border-radius: 8px;
-  background: #fff;
-}
-.companion-list > b {
-  color: #29495b;
-  font-size: 11px;
-}
-.companion {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 9px;
-  color: #29495b;
-  font-size: 11px;
-}
-.lookup-note,
-.lookup-error {
-  margin: 0;
-  padding: 10px 12px;
-  border-left: 4px solid #5d7e91;
-  background: #fff;
-  color: #405e6f;
-  font-size: 11px;
-}
-.lookup-error {
-  border-left-color: var(--d);
-  color: var(--d);
-}
-.boolean-preview {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.boolean-preview input {
-  min-height: auto;
+  margin-top: 3px;
 }
 .preview {
   border-left: 1px solid var(--b) !important;
@@ -492,20 +332,6 @@ i {
   }
   .topbar div:last-of-type {
     margin-top: 10px;
-  }
-  .candidate-heading,
-  .companion,
-  .cdash-action-row {
-    align-items: stretch;
-    flex-direction: column;
-  }
-  .candidate-heading button,
-  .companion button {
-    width: 100%;
-  }
-  .candidate dl div {
-    grid-template-columns: 1fr;
-    gap: 2px;
   }
   .contextbar {
     grid-template-columns: 1fr;

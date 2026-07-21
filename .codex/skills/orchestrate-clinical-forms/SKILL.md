@@ -1,6 +1,6 @@
 ---
 name: orchestrate-clinical-forms
-description: Orchestrate this repository's protocol-to-eCRF, CDASHIG v2.1 mapping, precompiled React YAML/JSON sites, Sites publishing, QA-gated public GitHub Pages eCRF publishing, YAML specification QA, and rendered HTML form QA skills. Use when a request spans multiple clinical-form stages, when Codex must choose the correct project skill, or when required protocol, YAML, JSON, static bundle, project ID, approval, identity, deployment, repository, or submission inputs may be missing.
+description: Orchestrate this repository's protocol-to-eCRF, CDASHIG v2.1 mapping, precompiled React YAML/JSON sites, Sites publishing, YAML specification QA, and rendered HTML form QA skills. Use when a request spans multiple clinical-form stages, when Codex must choose the correct project skill, or when required protocol, YAML, JSON, static bundle, project ID, approval, identity, deployment, or submission inputs may be missing.
 ---
 
 # Orchestrate Clinical Forms
@@ -16,7 +16,6 @@ Identify the requested outcome and available artifacts. Ask only for missing blo
 - YAML QA: one YAML Form Specification 1.0 file and `prj_id`;
 - YAML editor publishing: one supported `program.yaml`, project/form identity, and authenticated reviewer context for confirmation;
 - HTML QA: one local HTML file or public single-page URL and `prj_id`;
-- GitHub Pages publication: one approved runtime eCRF bundle, QA evidence for the exact Pages artifact, repository and branch, public-data screening, and a fresh post-QA push decision;
 - browser submission: explicit submission permission;
 - clinical or mapping approval: named human decision at the required gate.
 - confirmed YAML: an authenticated login identity that can populate `approved_by` and the confirmation timestamp.
@@ -33,7 +32,6 @@ Read the selected project-local `SKILL.md` completely and follow its required re
 - Use `protocol-to-ecrf` to compile an approved JSON eCRF contract with the `template/crf/` React renderer into a static bundle before Sites deployment.
 - Use `test-yaml-forms` only for YAML Form Specification 1.0 contract QA.
 - Use `test-html-forms` for rendered single-page form/browser validation.
-- Use `publish-ecrf-github-pages` after runtime eCRF QA when the completed form must be committed, pushed, and verified as a public GitHub Pages project site. Invoke it even when QA reports failures so it can enforce the required post-QA publication decision.
 
 Do not pass `protocol-to-ecrf` `program.yaml` directly to `test-yaml-forms`; the formats differ. Require an explicit compatible conversion first.
 
@@ -47,12 +45,11 @@ Do not pass `protocol-to-ecrf` `program.yaml` directly to `test-yaml-forms`; the
 6. Use `publish-yaml-form-editor` when reviewers need a deployed field editor; require its HTML／JavaScript／CSS production bundle before QA or Sites hosting, and route every CDASH lookup through `map-cdashig-fields`.
 7. Run `test-yaml-forms` only when a YAML Form Specification 1.0 artifact exists.
 8. For approved JSON, use the `template/crf/` React production build and require a static HTML／JavaScript／CSS bundle before QA or Sites hosting.
-9. Run `test-html-forms` on the exact prepared static HTML when requested; keep real submission disabled unless authorized.
-10. When a public GitHub eCRF is requested, invoke `publish-ecrf-github-pages` after QA finishes whether the result is `PASS`, `FAIL`, or `PARTIAL`. Stop at its push gate and obtain a fresh explicit yes before staging, committing, pushing, changing Pages settings, or deploying.
-11. Report source and bundle paths, manifests/checksums, deployed Sites or GitHub Pages URL, approvals, unresolved items, test limitations, and next required input.
+9. Run `test-html-forms` on the built static HTML when requested; keep real submission disabled unless authorized.
+10. Report source and bundle paths, manifests／checksums, deployed Sites URL, approvals, unresolved items, test limitations, and next required input.
 
 Never route YAML-to-HTML or JSON-to-HTML through request-time backend rendering, React SSR／RSC, or Worker-generated HTML. Sites may host static assets and non-rendering APIs only.
 
 ## Safety
 
-Use synthetic data only. Exclude PHI/PII. A GitHub Pages artifact is public: exclude protocol sources, credentials, reviewer history, participant data, server bundles, and authenticated editor APIs. Do not describe automated contract or browser checks as clinical correctness, regulatory fitness, or QMS validation.
+Use synthetic data only. Exclude PHI/PII. Do not describe automated contract or browser checks as clinical correctness, regulatory fitness, or QMS validation.

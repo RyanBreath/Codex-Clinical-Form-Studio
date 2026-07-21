@@ -112,13 +112,17 @@ async function runBuild(projectRoot, csvPath) {
     configFile: false,
     publicDir: false,
     build: {
-      ssr: resolve(projectRoot, "worker/index.ts"),
+      lib: {
+        entry: resolve(projectRoot, "worker/index.ts"),
+        formats: ["es"],
+        fileName: () => "index.js",
+      },
       outDir: resolve(dist, "server"),
       emptyOutDir: true,
       minify: true,
+      target: "es2022",
       rollupOptions: { output: { entryFileNames: "index.js", format: "es" } },
     },
-    ssr: { noExternal: true },
   });
 
   const packageJson = JSON.parse(await readFile(resolve(projectRoot, "package.json"), "utf8"));

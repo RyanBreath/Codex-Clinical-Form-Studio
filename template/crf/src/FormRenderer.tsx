@@ -101,9 +101,9 @@ function issueMessage(
   }
 }
 
-function ContractBlocker({ diagnostics }: { diagnostics: Diagnostic[] }) {
+function ContractBlocker({ diagnostics, compact = false }: { diagnostics: Diagnostic[]; compact?: boolean }) {
   return (
-    <section className={styles.blocker} role="alert" aria-labelledby="contract-error-title">
+    <section className={`${styles.blocker} ${compact ? styles.compact : ""}`} role="alert" aria-labelledby="contract-error-title">
       <span className={styles.blockerEyebrow}>Schema blocked</span>
       <h1 id="contract-error-title">表單合約無法載入</h1>
       <p>為避免蒐集不可信資料，renderer 已停止顯示與送出。</p>
@@ -275,8 +275,8 @@ export function FormRenderer(props: FormRendererProps) {
       try {
         if (!props.onSubmit) return;
         await props.onSubmit(submission);
-        downloadSubmissionArtifacts(compiled.contract, submission);
-        if (apiUrl.trim()) {
+        if (!props.context || props.context === "demo") downloadSubmissionArtifacts(compiled.contract, submission);
+        if ((!props.context || props.context === "demo") && apiUrl.trim()) {
           const response = await fetch(apiUrl.trim(), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -315,12 +315,12 @@ export function FormRenderer(props: FormRendererProps) {
   );
 
   if (!compiledResult.ok) {
-    return <ContractBlocker diagnostics={compiledResult.diagnostics} />;
+    return <ContractBlocker compact={props.context === "platform" || props.context === "preview"} diagnostics={compiledResult.diagnostics} />;
   }
   if (!compiled) return null;
   if (structuralIssues.length > 0) {
     return (
-      <ContractBlocker
+      <ContractBlocker compact={props.context === "platform" || props.context === "preview"}
         diagnostics={structuralIssues.map((issue) => ({
           severity: "error",
           code: `initial-data-${issue.code}`,
@@ -698,7 +698,7 @@ export function FormRenderer(props: FormRendererProps) {
                       : coding.variable]
                       .filter(Boolean)
                       .join(" · ")
-                  : "不適用"}
+                  : coding.status === "unresolved" ? "待確認對應" : "不適用"}
               </dd>
             </div>
             {coding.codelist ? (
@@ -758,11 +758,11 @@ export function FormRenderer(props: FormRendererProps) {
   const readonlyHasInvalidValues = mode === "readonly" && initialIssues.length > 0;
 
   return (
-    <form className={styles.renderer} noValidate onSubmit={submit} aria-busy={isSubmitting}>
+    <form className={`${styles.renderer} ${props.context === "platform" || props.context === "preview" ? styles.compact : ""}`} noValidate onSubmit={submit} aria-busy={isSubmitting}>
       <header className={styles.header}>
         <div>
           <div className={styles.badgeRow}>
-            <span className={styles.demoBadge}>合成 Demo</span>
+            <span className={styles.demoBadge}>{props.context === "platform" ? "研究紀錄" : props.context === "preview" ? "設計預覽" : "合成 Demo"}</span>
             <span className={styles.modeBadge}>{mode === "readonly" ? "唯讀紀錄" : "資料填寫"}</span>
           </div>
           <h1>{loc(extension.title)}</h1>
@@ -840,14 +840,14 @@ export function FormRenderer(props: FormRendererProps) {
         <footer className={styles.footer}>
           <div>
             <strong>送出前會再次驗證所有目前有效欄位</strong>
-            <span>隱藏或停用欄位不會包含在 payload。</span>
+            <span>{props.context && props.context !== "demo" ? "隱藏或停用欄位不會納入本次紀錄。" : "隱藏或停用欄位不會包含在 payload。"}</span>
           </div>
           <div className={styles.footerActions}>
             <button className={styles.submitButton} type="submit" disabled={isSubmitting}>
               {isSubmitting ? <span className={styles.spinner} aria-hidden="true" /> : null}
-              {isSubmitting ? "送出中…" : "驗證並送出"}
+              {isSubmitting ? "送出中…" : props.context === "preview" ? "驗證預覽" : "驗證並送出"}
             </button>
-            <label className={styles.apiUrlLabel}>
+            {(!props.context || props.context === "demo") && <label className={styles.apiUrlLabel}>
               API URL:
               <input
                 className={styles.apiUrlInput}
@@ -857,7 +857,7 @@ export function FormRenderer(props: FormRendererProps) {
                 placeholder="https://example.com/api/forms"
                 disabled={isSubmitting}
               />
-            </label>
+            </label>}
           </div>
         </footer>
       ) : null}

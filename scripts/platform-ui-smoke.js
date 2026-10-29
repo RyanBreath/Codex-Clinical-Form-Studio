@@ -1,0 +1,35 @@
+async page => {
+  await page.goto(page.url());
+  const studyId = new URL(page.url()).searchParams.get('studyId');
+  const subjects = await (await page.request.get(new URL(`/api/studies/${studyId}/subjects`, page.url()).href, { headers: { 'X-Development-User': 'dev-operator' } })).json();
+  const subject = subjects.find(item => item.code === 'SYNTH-MVP-A001');
+  if (!subject) throw new Error('請使用已完成 MVP 驗收的合成研究');
+  const visits = await (await page.request.get(new URL(`/api/subjects/${subject.id}/visits`, page.url()).href, { headers: { 'X-Development-User': 'dev-operator' } })).json();
+  const expectedVisit = visits.find(visit => visit.name === 'MVP 初次訪視');
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.getByRole('heading', { name: '訪視工作清單', exact: true }).waitFor();
+  await page.getByRole('button', { name: '開啟 SYNTH-MVP-A001 MVP 初次訪視', exact: true }).waitFor();
+  await page.getByRole('searchbox', { name: '搜尋工作清單', exact: true }).fill('不存在的研究代碼');
+  await page.getByText('沒有符合條件的工作', { exact: true }).waitFor();
+  await page.getByRole('button', { name: '清除篩選', exact: true }).click();
+  await page.getByRole('button', { name: '已鎖定', exact: true }).click();
+  await page.getByRole('button', { name: '開啟 SYNTH-MVP-A001 MVP 初次訪視', exact: true }).waitFor();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({ path: 'output/playwright/ui-20261028/overview-desktop.png', fullPage: true });
+  await page.getByRole('button', { name: '開啟 SYNTH-MVP-A001 MVP 初次訪視', exact: true }).click();
+  await page.getByRole('combobox', { name: '訪視', exact: true }).waitFor();
+  await page.getByText('已鎖定', { exact: true }).first().waitFor();
+  if (await page.getByRole('combobox', { name: '訪視', exact: true }).inputValue() !== expectedVisit?.id) throw new Error('工作清單未導向對應訪視');
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({ path: 'output/playwright/ui-20261028/collect-desktop.png', fullPage: true });
+  await page.getByRole('button', { name: '02表單設計', exact: true }).click();
+  await page.getByRole('heading', { name: '即時預覽', exact: true }).waitFor();
+  await page.screenshot({ path: 'output/playwright/ui-20261028/design-desktop.png', fullPage: true });
+  await page.getByRole('button', { name: '01研究總覽', exact: true }).click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: '開啟 SYNTH-MVP-A001 MVP 初次訪視', exact: true }).waitFor();
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  if (overflow) throw new Error('窄螢幕發生頁面水平溢出');
+  await page.screenshot({ path: 'output/playwright/ui-20261028/overview-mobile.png', fullPage: true });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+}

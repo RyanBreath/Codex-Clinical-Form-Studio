@@ -5,7 +5,15 @@
   "scripts": {
     "build": "node sites/build-static-site.mjs",
     "studio": "npm --prefix template/crf run studio",
+    "platform:db": "docker compose -f compose.platform.yml up -d --wait",
+    "platform:api": "dotnet run --project backend/FormPlatform.Api --launch-profile http",
+    "platform": "npm --prefix template/crf run platform",
+    "platform:build": "npm --prefix template/crf run platform:build",
+    "platform:test": "dotnet test tests/FormPlatform.IntegrationTests/FormPlatform.IntegrationTests.csproj",
     "studio:build": "npm --prefix template/crf run studio:build",
-    "studio:test": "npm --prefix template/crf run studio:test"
+    "studio:test": "npm --prefix template/crf run studio:test",
+    "platform:package": "pwsh -NoProfile -File scripts/platform-package.ps1",
+    "platform:mvp": "pwsh -NoProfile -File scripts/platform-start-mvp.ps1",
+    "platform:restore-rehearsal": "pwsh -NoProfile -File scripts/platform-restore-rehearsal.ps1"
   }
 }

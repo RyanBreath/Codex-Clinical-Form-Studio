@@ -8,9 +8,46 @@ template/crf/node_modules/
 template/crf/dist/
 template/crf/dist-demo/
 template/crf/dist-studio/
+template/crf/dist-platform/
 template/crf/coverage/
 template/crf/output/
 template/crf/.vite/
 
 # Protocol work packages may contain confidential source material.
 2.SA/projects/
+
+# Research form platform local runtime and build artifacts
+**/bin/
+**/obj/
+**/TestResults/
+apps/**/node_modules/
+apps/**/dist/
+.platform-data/
+playwright-report/
+test-results/
+.env
+.env.local
+
+# Generated local integration-test reports
+output/platform-tests/
+
+# Generated scenario recordings, audio and rendered videos
+output/video/
+
+# Dependencies and local browser/tool caches (at any project depth)
+node_modules/
+.playwright-cli/
+
+# Generated reports, screenshots, recordings and temporary workspaces.
+# Previously tracked historical artifacts remain tracked.
+/output/
+/tmp/
+
+# Local environment overrides; keep distributable examples.
+.env.*
+!.env.example
+!.env.*.example
+
+# Legacy video build output and reproducible synthesized narration
+/clinical-form-video/out/
+/clinical-form-video/public/audio/

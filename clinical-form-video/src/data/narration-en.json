@@ -1,0 +1,79 @@
+[
+  {
+    "id": "scene-01",
+    "title": "The Clinical Trial Data Problem",
+    "segments": [
+      "Clinical trials require accurate, standardized, and traceable data.",
+      "Converting a clinical Protocol into an eCRF remains highly manual.",
+      "Teams identify required data, design fields, define validation rules, and map them to CDISC CDASH.",
+      "Even a small amendment can affect forms, mappings, and downstream analysis."
+    ]
+  },
+  {
+    "id": "scene-02",
+    "title": "Introducing the Solution",
+    "segments": [
+      "We created Codex Clinical Form Studio.",
+      "It is a reusable Plugin composed of specialized Skills, not a single form-generating prompt.",
+      "After a user uploads a Protocol, an Orchestrator Skill coordinates analysis, design, CDASH mapping, clinical review, testing, and deployment.",
+      "Every stage has defined input, output, and human approval."
+    ]
+  },
+  {
+    "id": "scene-03",
+    "title": "GPT-5.6 and Protocol Analysis",
+    "segments": [
+      "The Orchestrator invokes the Protocol Analysis Skill, while GPT-5.6 provides medical and logical reasoning.",
+      "GPT-5.6 identifies forms, fields, data types, units, required conditions, options, and validation rules, then converts them into structured YAML.",
+      "YAML becomes the single source of truth.",
+      "Clinical users can review it in a web interface instead of editing application code."
+    ]
+  },
+  {
+    "id": "scene-04",
+    "title": "Clinical Editing and CDASH Mapping",
+    "segments": [
+      "Clinical users modify fields, required conditions, numeric limits, and selectable options.",
+      "The Orchestrator then invokes the CDASH Mapping Skill.",
+      "GPT-5.6 evaluates each field in its Protocol context, ranks CDASH candidates, and explains its recommendations.",
+      "AI suggests, but the clinical professional makes the final mapping decision."
+    ]
+  },
+  {
+    "id": "scene-05",
+    "title": "Generating an Executable eCRF",
+    "segments": [
+      "After approval, the Form Generation Skill converts YAML into standardized JSON.",
+      "The JSON-to-HTML renderer generates an executable eCRF with controls, required settings, allowed values, ranges, and validation.",
+      "The form first enters a validation environment for clinical review."
+    ]
+  },
+  {
+    "id": "scene-06",
+    "title": "Codex Engineering and Automated QA",
+    "segments": [
+      "Codex turns the approved specification into maintainable engineering work.",
+      "The Orchestrator directs Codex to update the application, generate database migrations, create pytest and Playwright tests, and validate in a real browser.",
+      "When a test fails, Codex traces YAML, the renderer, or the application, corrects the issue, and retests."
+    ]
+  },
+  {
+    "id": "scene-07",
+    "title": "Protocol Version Comparison",
+    "segments": [
+      "When a new Protocol version arrives, the Version Comparison Skill compares both YAML specifications.",
+      "It identifies added, removed, and modified fields, including required conditions, validation rules, options, and CDASH mappings.",
+      "This creates a traceable record of each amendment."
+    ]
+  },
+  {
+    "id": "scene-08",
+    "title": "GitHub and Deployment",
+    "segments": [
+      "GPT-5.6 interprets complex Protocols and reasons about CDISC mappings.",
+      "Codex implements the application, writes tests, fixes failures, and prepares GitHub pull requests.",
+      "After clinical approval and QA, the CI/CD pipeline deploys the validated eCRF.",
+      "Codex Clinical Form Studio packages the workflow into a reusable, testable Plugin. Human approval remains required at every critical clinical decision."
+    ]
+  }
+]

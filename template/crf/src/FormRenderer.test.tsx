@@ -43,6 +43,20 @@ function validData() {
 afterEach(() => cleanup());
 
 describe("FormRenderer", () => {
+  it("平台模式不提供任意外送 URL 或自動下載，也不將待對應顯示為不適用", async () => {
+    const schema = structuredClone(demoSchema);
+    schema["x-airwayai"].contractVersion = "1.2.0";
+    Object.values(schema["x-airwayai"].fields).forEach(field => { field.coding ??= { status: "unresolved" }; });
+    vi.mocked(downloadSubmissionArtifacts).mockClear();
+    const onSubmit = vi.fn(); const user = userEvent.setup();
+    render(<FormRenderer schema={schema} context="platform" initialData={validData()} onSubmit={onSubmit} />);
+    expect(screen.queryByRole("textbox", { name: "API URL:" })).not.toBeInTheDocument();
+    expect(screen.getByText("研究紀錄")).toBeInTheDocument();
+    expect(screen.getAllByText("待確認對應").length).toBeGreaterThan(0);
+    await user.click(screen.getByRole("button", { name: "驗證並送出" }));
+    await waitFor(() => expect(onSubmit).toHaveBeenCalledOnce());
+    expect(downloadSubmissionArtifacts).not.toHaveBeenCalled();
+  });
   it("renders the golden schema and reveals conditional fields", async () => {
     const user = userEvent.setup();
     render(

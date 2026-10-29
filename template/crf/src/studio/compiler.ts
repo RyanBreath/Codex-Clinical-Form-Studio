@@ -137,7 +137,7 @@ function compileCoding(coding: ProgramCoding): FieldConfig["coding"] | undefined
   };
 }
 
-function validateField(field: ProgramField, index: number): StudioDiagnostic[] {
+function validateField(field: ProgramField, index: number, draft = false): StudioDiagnostic[] {
   const diagnostics: StudioDiagnostic[] = [];
   const path = `/selected_form/fields/${index}`;
   if (!field.concept_id.trim()) diagnostics.push(error("concept-id-required", "欄位缺少 concept_id。", path));
@@ -152,7 +152,7 @@ function validateField(field: ProgramField, index: number): StudioDiagnostic[] {
     diagnostics.push(error("field-source-required", `「${field.label}」缺少 protocol 來源定位。`, path));
   }
   if (!field.coding?.status || field.coding.status === "unresolved") {
-    diagnostics.push(error("field-coding-unresolved", `「${field.label}」的 CDISC 對應尚未決定。`, path));
+    diagnostics.push((draft ? warning : error)("field-coding-unresolved", `「${field.label}」的 CDISC 對應尚未決定。`, path));
   }
   if (field.coding.status === "not-applicable" && !field.coding.rationale?.trim()) {
     diagnostics.push(error("coding-rationale-required", `「${field.label}」標為不適用時必須填寫理由。`, path));
@@ -232,7 +232,8 @@ function mapContractDiagnostics(diagnostics: Diagnostic[]): StudioDiagnostic[] {
   }));
 }
 
-export function compileProgram(program: ProgramYaml): ProgramCompileResult {
+export function compileProgram(program: ProgramYaml, options: { draft?: boolean } = {}): ProgramCompileResult {
+  const isDraft = options.draft === true;
   const diagnostics: StudioDiagnostic[] = [];
   if (!program || typeof program !== "object") {
     return { ok: false, diagnostics: [error("program-invalid", "YAML 根節點必須是物件。", "/")] };
@@ -242,19 +243,19 @@ export function compileProgram(program: ProgramYaml): ProgramCompileResult {
     diagnostics.push(error("source-traceability-required", "source.file_name 與 source.sha256 為必要追溯資訊。"));
   }
   if (program.selected_form?.approval_status !== "approved") {
-    diagnostics.push(error("gate-a-form-not-approved", "selected_form.approval_status 尚未核准。"));
+    diagnostics.push((options.draft ? warning : error)("gate-a-form-not-approved", "selected_form.approval_status 尚未核准。"));
   }
   if (program.approvals?.clinical_meaning?.status !== "approved") {
-    diagnostics.push(error("gate-a-clinical-not-approved", "Gate A 臨床意義尚未核准。"));
+    diagnostics.push((options.draft ? warning : error)("gate-a-clinical-not-approved", "Gate A 臨床意義尚未核准。"));
   }
   for (const item of program.unresolved_items ?? []) {
     if (item.severity === "blocking" && !item.resolution?.trim()) {
-      diagnostics.push(error("blocking-unresolved-item", `${item.id}: ${item.question}`, "/unresolved_items"));
+      diagnostics.push((options.draft ? warning : error)("blocking-unresolved-item", `${item.id}: ${item.question}`, "/unresolved_items"));
     }
   }
   const fields = program.selected_form?.fields ?? [];
   if (!fields.length) diagnostics.push(error("fields-required", "所選表單至少需要一個欄位。"));
-  fields.forEach((field, index) => diagnostics.push(...validateField(field, index)));
+  fields.forEach((field, index) => diagnostics.push(...validateField(field, index, options.draft)));
 
   const propertyNames = fields.map((field) => conceptIdToProperty(field.concept_id));
   const duplicates = propertyNames.filter((name, index) => propertyNames.indexOf(name) !== index);
@@ -272,6 +273,8 @@ export function compileProgram(program: ProgramYaml): ProgramCompileResult {
     const options = compileOptions(field);
     properties[propertyName] = compileProperty(field, options);
     fieldConfigs[path] = compileFieldConfig(field, options);
+    if (isDraft && field.coding.status === "unresolved") fieldConfigs[path].coding = { status: "unresolved" };
+    if (isDraft) fieldConfigs[path].sourceRefs = field.source_refs.map(ref => ({ locator: ref.locator, document: program.source.file_name, sha256: program.source.sha256 }));
     if (field.required === true) required.push(propertyName);
   }
 
@@ -288,10 +291,14 @@ export function compileProgram(program: ProgramYaml): ProgramCompileResult {
     properties,
     ...(required.length ? { required } : {}),
     "x-airwayai": {
-      contractVersion: "1.1.0",
+      contractVersion: isDraft ? "1.2.0" : "1.1.0",
+      ...(isDraft ? { reviewIssues: [
+        ...(program.unresolved_items ?? []).map(item => ({ id: item.id, question: item.question, severity: item.severity, ...(item.resolution ? { resolution: item.resolution } : {}) })),
+        ...(program.approvals.clinical_meaning.status !== "approved" || program.selected_form.approval_status !== "approved" ? [{ id: "source-clinical-review", question: "來源草稿的臨床意義尚未確認，請逐欄核對並記錄決策。", severity: "blocking" as const }] : []),
+      ] } : {}),
       formId,
       schemaVersion,
-      status: "demo",
+      status: isDraft ? "draft" : "demo",
       defaultLocale: "zh-TW",
       locales: ["zh-TW"],
       title: { "zh-TW": program.selected_form.title },

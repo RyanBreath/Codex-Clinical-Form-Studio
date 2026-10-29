@@ -1,0 +1,10 @@
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080">
+    <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eff8ff"/><stop offset="1" stop-color="#e3f5f1"/></linearGradient></defs>
+    <rect width="1920" height="1080" fill="url(#bg)"/>
+    <rect x="250" y="250" width="1420" height="580" rx="42" fill="#ffffff" stroke="#8bb9d6" stroke-width="4"/>
+    <circle cx="960" cy="410" r="68" fill="#087f8c"/><path d="M925 410h70M960 375v70" stroke="#fff" stroke-width="16" stroke-linecap="round"/>
+    <text x="960" y="560" text-anchor="middle" font-family="Arial" font-size="58" font-weight="700" fill="#0a3152">Recording not supplied</text>
+    <text x="960" y="635" text-anchor="middle" font-family="Arial" font-size="31" fill="#486b82">The scene falls back to a still image.</text>
+    <text x="960" y="735" text-anchor="middle" font-family="Arial" font-size="24" fill="#07878b">Replace this local asset without changing scene code.</text>
+  </svg>

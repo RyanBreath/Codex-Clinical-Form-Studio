@@ -1,0 +1,20 @@
+{
+      "$schema":"https://json-schema.org/draft/2020-12/schema", "$id":"https://example.test/forms/vitals/1.0.0",
+      "type":"object", "additionalProperties":false, "properties":{
+        "weight":{"type":"number","minimum":1,"maximum":300},
+        "height":{"type":"number","minimum":30,"maximum":250},
+        "bmi":{"type":"number","readOnly":true},
+        "symptom":{"type":"boolean"}, "detail":{"type":"string","maxLength":50}
+      },"required":["weight","height"],
+      "x-airwayai":{"contractVersion":"1.2.0","formId":"vitals","schemaVersion":"1.0.0","status":"draft",
+        "defaultLocale":"zh-TW","locales":["zh-TW"],"title":{"zh-TW":"生命徵象"},
+        "fields":{
+          "/weight":{"label":{"zh-TW":"體重"},"widget":"number","coding":{"status":"unresolved"}},
+          "/height":{"label":{"zh-TW":"身高"},"widget":"number","coding":{"status":"unresolved"}},
+          "/bmi":{"label":{"zh-TW":"BMI"},"widget":"computed","coding":{"status":"unresolved"}},
+          "/symptom":{"label":{"zh-TW":"有症狀"},"widget":"boolean","coding":{"status":"unresolved"}},
+          "/detail":{"label":{"zh-TW":"說明"},"widget":"text","visibleWhen":{"op":"eq","path":"/symptom","value":true},"requiredWhen":{"op":"eq","path":"/symptom","value":true},"coding":{"status":"unresolved"}}
+        },"layout":[{"type":"section","id":"main","title":{"zh-TW":"生命徵象"},"items":[{"type":"field","path":"/weight"},{"type":"field","path":"/height"},{"type":"field","path":"/bmi"},{"type":"field","path":"/symptom"},{"type":"field","path":"/detail"}]}],
+        "computed":{"/bmi":{"op":"divide","args":[{"op":"path","path":"/weight"},{"op":"multiply","args":[{"op":"divide","args":[{"op":"path","path":"/height"},{"op":"value","value":100}]},{"op":"divide","args":[{"op":"path","path":"/height"},{"op":"value","value":100}]}]}]}}
+      }
+    }

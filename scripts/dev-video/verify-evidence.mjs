@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const out=path.resolve('output/video/dev-20261029');
+const evidence=JSON.parse(fs.readFileSync(path.join(out,'api-evidence.json'),'utf8'));
+const result=JSON.parse(fs.readFileSync(path.join(out,'scenario-result.json'),'utf8'));
+const recording=JSON.parse(fs.readFileSync(path.join(out,'recording.json'),'utf8'));
+const byCode=code=>evidence.filter(item=>item.response?.code===code);
+assert.equal(result.status,'passed');assert.equal(result.responseState,'locked');assert.equal(recording.shots.length,11);assert.deepEqual(recording.errors,[]);
+for(const [code,status] of [['CTMS_AUTHORITY',422],['COLLECTION_BASIS_REQUIRED',409],['NOT_FOUND',404],['IDEMPOTENCY_MISMATCH',409],['INTEGRATION_ROUTE_REQUIRED',422],['REVISION_CONFLICT',409],['RESPONSE_LOCKED',422]])
+  assert.ok(byCode(code).some(item=>item.status===status),`Missing ${code} / ${status}`);
+const created=evidence.filter(item=>item.method==='POST'&&item.path==='/api/integrations/responses'&&item.status===200);
+assert.equal(created.length,2);assert.equal(created[0].response.id,created[1].response.id);assert.equal(created[0].response.revision,created[1].response.revision);
+assert.equal(created[0].response.state,'draft');assert.ok(Math.abs(created[0].response.data.bmi-22.49134948)<.001);
+const correction=evidence.find(item=>item.method==='PUT'&&item.path.startsWith('/api/integrations/responses/')&&item.status===200);
+assert.ok(correction.response.revision>created[0].response.revision);
+const revisionEvidence=evidence.find(item=>item.path.endsWith('/revisions'));
+assert.ok(revisionEvidence.response.some(row=>row.source==='ctms-demo'&&row.externalRecordId==='CTMS-RESPONSE-001'));
+const exported=evidence.find(item=>item.method==='GET'&&item.path.startsWith('/api/exports/'));
+assert.equal(exported.response.records[0].revision,result.responseRevision);assert.equal(exported.response.records[0].state,'locked');
+const secretFields=/"(?:authorization|cookie|set-cookie|password|clientSecret|access_token|refresh_token)"\s*:/i;
+assert.equal(secretFields.test(JSON.stringify(evidence)),false,'Unexpected secret-bearing field in saved HTTP evidence');
+const report={checkedAt:new Date().toISOString(),status:'passed',requests:evidence.length,recordedShots:recording.shots.length,checks:['ctms-authority','basis-gate','site-isolation','server-computation','draft-not-submitted','idempotent-replay','mismatched-key','source-route','revision-conflict','locked-rejection','revision-provenance','fixed-export-revision','no-secret-fields']};
+fs.writeFileSync(path.join(out,'api-verification.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));

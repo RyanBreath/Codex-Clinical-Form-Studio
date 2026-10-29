@@ -1,0 +1,43 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { execFileSync, spawnSync } from 'node:child_process';
+const out=path.resolve('output/video/dev-20261029/voice-neutral-tw');
+const spec=JSON.parse(fs.readFileSync(path.join(out,'specification.json'),'utf8'));
+const sampleRate=48000;
+const master=Buffer.alloc(Math.round(spec.duration*sampleRate)*2);
+const aligned=path.join(out,'aligned');fs.mkdirSync(aligned,{recursive:true});
+const rows=[];
+const pcm=(input,filter)=>execFileSync('ffmpeg',['-v','error','-i',input,'-af',filter,'-ar',String(sampleRate),'-ac','1','-f','s16le','pipe:1'],{maxBuffer:16*1024*1024});
+for(const cue of spec.cues){
+  const raw=path.join(out,cue.file);
+  // Remove only synthesizer silence; never cut spoken content to fit a slot.
+  const trim='silenceremove=start_periods=1:start_duration=0.015:start_threshold=-55dB,areverse,silenceremove=start_periods=1:start_duration=0.015:start_threshold=-55dB,areverse';
+  const clean=pcm(raw,trim);
+  const cleanFile=path.join(aligned,cue.id+'-clean.wav');
+  execFileSync('ffmpeg',['-v','error','-y','-f','s16le','-ar',String(sampleRate),'-ac','1','-i','pipe:0',cleanFile],{input:clean});
+  const available=cue.end-cue.start-.065;
+  const rawDuration=clean.length/(sampleRate*2);
+  const tempo=Math.max(.92,rawDuration/available);
+  if(tempo>2)throw Error(`Cue ${cue.id} needs excessive acceleration: ${tempo}`);
+  const adjusted=pcm(cleanFile,`atempo=${tempo},afade=t=in:d=0.008`);
+  const duration=adjusted.length/(sampleRate*2);
+  if(duration>cue.end-cue.start-.015)throw Error(`Cue ${cue.id} overruns its subtitle`);
+  const offset=Math.round(cue.start*sampleRate)*2;
+  adjusted.copy(master,offset);
+  const file=path.join(aligned,cue.id+'.wav');
+  execFileSync('ffmpeg',['-v','error','-y','-f','s16le','-ar',String(sampleRate),'-ac','1','-i','pipe:0',file],{input:adjusted});
+  rows.push({id:cue.id,text:cue.text,subtitleStart:cue.start,subtitleEnd:cue.end,audioStart:offset/(sampleRate*2),audioEnd:offset/(sampleRate*2)+duration,rawDuration,tempo,duration,emphasis:cue.ssml.includes('<emphasis')});
+}
+const filename='DEV1-台灣正體中文中性女聲-SRT同步.mp3';
+const file=path.join(out,filename);
+execFileSync('ffmpeg',['-v','error','-y','-f','s16le','-ar',String(sampleRate),'-ac','1','-i','pipe:0','-af','loudnorm=I=-19:TP=-2:LRA=7','-ar',String(sampleRate),'-c:a','libmp3lame','-b:a','192k','-metadata','title=研究表單平台開發介接｜台灣正體中文中性女聲','-metadata','comment=Local synthetic narration; aligned to DEV1.srt; no music',file],{input:master,maxBuffer:48*1024*1024});
+const metadata=JSON.parse(execFileSync('ffprobe',['-v','error','-show_format','-show_streams','-of','json',file],{encoding:'utf8'}));
+if(Math.abs(Number(metadata.format.duration)-spec.duration)>.1)throw Error('Final MP3 duration mismatch');
+execFileSync('ffmpeg',['-v','error','-i',file,'-f','null','-'],{stdio:'pipe'});
+const volume=spawnSync('ffmpeg',['-hide_banner','-i',file,'-af','volumedetect','-f','null','-'],{encoding:'utf8'});
+const peak=Number(volume.stderr.match(/max_volume: (-?[\d.]+)/)?.[1]);
+if(!Number.isFinite(peak)||peak>-.1||peak< -25)throw Error('Unexpected final audio peak');
+execFileSync('ffmpeg',['-v','error','-y','-i',file,'-t','27.46','-c:a','libmp3lame','-b:a','192k',path.join(out,'試聽-開場與架構.mp3')]);
+const report={createdAt:new Date().toISOString(),filename,sourceSrt:spec.sourceSrt,sourceDuration:spec.duration,duration:Number(metadata.format.duration),bytes:fs.statSync(file).size,voice:spec.voice,engine:spec.engine,language:spec.language,sampleRate,codec:'mp3',bitRate:192000,channels:1,decode:'passed',peakDb:peak,cueCount:rows.length,alignment:'Every spoken cue starts at its SRT start and ends before its SRT end; source timing unchanged',minTempo:Math.min(...rows.map(x=>x.tempo)),maxTempo:Math.max(...rows.map(x=>x.tempo)),timingLimitedCues:rows.filter(x=>x.tempo>1.25).map(x=>x.id),cues:rows};
+fs.writeFileSync(path.join(out,'verification.json'),JSON.stringify(report,null,2));
+console.log(JSON.stringify({...report,cues:undefined},null,2));

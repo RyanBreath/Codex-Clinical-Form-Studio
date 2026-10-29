@@ -239,7 +239,7 @@ function validateSemanticContract(contract: CrfContract): Diagnostic[] {
       );
     }
 
-    if (extension.contractVersion === "1.1.0" && !config.coding) {
+    if (extension.contractVersion !== "1.0.0" && !config.coding) {
       diagnostics.push(
         diagnostic(
           "error",
@@ -248,6 +248,10 @@ function validateSemanticContract(contract: CrfContract): Diagnostic[] {
           path,
         ),
       );
+    }
+
+    if (config.coding?.status === "unresolved" && extension.contractVersion !== "1.2.0") {
+      diagnostics.push(diagnostic("error", "unresolved-coding-version", "未完成對應狀態僅適用契約 1.2.0；正式發布仍須由研究政策驗證。", path));
     }
 
     if (config.coding?.status === "not-applicable") {

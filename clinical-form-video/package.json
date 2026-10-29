@@ -1,0 +1,37 @@
+{
+  "name": "codex-clinical-form-studio-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reproducible Remotion production pipeline for the Codex Clinical Form Studio hackathon demo.",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "inspect:assets": "tsx scripts/inspect-assets.ts",
+    "generate:voice": "tsx scripts/generate-voice.ts",
+    "generate:subtitles": "tsx scripts/generate-subtitles.ts",
+    "check:duration": "tsx scripts/enforce-duration.ts",
+    "typecheck": "tsc --noEmit",
+    "prepare": "npm run inspect:assets && npm run generate:voice && npm run generate:subtitles && npm run check:duration && npm run typecheck",
+    "render": "tsx scripts/render-video.ts",
+    "verify": "tsx scripts/verify-output.ts",
+    "build:video": "npm run prepare && npm run render && npm run verify && npm run check:duration -- --final"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.495",
+    "@remotion/media": "4.0.495",
+    "dotenv": "^17.2.3",
+    "image-size": "^2.0.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "remotion": "4.0.495"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

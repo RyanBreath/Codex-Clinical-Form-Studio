@@ -186,7 +186,7 @@
       "required": ["status"],
       "properties": {
         "status": {
-          "enum": ["matched", "not-applicable"]
+          "enum": ["matched", "not-applicable", "unresolved"]
         },
         "rationale": {
           "$ref": "#/$defs/localizedText"
@@ -263,6 +263,20 @@
       "type": "object",
       "required": ["label", "widget"],
       "properties": {
+        "sourceRefs": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "type": "object",
+            "required": ["locator"],
+            "properties": {
+              "locator": { "type": "string", "minLength": 1, "maxLength": 2000 },
+              "document": { "type": "string", "maxLength": 500 },
+              "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+            },
+            "additionalProperties": false
+          }
+        },
         "label": {
           "$ref": "#/$defs/localizedText"
         },
@@ -482,7 +496,20 @@
       ],
       "properties": {
         "contractVersion": {
-          "enum": ["1.0.0", "1.1.0"]
+          "enum": ["1.0.0", "1.1.0", "1.2.0"]
+        },
+        "reviewIssues": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "type": "object", "required": ["id", "question", "severity"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+              "question": { "type": "string", "minLength": 1, "maxLength": 4000 },
+              "severity": { "enum": ["blocking", "warning"] },
+              "resolution": { "type": "string", "maxLength": 4000 }
+            }, "additionalProperties": false
+          }
         },
         "formId": {
           "type": "string",

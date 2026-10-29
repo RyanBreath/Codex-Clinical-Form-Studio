@@ -1,0 +1,232 @@
+1
+00:00:00,200 --> 00:00:03,687
+Clinical trials require accurate,
+standardized, and traceable data.
+
+2
+00:00:03,737 --> 00:00:08,097
+Converting a clinical Protocol into an
+eCRF remains highly manual.
+
+3
+00:00:08,147 --> 00:00:11,198
+Teams identify required data, design
+fields, define
+
+4
+00:00:11,248 --> 00:00:14,736
+validation rules, and map them to CDISC
+CDASH.
+
+5
+00:00:14,786 --> 00:00:19,581
+Even a small amendment can affect forms,
+mappings, and downstream analysis.
+
+6
+00:00:20,131 --> 00:00:22,617
+We created Codex Clinical Form Studio.
+
+7
+00:00:22,667 --> 00:00:25,981
+It is a reusable Plugin composed of
+specialized
+
+8
+00:00:26,031 --> 00:00:28,517
+Skills, not a single form-generating
+prompt.
+
+9
+00:00:28,567 --> 00:00:33,125
+After a user uploads a Protocol, an
+Orchestrator Skill coordinates analysis,
+
+10
+00:00:33,175 --> 00:00:36,489
+design, CDASH mapping, clinical review,
+testing, and deployment.
+
+11
+00:00:36,539 --> 00:00:40,268
+Every stage has defined input, output, and
+human approval.
+
+12
+00:00:40,818 --> 00:00:43,845
+The Orchestrator invokes the Protocol
+Analysis Skill,
+
+13
+00:00:43,895 --> 00:00:46,921
+while GPT-5.6 provides medical and logical
+reasoning.
+
+14
+00:00:46,971 --> 00:00:50,863
+GPT-5.6 identifies forms, fields, data
+types, units, required conditions,
+
+15
+00:00:50,913 --> 00:00:55,236
+options, and validation rules, then
+converts them into structured YAML.
+
+16
+00:00:55,286 --> 00:00:58,313
+YAML becomes the single source of truth.
+
+17
+00:00:58,363 --> 00:01:01,822
+Clinical users can review it in a web
+
+18
+00:01:01,872 --> 00:01:04,466
+interface instead of editing application
+code.
+
+19
+00:01:05,016 --> 00:01:07,589
+Clinical users modify fields, required
+conditions,
+
+20
+00:01:07,639 --> 00:01:09,784
+numeric limits, and selectable options.
+
+21
+00:01:09,834 --> 00:01:11,549
+The Orchestrator then invokes
+
+22
+00:01:11,599 --> 00:01:13,315
+the CDASH Mapping Skill.
+
+23
+00:01:13,365 --> 00:01:16,796
+GPT-5.6 evaluates each field in its
+Protocol context,
+
+24
+00:01:16,846 --> 00:01:19,848
+ranks CDASH candidates, and explains its
+recommendations.
+
+25
+00:01:19,898 --> 00:01:24,615
+AI suggests, but the clinical professional
+makes the final mapping decision.
+
+26
+00:01:29,016 --> 00:01:31,517
+After approval, the Form Generation Skill
+
+27
+00:01:31,567 --> 00:01:33,652
+converts YAML into standardized JSON.
+
+28
+00:01:33,702 --> 00:01:37,454
+The JSON-to-HTML renderer generates an
+executable eCRF with controls,
+
+29
+00:01:37,504 --> 00:01:40,423
+required settings, allowed values, ranges,
+and validation.
+
+30
+00:01:40,473 --> 00:01:44,642
+The form first enters a validation
+environment for clinical review.
+
+31
+00:01:49,016 --> 00:01:52,600
+Codex turns the approved specification
+into maintainable engineering work.
+
+32
+00:01:52,650 --> 00:01:55,836
+The Orchestrator directs Codex to update
+the application,
+
+33
+00:01:55,886 --> 00:01:58,276
+generate database migrations, create
+pytest and
+
+34
+00:01:58,326 --> 00:02:01,512
+Playwright tests, and validate in a real
+browser.
+
+35
+00:02:01,562 --> 00:02:05,146
+When a test fails, Codex traces YAML, the
+renderer,
+
+36
+00:02:05,196 --> 00:02:08,382
+or the application, corrects the issue,
+and retests.
+
+37
+00:02:15,016 --> 00:02:18,217
+When a new Protocol version arrives, the
+Version
+
+38
+00:02:18,267 --> 00:02:20,668
+Comparison Skill compares both YAML
+specifications.
+
+39
+00:02:20,718 --> 00:02:23,918
+It identifies added, removed, and modified
+fields, including
+
+40
+00:02:23,968 --> 00:02:27,169
+required conditions, validation rules,
+options, and CDASH mappings.
+
+41
+00:02:27,219 --> 00:02:30,420
+This creates a traceable record of each
+amendment.
+
+42
+00:02:30,970 --> 00:02:32,626
+GPT-5.6 interprets complex Protocols
+
+43
+00:02:32,676 --> 00:02:34,746
+and reasons about CDISC mappings.
+
+44
+00:02:34,796 --> 00:02:37,280
+Codex implements the application, writes
+tests,
+
+45
+00:02:37,330 --> 00:02:40,228
+fixes failures, and prepares GitHub pull
+requests.
+
+46
+00:02:40,278 --> 00:02:43,176
+After clinical approval and QA, the CI/CD
+
+47
+00:02:43,226 --> 00:02:45,295
+pipeline deploys the validated eCRF.
+
+48
+00:02:45,345 --> 00:02:49,899
+Codex Clinical Form Studio packages the
+workflow into a reusable, testable
+
+49
+00:02:49,949 --> 00:02:54,089
+Plugin. Human approval remains required at
+every critical clinical decision.

@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.local
+out/*.raw.mp4
+out/frames/
+out/.voice-work/
+out/*.wav
+out/*.txt
+*.log

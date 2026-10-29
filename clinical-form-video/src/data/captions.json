@@ -1,0 +1,492 @@
+[
+  {
+    "id": 1,
+    "sceneId": "scene-01",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 3.687,
+    "globalStartSeconds": 0.2,
+    "globalEndSeconds": 3.687,
+    "en": "Clinical trials require accurate,\nstandardized, and traceable data.",
+    "zhTW": "臨床試驗需要準確、標準化且可追溯的資料。"
+  },
+  {
+    "id": 2,
+    "sceneId": "scene-01",
+    "localStartSeconds": 3.737,
+    "localEndSeconds": 8.097,
+    "globalStartSeconds": 3.737,
+    "globalEndSeconds": 8.097,
+    "en": "Converting a clinical Protocol into an\neCRF remains highly manual.",
+    "zhTW": "但將 Protocol 轉換成\neCRF，仍高度依賴人工。"
+  },
+  {
+    "id": 3,
+    "sceneId": "scene-01",
+    "localStartSeconds": 8.147,
+    "localEndSeconds": 11.198,
+    "globalStartSeconds": 8.147,
+    "globalEndSeconds": 11.198,
+    "en": "Teams identify required data, design\nfields, define",
+    "zhTW": "團隊必須設計欄位、定義驗證規則，"
+  },
+  {
+    "id": 4,
+    "sceneId": "scene-01",
+    "localStartSeconds": 11.248,
+    "localEndSeconds": 14.736,
+    "globalStartSeconds": 11.248,
+    "globalEndSeconds": 14.736,
+    "en": "validation rules, and map them to CDISC\nCDASH.",
+    "zhTW": "並對應 CDISC CDASH。"
+  },
+  {
+    "id": 5,
+    "sceneId": "scene-01",
+    "localStartSeconds": 14.786,
+    "localEndSeconds": 19.581,
+    "globalStartSeconds": 14.786,
+    "globalEndSeconds": 19.581,
+    "en": "Even a small amendment can affect forms,\nmappings, and downstream analysis.",
+    "zhTW": "即使只是小幅修訂，也可能影響多張表\n單、Mapping 與後續分析。"
+  },
+  {
+    "id": 6,
+    "sceneId": "scene-02",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 2.686,
+    "globalStartSeconds": 20.131,
+    "globalEndSeconds": 22.617,
+    "en": "We created Codex Clinical Form Studio.",
+    "zhTW": "我們建立了 Codex\nClinical Form Studio。"
+  },
+  {
+    "id": 7,
+    "sceneId": "scene-02",
+    "localStartSeconds": 2.736,
+    "localEndSeconds": 6.05,
+    "globalStartSeconds": 22.667,
+    "globalEndSeconds": 25.981,
+    "en": "It is a reusable Plugin composed of\nspecialized",
+    "zhTW": "它不是單次產生表單的\nPrompt，而是由專業"
+  },
+  {
+    "id": 8,
+    "sceneId": "scene-02",
+    "localStartSeconds": 6.1,
+    "localEndSeconds": 8.586,
+    "globalStartSeconds": 26.031,
+    "globalEndSeconds": 28.517,
+    "en": "Skills, not a single form-generating\nprompt.",
+    "zhTW": "Skills 組成的\nreusable Plugin。"
+  },
+  {
+    "id": 9,
+    "sceneId": "scene-02",
+    "localStartSeconds": 8.636,
+    "localEndSeconds": 13.194,
+    "globalStartSeconds": 28.567,
+    "globalEndSeconds": 33.125,
+    "en": "After a user uploads a Protocol, an\nOrchestrator Skill coordinates analysis,",
+    "zhTW": "上傳 Protocol 後，\nOrchestrator Skill"
+  },
+  {
+    "id": 10,
+    "sceneId": "scene-02",
+    "localStartSeconds": 13.244,
+    "localEndSeconds": 16.558,
+    "globalStartSeconds": 33.175,
+    "globalEndSeconds": 36.489,
+    "en": "design, CDASH mapping, clinical review,\ntesting, and deployment.",
+    "zhTW": "會協調分析、設計、\nMapping、審核、測試與部署。"
+  },
+  {
+    "id": 11,
+    "sceneId": "scene-02",
+    "localStartSeconds": 16.608,
+    "localEndSeconds": 20.337,
+    "globalStartSeconds": 36.539,
+    "globalEndSeconds": 40.268,
+    "en": "Every stage has defined input, output, and\nhuman approval.",
+    "zhTW": "每個階段都有明確的輸入、\n輸出與人工核准點。"
+  },
+  {
+    "id": 12,
+    "sceneId": "scene-03",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 3.227,
+    "globalStartSeconds": 40.818,
+    "globalEndSeconds": 43.845,
+    "en": "The Orchestrator invokes the Protocol\nAnalysis Skill,",
+    "zhTW": "Orchestrator 呼叫\nProtocol Analysis"
+  },
+  {
+    "id": 13,
+    "sceneId": "scene-03",
+    "localStartSeconds": 3.277,
+    "localEndSeconds": 6.303,
+    "globalStartSeconds": 43.895,
+    "globalEndSeconds": 46.921,
+    "en": "while GPT-5.6 provides medical and logical\nreasoning.",
+    "zhTW": "Skill，\nGPT-5.6 負責醫療與邏輯推理。"
+  },
+  {
+    "id": 14,
+    "sceneId": "scene-03",
+    "localStartSeconds": 6.353,
+    "localEndSeconds": 10.245,
+    "globalStartSeconds": 46.971,
+    "globalEndSeconds": 50.863,
+    "en": "GPT-5.6 identifies forms, fields, data\ntypes, units, required conditions,",
+    "zhTW": "GPT-5.6\n會找出表單、欄位、資料型別、"
+  },
+  {
+    "id": 15,
+    "sceneId": "scene-03",
+    "localStartSeconds": 10.295,
+    "localEndSeconds": 14.618,
+    "globalStartSeconds": 50.913,
+    "globalEndSeconds": 55.236,
+    "en": "options, and validation rules, then\nconverts them into structured YAML.",
+    "zhTW": "單位、必填條件、選項與驗證規則。"
+  },
+  {
+    "id": 16,
+    "sceneId": "scene-03",
+    "localStartSeconds": 14.668,
+    "localEndSeconds": 17.695,
+    "globalStartSeconds": 55.286,
+    "globalEndSeconds": 58.313,
+    "en": "YAML becomes the single source of truth.",
+    "zhTW": "接著將結果轉換成結構化 YAML。"
+  },
+  {
+    "id": 17,
+    "sceneId": "scene-03",
+    "localStartSeconds": 17.745,
+    "localEndSeconds": 21.204,
+    "globalStartSeconds": 58.363,
+    "globalEndSeconds": 61.822,
+    "en": "Clinical users can review it in a web",
+    "zhTW": "YAML 成為單一規格來源，"
+  },
+  {
+    "id": 18,
+    "sceneId": "scene-03",
+    "localStartSeconds": 21.254,
+    "localEndSeconds": 23.848,
+    "globalStartSeconds": 61.872,
+    "globalEndSeconds": 64.466,
+    "en": "interface instead of editing application\ncode.",
+    "zhTW": "讓臨床人員透過網頁介面\n審查，不必修改程式碼。"
+  },
+  {
+    "id": 19,
+    "sceneId": "scene-04",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 2.773,
+    "globalStartSeconds": 65.016,
+    "globalEndSeconds": 67.589,
+    "en": "Clinical users modify fields, required\nconditions,",
+    "zhTW": "臨床人員可以修改欄位、"
+  },
+  {
+    "id": 20,
+    "sceneId": "scene-04",
+    "localStartSeconds": 2.823,
+    "localEndSeconds": 4.968,
+    "globalStartSeconds": 67.639,
+    "globalEndSeconds": 69.784,
+    "en": "numeric limits, and selectable options.",
+    "zhTW": "必填條件、數值限制與選項。"
+  },
+  {
+    "id": 21,
+    "sceneId": "scene-04",
+    "localStartSeconds": 5.018,
+    "localEndSeconds": 6.733,
+    "globalStartSeconds": 69.834,
+    "globalEndSeconds": 71.549,
+    "en": "The Orchestrator then invokes",
+    "zhTW": "接著 Orchestrator 會呼叫"
+  },
+  {
+    "id": 22,
+    "sceneId": "scene-04",
+    "localStartSeconds": 6.783,
+    "localEndSeconds": 8.499,
+    "globalStartSeconds": 71.599,
+    "globalEndSeconds": 73.315,
+    "en": "the CDASH Mapping Skill.",
+    "zhTW": "CDASH Mapping Skill。"
+  },
+  {
+    "id": 23,
+    "sceneId": "scene-04",
+    "localStartSeconds": 8.549,
+    "localEndSeconds": 11.98,
+    "globalStartSeconds": 73.365,
+    "globalEndSeconds": 76.796,
+    "en": "GPT-5.6 evaluates each field in its\nProtocol context,",
+    "zhTW": "GPT-5.6 依 Protocol"
+  },
+  {
+    "id": 24,
+    "sceneId": "scene-04",
+    "localStartSeconds": 12.03,
+    "localEndSeconds": 15.032,
+    "globalStartSeconds": 76.846,
+    "globalEndSeconds": 79.848,
+    "en": "ranks CDASH candidates, and explains its\nrecommendations.",
+    "zhTW": "上下文排序 CDASH\n候選，並解釋推薦原因。"
+  },
+  {
+    "id": 25,
+    "sceneId": "scene-04",
+    "localStartSeconds": 15.082,
+    "localEndSeconds": 19.799,
+    "globalStartSeconds": 79.898,
+    "globalEndSeconds": 84.615,
+    "en": "AI suggests, but the clinical professional\nmakes the final mapping decision.",
+    "zhTW": "AI 提供建議，但最終\nMapping 仍由臨床專業人員決定。"
+  },
+  {
+    "id": 26,
+    "sceneId": "scene-05",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 2.701,
+    "globalStartSeconds": 89.016,
+    "globalEndSeconds": 91.517,
+    "en": "After approval, the Form Generation Skill",
+    "zhTW": "規格核准後，Form\nGeneration"
+  },
+  {
+    "id": 27,
+    "sceneId": "scene-05",
+    "localStartSeconds": 2.751,
+    "localEndSeconds": 4.836,
+    "globalStartSeconds": 91.567,
+    "globalEndSeconds": 93.652,
+    "en": "converts YAML into standardized JSON.",
+    "zhTW": "Skill 會將 YAML\n轉換成標準化 JSON。"
+  },
+  {
+    "id": 28,
+    "sceneId": "scene-05",
+    "localStartSeconds": 4.886,
+    "localEndSeconds": 8.638,
+    "globalStartSeconds": 93.702,
+    "globalEndSeconds": 97.454,
+    "en": "The JSON-to-HTML renderer generates an\nexecutable eCRF with controls,",
+    "zhTW": "JSON-to-HTML\nRenderer 產生包含控制項、"
+  },
+  {
+    "id": 29,
+    "sceneId": "scene-05",
+    "localStartSeconds": 8.688,
+    "localEndSeconds": 11.607,
+    "globalStartSeconds": 97.504,
+    "globalEndSeconds": 100.423,
+    "en": "required settings, allowed values, ranges,\nand validation.",
+    "zhTW": "必填、允許值、\n範圍與驗證行為的 eCRF。"
+  },
+  {
+    "id": 30,
+    "sceneId": "scene-05",
+    "localStartSeconds": 11.657,
+    "localEndSeconds": 15.826,
+    "globalStartSeconds": 100.473,
+    "globalEndSeconds": 104.642,
+    "en": "The form first enters a validation\nenvironment for clinical review.",
+    "zhTW": "表單會先部署到驗證環境，供臨床團隊確認。"
+  },
+  {
+    "id": 31,
+    "sceneId": "scene-06",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 3.784,
+    "globalStartSeconds": 109.016,
+    "globalEndSeconds": 112.6,
+    "en": "Codex turns the approved specification\ninto maintainable engineering work.",
+    "zhTW": "Codex 會把核准後的規\n格轉換成可維護的工程成果。"
+  },
+  {
+    "id": 32,
+    "sceneId": "scene-06",
+    "localStartSeconds": 3.834,
+    "localEndSeconds": 7.02,
+    "globalStartSeconds": 112.65,
+    "globalEndSeconds": 115.836,
+    "en": "The Orchestrator directs Codex to update\nthe application,",
+    "zhTW": "Orchestrator\n指示 Codex 更新程式、"
+  },
+  {
+    "id": 33,
+    "sceneId": "scene-06",
+    "localStartSeconds": 7.07,
+    "localEndSeconds": 9.46,
+    "globalStartSeconds": 115.886,
+    "globalEndSeconds": 118.276,
+    "en": "generate database migrations, create\npytest and",
+    "zhTW": "產生 Migration、\n建立 pytest 與"
+  },
+  {
+    "id": 34,
+    "sceneId": "scene-06",
+    "localStartSeconds": 9.51,
+    "localEndSeconds": 12.696,
+    "globalStartSeconds": 118.326,
+    "globalEndSeconds": 121.512,
+    "en": "Playwright tests, and validate in a real\nbrowser.",
+    "zhTW": "Playwright\n測試，並在真實瀏覽器驗證。"
+  },
+  {
+    "id": 35,
+    "sceneId": "scene-06",
+    "localStartSeconds": 12.746,
+    "localEndSeconds": 16.33,
+    "globalStartSeconds": 121.562,
+    "globalEndSeconds": 125.146,
+    "en": "When a test fails, Codex traces YAML, the\nrenderer,",
+    "zhTW": "測試失敗時，Codex\n會追查 YAML、"
+  },
+  {
+    "id": 36,
+    "sceneId": "scene-06",
+    "localStartSeconds": 16.38,
+    "localEndSeconds": 19.566,
+    "globalStartSeconds": 125.196,
+    "globalEndSeconds": 128.382,
+    "en": "or the application, corrects the issue,\nand retests.",
+    "zhTW": "Renderer\n或應用程式，修正後再重新測試。"
+  },
+  {
+    "id": 37,
+    "sceneId": "scene-07",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 3.401,
+    "globalStartSeconds": 135.016,
+    "globalEndSeconds": 138.217,
+    "en": "When a new Protocol version arrives, the\nVersion",
+    "zhTW": "上傳新版 Protoco\nl 後，Version"
+  },
+  {
+    "id": 38,
+    "sceneId": "scene-07",
+    "localStartSeconds": 3.451,
+    "localEndSeconds": 5.852,
+    "globalStartSeconds": 138.267,
+    "globalEndSeconds": 140.668,
+    "en": "Comparison Skill compares both YAML\nspecifications.",
+    "zhTW": "Comparison\nSkill 會比較兩版 YAML。"
+  },
+  {
+    "id": 39,
+    "sceneId": "scene-07",
+    "localStartSeconds": 5.902,
+    "localEndSeconds": 9.102,
+    "globalStartSeconds": 140.718,
+    "globalEndSeconds": 143.918,
+    "en": "It identifies added, removed, and modified\nfields, including",
+    "zhTW": "系統找出新增、\n刪除與修改的欄位，以及必填、驗證、"
+  },
+  {
+    "id": 40,
+    "sceneId": "scene-07",
+    "localStartSeconds": 9.152,
+    "localEndSeconds": 12.353,
+    "globalStartSeconds": 143.968,
+    "globalEndSeconds": 147.169,
+    "en": "required conditions, validation rules,\noptions, and CDASH mappings.",
+    "zhTW": "選項和 CDASH\nMapping 的變化。"
+  },
+  {
+    "id": 41,
+    "sceneId": "scene-07",
+    "localStartSeconds": 12.403,
+    "localEndSeconds": 15.604,
+    "globalStartSeconds": 147.219,
+    "globalEndSeconds": 150.42,
+    "en": "This creates a traceable record of each\namendment.",
+    "zhTW": "每次 Protocol\nAmendment 都能被清楚追蹤。"
+  },
+  {
+    "id": 42,
+    "sceneId": "scene-08",
+    "localStartSeconds": 0.2,
+    "localEndSeconds": 1.856,
+    "globalStartSeconds": 150.97,
+    "globalEndSeconds": 152.626,
+    "en": "GPT-5.6 interprets complex Protocols",
+    "zhTW": "GPT-5.6\n負責解讀複雜 Protocol"
+  },
+  {
+    "id": 43,
+    "sceneId": "scene-08",
+    "localStartSeconds": 1.906,
+    "localEndSeconds": 3.976,
+    "globalStartSeconds": 152.676,
+    "globalEndSeconds": 154.746,
+    "en": "and reasons about CDISC mappings.",
+    "zhTW": "與 CDISC Mapping 推理。"
+  },
+  {
+    "id": 44,
+    "sceneId": "scene-08",
+    "localStartSeconds": 4.026,
+    "localEndSeconds": 6.51,
+    "globalStartSeconds": 154.796,
+    "globalEndSeconds": 157.28,
+    "en": "Codex implements the application, writes\ntests,",
+    "zhTW": "Codex 負責應用程式實\n作、自動測試、錯誤修正與"
+  },
+  {
+    "id": 45,
+    "sceneId": "scene-08",
+    "localStartSeconds": 6.56,
+    "localEndSeconds": 9.458,
+    "globalStartSeconds": 157.33,
+    "globalEndSeconds": 160.228,
+    "en": "fixes failures, and prepares GitHub pull\nrequests.",
+    "zhTW": "GitHub Pull Request。"
+  },
+  {
+    "id": 46,
+    "sceneId": "scene-08",
+    "localStartSeconds": 9.508,
+    "localEndSeconds": 12.406,
+    "globalStartSeconds": 160.278,
+    "globalEndSeconds": 163.176,
+    "en": "After clinical approval and QA, the CI/CD",
+    "zhTW": "完成臨床核准與 QA 後，\nCI/CD Pipeline"
+  },
+  {
+    "id": 47,
+    "sceneId": "scene-08",
+    "localStartSeconds": 12.456,
+    "localEndSeconds": 14.525,
+    "globalStartSeconds": 163.226,
+    "globalEndSeconds": 165.295,
+    "en": "pipeline deploys the validated eCRF.",
+    "zhTW": "會將 eCRF 部署到\nProduction。"
+  },
+  {
+    "id": 48,
+    "sceneId": "scene-08",
+    "localStartSeconds": 14.575,
+    "localEndSeconds": 19.129,
+    "globalStartSeconds": 165.345,
+    "globalEndSeconds": 169.899,
+    "en": "Codex Clinical Form Studio packages the\nworkflow into a reusable, testable",
+    "zhTW": "整套流程封裝成可重複使用、\n可測試的 Plugin，"
+  },
+  {
+    "id": 49,
+    "sceneId": "scene-08",
+    "localStartSeconds": 19.179,
+    "localEndSeconds": 23.319,
+    "globalStartSeconds": 169.949,
+    "globalEndSeconds": 174.089,
+    "en": "Plugin. Human approval remains required at\nevery critical clinical decision.",
+    "zhTW": "所有關鍵臨床決策仍須經過人工核准。"
+  }
+]

@@ -1,0 +1,462 @@
+[
+  {
+    "id": "scene-01",
+    "title": "The Clinical Trial Data Problem",
+    "narrationText": "Clinical trials require accurate, standardized, and traceable data. Converting a clinical Protocol into an eCRF remains highly manual. Teams identify required data, design fields, define validation rules, and map them to CDISC CDASH. Even a small amendment can affect forms, mappings, and downstream analysis.",
+    "narrationAudio": "audio/generated/scene-01.mp3",
+    "infographic": "images/01-clinical-data-problem.png",
+    "screenshots": [],
+    "recordings": [],
+    "fallbackAssets": [
+      "placeholders/missing-visual.svg"
+    ],
+    "maxDurationSeconds": 18,
+    "actualDurationSeconds": 19.931,
+    "durationInFrames": 598,
+    "overlays": [
+      "Manual. Fragmented. Error-prone."
+    ],
+    "highlights": [
+      {
+        "x": 3,
+        "y": 20,
+        "width": 20,
+        "height": 48,
+        "label": "Protocol"
+      },
+      {
+        "x": 25,
+        "y": 20,
+        "width": 23,
+        "height": 48,
+        "label": "Spreadsheets"
+      },
+      {
+        "x": 50,
+        "y": 20,
+        "width": 23,
+        "height": 48,
+        "label": "Manual forms"
+      },
+      {
+        "x": 75,
+        "y": 20,
+        "width": 22,
+        "height": 48,
+        "label": "Mapping tables"
+      }
+    ],
+    "cropRegions": [],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.055,
+        "panX": -12,
+        "panY": 0
+      }
+    ],
+    "transitions": {
+      "type": "crossfade",
+      "durationFrames": 15
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.07
+  },
+  {
+    "id": "scene-02",
+    "title": "Introducing the Solution",
+    "narrationText": "We created Codex Clinical Form Studio. It is a reusable Plugin composed of specialized Skills, not a single form-generating prompt. After a user uploads a Protocol, an Orchestrator Skill coordinates analysis, design, CDASH mapping, clinical review, testing, and deployment. Every stage has defined input, output, and human approval.",
+    "narrationAudio": "audio/generated/scene-02.mp3",
+    "infographic": "images/02-orchestrator-workflow.png",
+    "screenshots": [
+      "screenshots/upload-protocol.png"
+    ],
+    "recordings": [
+      "recordings/protocol-upload.mp4"
+    ],
+    "fallbackAssets": [
+      "placeholders/missing-recording.svg"
+    ],
+    "maxDurationSeconds": 20,
+    "actualDurationSeconds": 20.687,
+    "durationInFrames": 621,
+    "overlays": [
+      "One orchestrated workflow."
+    ],
+    "highlights": [
+      {
+        "x": 40,
+        "y": 31,
+        "width": 19,
+        "height": 35,
+        "label": "Orchestrator Skill"
+      }
+    ],
+    "cropRegions": [
+      {
+        "x": 1,
+        "y": 10,
+        "width": 98,
+        "height": 80
+      }
+    ],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.04,
+        "panX": 0,
+        "panY": 0
+      }
+    ],
+    "transitions": {
+      "type": "crossfade",
+      "durationFrames": 15
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.07
+  },
+  {
+    "id": "scene-03",
+    "title": "GPT-5.6 and Protocol Analysis",
+    "narrationText": "The Orchestrator invokes the Protocol Analysis Skill, while GPT-5.6 provides medical and logical reasoning. GPT-5.6 identifies forms, fields, data types, units, required conditions, options, and validation rules, then converts them into structured YAML. YAML becomes the single source of truth. Clinical users can review it in a web interface instead of editing application code.",
+    "narrationAudio": "audio/generated/scene-03.mp3",
+    "infographic": "images/03-gpt56-protocol-analysis.png",
+    "screenshots": [
+      "screenshots/upload-protocol.png",
+      "screenshots/protocol-analysis.png",
+      "screenshots/yaml-editor.png",
+      "screenshots/form-builder.png"
+    ],
+    "recordings": [
+      "recordings/protocol-upload.mp4"
+    ],
+    "fallbackAssets": [
+      "placeholders/missing-recording.svg"
+    ],
+    "maxDurationSeconds": 24,
+    "actualDurationSeconds": 24.198,
+    "durationInFrames": 726,
+    "overlays": [
+      "GPT-5.6 — Domain and Logic Reasoning",
+      "Protocol → Structured YAML"
+    ],
+    "highlights": [
+      {
+        "x": 18,
+        "y": 18,
+        "width": 31,
+        "height": 65,
+        "label": "Structured YAML"
+      }
+    ],
+    "cropRegions": [
+      {
+        "x": 18,
+        "y": 6,
+        "width": 62,
+        "height": 88
+      }
+    ],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.07,
+        "panX": 20,
+        "panY": 0
+      }
+    ],
+    "transitions": {
+      "type": "crossfade",
+      "durationFrames": 15
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.065
+  },
+  {
+    "id": "scene-04",
+    "title": "Clinical Editing and CDASH Mapping",
+    "narrationText": "Clinical users modify fields, required conditions, numeric limits, and selectable options. The Orchestrator then invokes the CDASH Mapping Skill. GPT-5.6 evaluates each field in its Protocol context, ranks CDASH candidates, and explains its recommendations. AI suggests, but the clinical professional makes the final mapping decision.",
+    "narrationAudio": "audio/generated/scene-04.mp3",
+    "infographic": "images/04-clinical-cdash-mapping.png",
+    "screenshots": [
+      "screenshots/form-builder.png",
+      "screenshots/cdash-search.png",
+      "screenshots/cdash-approval.png"
+    ],
+    "recordings": [
+      "recordings/form-editing.mp4",
+      "recordings/cdash-mapping.mp4"
+    ],
+    "fallbackAssets": [
+      "placeholders/missing-recording.svg"
+    ],
+    "maxDurationSeconds": 24,
+    "actualDurationSeconds": 24,
+    "durationInFrames": 720,
+    "overlays": [
+      "Final decision by clinical reviewer"
+    ],
+    "highlights": [
+      {
+        "x": 61,
+        "y": 21,
+        "width": 35,
+        "height": 39,
+        "label": "Ranked candidates"
+      },
+      {
+        "x": 72,
+        "y": 64,
+        "width": 17,
+        "height": 13,
+        "label": "Human approval"
+      }
+    ],
+    "cropRegions": [
+      {
+        "x": 45,
+        "y": 10,
+        "width": 54,
+        "height": 78
+      }
+    ],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.055,
+        "panX": -20,
+        "panY": 0
+      }
+    ],
+    "transitions": {
+      "type": "crossfade",
+      "durationFrames": 15
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.06
+  },
+  {
+    "id": "scene-05",
+    "title": "Generating an Executable eCRF",
+    "narrationText": "After approval, the Form Generation Skill converts YAML into standardized JSON. The JSON-to-HTML renderer generates an executable eCRF with controls, required settings, allowed values, ranges, and validation. The form first enters a validation environment for clinical review.",
+    "narrationAudio": "audio/generated/scene-05.mp3",
+    "infographic": "images/05-ecrf-generation.png",
+    "screenshots": [
+      "screenshots/json-preview.png",
+      "screenshots/ecrf-preview.png",
+      "screenshots/validation-error.png"
+    ],
+    "recordings": [
+      "recordings/ecrf-preview.mp4"
+    ],
+    "fallbackAssets": [
+      "placeholders/missing-recording.svg"
+    ],
+    "maxDurationSeconds": 20,
+    "actualDurationSeconds": 20,
+    "durationInFrames": 600,
+    "overlays": [
+      "YAML → JSON → Executable eCRF"
+    ],
+    "highlights": [
+      {
+        "x": 59,
+        "y": 18,
+        "width": 39,
+        "height": 66,
+        "label": "Runnable eCRF"
+      }
+    ],
+    "cropRegions": [
+      {
+        "x": 48,
+        "y": 7,
+        "width": 51,
+        "height": 87
+      }
+    ],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.05,
+        "panX": -18,
+        "panY": 0
+      }
+    ],
+    "transitions": {
+      "type": "crossfade",
+      "durationFrames": 15
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.06
+  },
+  {
+    "id": "scene-06",
+    "title": "Codex Engineering and Automated QA",
+    "narrationText": "Codex turns the approved specification into maintainable engineering work. The Orchestrator directs Codex to update the application, generate database migrations, create pytest and Playwright tests, and validate in a real browser. When a test fails, Codex traces YAML, the renderer, or the application, corrects the issue, and retests.",
+    "narrationAudio": "audio/generated/scene-06.mp3",
+    "infographic": "images/06-codex-qa.png",
+    "screenshots": [
+      "screenshots/playwright-test.png",
+      "screenshots/validation-error.png"
+    ],
+    "recordings": [
+      "recordings/automated-qa.mp4"
+    ],
+    "fallbackAssets": [
+      "placeholders/missing-recording.svg"
+    ],
+    "maxDurationSeconds": 26,
+    "actualDurationSeconds": 26,
+    "durationInFrames": 780,
+    "overlays": [
+      "Codex — Engineering Agent",
+      "Fail → Diagnose → Fix → Retest"
+    ],
+    "highlights": [
+      {
+        "x": 53,
+        "y": 19,
+        "width": 13,
+        "height": 27,
+        "label": "Failure"
+      },
+      {
+        "x": 66,
+        "y": 47,
+        "width": 31,
+        "height": 31,
+        "label": "Root-cause trace"
+      }
+    ],
+    "cropRegions": [
+      {
+        "x": 47,
+        "y": 10,
+        "width": 51,
+        "height": 75
+      }
+    ],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.06,
+        "panX": -14,
+        "panY": 2
+      }
+    ],
+    "transitions": {
+      "type": "crossfade",
+      "durationFrames": 15
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.055
+  },
+  {
+    "id": "scene-07",
+    "title": "Protocol Version Comparison",
+    "narrationText": "When a new Protocol version arrives, the Version Comparison Skill compares both YAML specifications. It identifies added, removed, and modified fields, including required conditions, validation rules, options, and CDASH mappings. This creates a traceable record of each amendment.",
+    "narrationAudio": "audio/generated/scene-07.mp3",
+    "infographic": "images/07-version-comparison.png",
+    "screenshots": [
+      "screenshots/protocol-diff.png"
+    ],
+    "recordings": [],
+    "fallbackAssets": [
+      "placeholders/missing-visual.svg"
+    ],
+    "maxDurationSeconds": 15,
+    "actualDurationSeconds": 15.954,
+    "durationInFrames": 479,
+    "overlays": [
+      "Field-level diff",
+      "Traceable amendments"
+    ],
+    "highlights": [
+      {
+        "x": 4,
+        "y": 18,
+        "width": 76,
+        "height": 59,
+        "label": "Version 1.0 → 1.1"
+      }
+    ],
+    "cropRegions": [
+      {
+        "x": 2,
+        "y": 10,
+        "width": 79,
+        "height": 77
+      }
+    ],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.045,
+        "panX": 10,
+        "panY": 0
+      }
+    ],
+    "transitions": {
+      "type": "crossfade",
+      "durationFrames": 15
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.05
+  },
+  {
+    "id": "scene-08",
+    "title": "GitHub and Deployment",
+    "narrationText": "GPT-5.6 interprets complex Protocols and reasons about CDISC mappings. Codex implements the application, writes tests, fixes failures, and prepares GitHub pull requests. After clinical approval and QA, the CI/CD pipeline deploys the validated eCRF. Codex Clinical Form Studio packages the workflow into a reusable, testable Plugin. Human approval remains required at every critical clinical decision.",
+    "narrationAudio": "audio/generated/scene-08.mp3",
+    "infographic": "images/08-github-deployment.png",
+    "screenshots": [
+      "screenshots/github-pr.png",
+      "screenshots/deployment-success.png"
+    ],
+    "recordings": [
+      "recordings/github-deployment.mp4"
+    ],
+    "fallbackAssets": [
+      "placeholders/missing-recording.svg"
+    ],
+    "maxDurationSeconds": 18,
+    "actualDurationSeconds": 23.669,
+    "durationInFrames": 711,
+    "overlays": [
+      "From Protocol to production-ready eCRF.",
+      "Human approval at every critical clinical decision."
+    ],
+    "highlights": [
+      {
+        "x": 4,
+        "y": 48,
+        "width": 92,
+        "height": 34,
+        "label": "Pull request → CI/CD → Production"
+      }
+    ],
+    "cropRegions": [
+      {
+        "x": 1,
+        "y": 8,
+        "width": 98,
+        "height": 84
+      }
+    ],
+    "zoomRegions": [
+      {
+        "start": 1,
+        "end": 1.035,
+        "panX": 0,
+        "panY": 0
+      }
+    ],
+    "transitions": {
+      "type": "fade",
+      "durationFrames": 18
+    },
+    "captionPosition": "bottom",
+    "backgroundMusicLevel": 0.04
+  }
+]

@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { execFileSync, spawnSync } from 'node:child_process';
+const out = path.resolve('output/video/mvp-20261029');
+const composition = JSON.parse(fs.readFileSync(path.join(out,'composition.json'),'utf8'));
+const recording = JSON.parse(fs.readFileSync(path.join(out,'recording.json'),'utf8'));
+const video = path.join(out,composition.filename);
+const metadata = JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',video],{encoding:'utf8'}));
+const image = metadata.streams.find(stream => stream.codec_type === 'video');
+const sound = metadata.streams.find(stream => stream.codec_type === 'audio');
+if (!image || image.width !== 1920 || image.height !== 1080 || image.codec_name !== 'h264' || !sound) throw new Error('Unexpected final video/audio format');
+const [fpsNumerator,fpsDenominator] = image.avg_frame_rate.split('/').map(Number);
+if (Math.abs(fpsNumerator/fpsDenominator - 30) > .01) throw new Error('Unexpected frame rate');
+if (Math.abs(Number(metadata.format.duration)-composition.duration) > .5) throw new Error('Rendered duration differs from composition');
+execFileSync('ffmpeg',['-v','error','-i',video,'-f','null','-'],{stdio:'pipe'});
+const audioProbe = spawnSync('ffmpeg', ['-hide_banner','-i',video,'-vn','-sn','-af','volumedetect','-f','null','-'], { encoding:'utf8' });
+const peakDb = Number(audioProbe.stderr.match(/max_volume: (-?[\d.]+)/)?.[1]);
+const meanDb = Number(audioProbe.stderr.match(/mean_volume: (-?[\d.]+)/)?.[1]);
+if (!Number.isFinite(peakDb) || peakDb < -35) throw new Error('Final narration is silent or too quiet');
+const frames = path.join(out,'verification'); fs.mkdirSync(frames,{recursive:true});
+const checkpoints = [];
+for (let i=0;i<recording.shots.length;i++) {
+  const shot = recording.shots[i]; const time = Math.min(shot.end-.5,shot.start + Math.max(2,shot.duration*.65));
+  const filename = `frame-${String(i).padStart(2,'0')}.png`;
+  execFileSync('ffmpeg',['-v','error','-y','-ss',String(time),'-i',video,'-frames:v','1',path.join(frames,filename)],{stdio:'pipe'});
+  checkpoints.push({ shot:shot.id,time,file:'verification/'+filename });
+}
+execFileSync('ffmpeg',['-v','error','-y','-start_number','0','-i',path.join(frames,'frame-%02d.png'),'-vf','scale=640:360,tile=3x4','-frames:v','1',path.join(out,'contact-sheet.png')],{stdio:'pipe'});
+const report = { validatedAt:new Date().toISOString(), file:composition.filename, bytes:fs.statSync(video).size, duration:Number(metadata.format.duration), video:{codec:image.codec_name,width:image.width,height:image.height,fps:image.avg_frame_rate,pixelFormat:image.pix_fmt}, audio:{codec:sound.codec_name,sampleRate:sound.sample_rate,channels:sound.channels}, syntheticOnly:true, narrationSegments:recording.shots.length, captionCount:composition.captions, browserErrors:recording.errors, decode:'passed', audioLevels:{peakDb,meanDb}, checkpoints, speechReview:'Local synthesized Mandarin; no external speech-recognition service used.' };
+fs.writeFileSync(path.join(out,'verification-report.json'),JSON.stringify(report,null,2));
+console.log(JSON.stringify({file:report.file,duration:report.duration,bytes:report.bytes,decode:report.decode,frames:checkpoints.length},null,2));

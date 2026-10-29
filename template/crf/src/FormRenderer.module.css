@@ -21,6 +21,7 @@
 }
 
 .renderer {
+  container-type: inline-size;
   width: min(100%, 1120px);
   margin: 0 auto;
   font-size: 16px;
@@ -29,6 +30,7 @@
 
 .header {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 32px;
@@ -38,6 +40,8 @@
   background: var(--crf-surface);
   box-shadow: var(--crf-shadow);
 }
+
+.header > div { min-width: 0; flex: 1 1 220px; }
 
 .header h1 {
   margin: 10px 0 8px;
@@ -85,13 +89,23 @@
 
 .versionCard {
   display: grid;
-  flex: 0 0 auto;
+  flex: 1 1 176px;
+  max-width: 100%;
   min-width: 176px;
   margin: 0;
   overflow: hidden;
   border: 1px solid var(--crf-border);
   border-radius: 12px;
   background: #f8fafb;
+}
+
+@container (max-width: 600px) {
+  .header, .footer { flex-direction: column; align-items: stretch; padding: 18px; }
+  .header > div, .versionCard { flex: none; width: 100%; min-width: 0; }
+  .header h1 { font-size: 1.5rem; overflow-wrap: anywhere; }
+  .fieldGrid, .coordinateGrid { grid-template-columns: 1fr; }
+  .field { grid-column: 1; }
+  .sectionBody, .sectionHeader { padding: 18px; }
 }
 
 .versionCard div {
@@ -826,3 +840,82 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Compact workspace theme; legacy standalone demo keeps its existing appearance. */
+.compact {
+  --crf-accent: #315fce;
+  --crf-accent-strong: #284fae;
+  --crf-accent-soft: #f0f4fc;
+  --crf-ink: #242830;
+  --crf-muted: #626a77;
+  --crf-border: #e1e4e9;
+  --crf-canvas: #fafbfc;
+  --crf-danger: #4b5670;
+  --crf-danger-soft: #f3f5f9;
+  --crf-warning: #4b5670;
+  --crf-warning-soft: #f3f5f9;
+  --crf-radius: 6px;
+  --crf-shadow: none;
+  font-size: 13px;
+  line-height: 1.55;
+  width: 100%;
+}
+.compact .header { gap: 14px; padding: 16px; border-radius: 6px; box-shadow: none; }
+.compact .header h1 { margin: 8px 0 4px; color: #242830; font-size: 20px; letter-spacing: -.035em; }
+.compact .header p { font-size: 11px; }
+.compact .badgeRow { gap: 5px; }
+.compact .demoBadge, .compact .modeBadge, .compact .derivedBadge {
+  min-height: 20px; padding: 2px 6px; border: 1px solid #dfe5ef; border-radius: 4px;
+  font: 10px/1.4 var(--mono, monospace); color: #52647f; background: #f4f6fa;
+}
+.compact .versionCard { min-width: 140px; border-radius: 6px; background: #fafbfc; }
+.compact .versionCard div { grid-template-columns: 50px minmax(0, 1fr); gap: 8px; padding: 6px 9px; }
+.compact .versionCard dt, .compact .versionCard dd { font: 10px/1.5 var(--mono, monospace); }
+.compact .section { margin-top: 14px; border-radius: 6px; box-shadow: none; }
+.compact .sectionHeader { padding: 12px 16px; gap: 10px; }
+.compact .sectionHeader h2 { color: #303a4a; font-size: 14px; letter-spacing: -.025em; }
+.compact .sectionHeader p { font-size: 11px; }
+.compact .sectionNumber { width: 24px; height: 24px; flex-basis: 24px; border-radius: 4px; font: 10px var(--mono, monospace); background: #eef2f9; color: #315fce; }
+.compact .sectionBody { padding: 16px; gap: 16px; }
+.compact .fieldGrid { gap: 16px; }
+.compact .fieldHeading { margin-bottom: 5px; gap: 8px; }
+.compact .label { color: #505c6f; font: 11px/1.6 var(--mono, monospace); }
+.compact .required { color: #315fce; font-size: 10px; font-weight: 500; }
+.compact .input, .compact .select, .compact .textarea, .compact .axisField input {
+  min-height: 34px; padding: 6px 9px; border-color: #d4d9e1; border-radius: 6px; background: #fff; font-size: 13px;
+}
+.compact .input:focus-visible, .compact .select:focus-visible, .compact .textarea:focus-visible { outline: 2px solid #315fce; outline-offset: 2px; box-shadow: none; }
+.compact .codingPanel { margin-top: 6px; padding: 6px 8px; border: 1px solid #e4e8ef; border-radius: 4px; background: #f8f9fb; color: #627087; font: 10px/1.5 var(--mono, monospace); }
+.compact .computedValue { min-height: 46px; padding: 10px 12px; border-color: #d9e2f2; border-radius: 6px; background: #f3f6fc; color: #31589f; }
+.compact .computedValue strong { font: 500 24px/1 var(--mono, monospace); }
+.compact .computedValue span { color: #66758d; font-size: 11px; }
+.compact .readonlyValue { min-height: 34px; padding: 7px 10px; border-radius: 6px; font: 12px/1.6 var(--mono, monospace); background: #f6f7f9; }
+.compact .description, .compact .help, .compact .error { font-size: 11px; }
+.compact .error { font-weight: 500; }
+.compact .error::before { content: "! "; }
+.compact .choice { padding: 8px 10px; border-radius: 6px; font-size: 12px; }
+.compact .choice:has(input:checked) { border-color: #aabfe8; background: #f0f4fc; }
+.compact .switchThumb { box-shadow: none; }
+.compact .coordinatePanel { border-radius: 6px; padding: 12px; }
+.compact .footer { margin-top: 14px; padding: 12px 14px; gap: 12px; border-color: #e1e4e9; border-radius: 6px; background: #fafbfc; box-shadow: none; }
+.compact .footer strong { font-size: 11px; font-weight: 500; }
+.compact .footer span { font-size: 10px; }
+.compact .submitButton { min-height: 34px; min-width: 110px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; }
+.compact .submitButton:hover:not(:disabled) { transform: none; }
+.compact .errorSummary, .compact .disclaimer, .compact .dataWarning, .compact .submitError { padding: 10px 12px; border-color: #d4dce9; border-radius: 6px; color: #465775; background: #f4f6fa; font-size: 11px; }
+@container (max-width: 600px) {
+  .compact .header, .compact .footer { padding: 12px; }
+  .compact .header h1 { font-size: 18px; }
+  .compact .sectionBody, .compact .sectionHeader { padding: 12px; }
+}
+
+.compact .sections { gap: 14px; margin-top: 14px; }
+.compact .sectionHeader { background: #fafbfc; }
+.compact .choice { color: #505c6f; }
+.compact .choice:hover { background: #fafbfc; border-color: #b7c2d4; }
+.compact .choice:has(input:checked) { color: #31589f; }
+.compact .optionCoding, .compact .unit { color: #626d7e; }
+.compact .unitPill { border-color: #dbe1eb; border-radius: 6px; color: #626d7e; background: #f5f7fa; font: 11px var(--mono, monospace); }
+
+.compact.blocker { width: 100%; margin: 14px 0; padding: 16px; border: 1px solid #8b98ae; color: #3e4d66; background: #f5f7fb; }
+.compact.blocker h1 { font-size: 20px; letter-spacing: -.035em; }

@@ -1,0 +1,71 @@
+[
+  {
+    "id": "scene-01",
+    "segments": [
+      "臨床試驗需要準確、標準化且可追溯的資料。",
+      "但將 Protocol 轉換成 eCRF，仍高度依賴人工。",
+      "團隊必須設計欄位、定義驗證規則，並對應 CDISC CDASH。",
+      "即使只是小幅修訂，也可能影響多張表單、Mapping 與後續分析。"
+    ]
+  },
+  {
+    "id": "scene-02",
+    "segments": [
+      "我們建立了 Codex Clinical Form Studio。",
+      "它不是單次產生表單的 Prompt，而是由專業 Skills 組成的 reusable Plugin。",
+      "上傳 Protocol 後，Orchestrator Skill 會協調分析、設計、Mapping、審核、測試與部署。",
+      "每個階段都有明確的輸入、輸出與人工核准點。"
+    ]
+  },
+  {
+    "id": "scene-03",
+    "segments": [
+      "Orchestrator 呼叫 Protocol Analysis Skill，GPT-5.6 負責醫療與邏輯推理。",
+      "GPT-5.6 會找出表單、欄位、資料型別、單位、必填條件、選項與驗證規則。",
+      "接著將結果轉換成結構化 YAML。",
+      "YAML 成為單一規格來源，讓臨床人員透過網頁介面審查，不必修改程式碼。"
+    ]
+  },
+  {
+    "id": "scene-04",
+    "segments": [
+      "臨床人員可以修改欄位、必填條件、數值限制與選項。",
+      "接著 Orchestrator 會呼叫 CDASH Mapping Skill。",
+      "GPT-5.6 依 Protocol 上下文排序 CDASH 候選，並解釋推薦原因。",
+      "AI 提供建議，但最終 Mapping 仍由臨床專業人員決定。"
+    ]
+  },
+  {
+    "id": "scene-05",
+    "segments": [
+      "規格核准後，Form Generation Skill 會將 YAML 轉換成標準化 JSON。",
+      "JSON-to-HTML Renderer 產生包含控制項、必填、允許值、範圍與驗證行為的 eCRF。",
+      "表單會先部署到驗證環境，供臨床團隊確認。"
+    ]
+  },
+  {
+    "id": "scene-06",
+    "segments": [
+      "Codex 會把核准後的規格轉換成可維護的工程成果。",
+      "Orchestrator 指示 Codex 更新程式、產生 Migration、建立 pytest 與 Playwright 測試，並在真實瀏覽器驗證。",
+      "測試失敗時，Codex 會追查 YAML、Renderer 或應用程式，修正後再重新測試。"
+    ]
+  },
+  {
+    "id": "scene-07",
+    "segments": [
+      "上傳新版 Protocol 後，Version Comparison Skill 會比較兩版 YAML。",
+      "系統找出新增、刪除與修改的欄位，以及必填、驗證、選項和 CDASH Mapping 的變化。",
+      "每次 Protocol Amendment 都能被清楚追蹤。"
+    ]
+  },
+  {
+    "id": "scene-08",
+    "segments": [
+      "GPT-5.6 負責解讀複雜 Protocol 與 CDISC Mapping 推理。",
+      "Codex 負責應用程式實作、自動測試、錯誤修正與 GitHub Pull Request。",
+      "完成臨床核准與 QA 後，CI/CD Pipeline 會將 eCRF 部署到 Production。",
+      "整套流程封裝成可重複使用、可測試的 Plugin，所有關鍵臨床決策仍須經過人工核准。"
+    ]
+  }
+]

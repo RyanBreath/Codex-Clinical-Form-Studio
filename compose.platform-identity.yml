@@ -1,0 +1,9 @@
+name: clinical-form-platform-identity
+services:
+  identity:
+    image: quay.io/keycloak/keycloak:26.3
+    command: ["start-dev", "--import-realm"]
+    ports:
+      - "127.0.0.1:25881:8080"
+    volumes:
+      - ./infra/platform-identity/realm.json:/opt/keycloak/data/import/realm.json:ro

@@ -54,7 +54,7 @@ export interface TerminologyCode {
 }
 
 export interface FieldCoding {
-  status: "matched" | "not-applicable";
+  status: "matched" | "not-applicable" | "unresolved";
   rationale?: LocalizedText;
   standard?: "CDISC";
   model?: string;
@@ -72,6 +72,7 @@ export interface FieldCoding {
 }
 
 export interface FieldConfig {
+  sourceRefs?: Array<{ locator: string; document?: string; sha256?: string }>;
   label: LocalizedText;
   description?: LocalizedText;
   help?: LocalizedText;
@@ -125,7 +126,8 @@ export type NumericExpression =
     };
 
 export interface AirwayAiExtension {
-  contractVersion: "1.0.0" | "1.1.0";
+  reviewIssues?: Array<{ id: string; question: string; severity: "blocking" | "warning"; resolution?: string }>;
+  contractVersion: "1.0.0" | "1.1.0" | "1.2.0";
   formId: string;
   schemaVersion: string;
   status: "demo" | "draft" | "released" | "retired";
@@ -210,7 +212,7 @@ export interface FormSnapshot {
 export interface FormSubmission {
   formId: string;
   schemaVersion: string;
-  contractVersion: "1.0.0" | "1.1.0";
+  contractVersion: "1.0.0" | "1.1.0" | "1.2.0";
   rendererVersion: string;
   locale: string;
   data: JsonRecord;
@@ -231,6 +233,7 @@ export interface SubmissionCoding {
 
 interface SharedRendererProps {
   schema: CrfContract;
+  context?: "demo" | "platform" | "preview";
   locale?: string;
   onDiagnostic?: (diagnostic: Diagnostic) => void;
 }

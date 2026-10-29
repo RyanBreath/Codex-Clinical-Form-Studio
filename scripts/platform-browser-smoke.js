@@ -1,0 +1,58 @@
+async page => {
+  const runtime = await (await page.request.get(new URL('/api/runtime', page.url()).href)).json();
+  if (!runtime.developmentIdentity || !runtime.syntheticOnly) throw new Error('此驗收僅允許合成資料開發環境');
+  await page.getByLabel('開發身分', { exact: true }).selectOption('dev-reviewer');
+  await page.getByRole('button', { name: '02表單設計' }).click();
+  await page.getByLabel('操作／更正理由', { exact: true }).fill('合成研究獨立核准');
+  const publish = page.getByRole('button', { name: '核准並正式發布', exact: true });
+  if (await publish.isEnabled()) await publish.click();
+  await page.getByText('此研究採用版本', { exact: true }).click();
+  await page.getByRole('spinbutton', { name: '每次訪視最多填寫次數', exact: true }).fill('10');
+  await page.getByRole('textbox', { name: '採用理由', exact: true }).fill('合成研究採用核准版本');
+  await page.getByRole('button', { name: '確認採用固定版本', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: '已採用此固定版本' }).waitFor();
+
+  await page.getByLabel('開發身分', { exact: true }).selectOption('dev-site-a');
+  await page.getByRole('button', { name: '04ICF 與收集依據' }).click();
+  await page.getByLabel('院端文件編號／核准依據', { exact: true }).fill('SYNTHETIC-WAIVER-ONLY');
+  await page.getByRole('button', { name: '登錄並等待確認', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: '已儲存' }).waitFor();
+  await page.getByLabel('開發身分', { exact: true }).selectOption('dev-reviewer');
+  const confirm = page.getByRole('button', { name: '確認適用依據', exact: true }).first();
+  await confirm.waitFor();
+  page.once('dialog', dialog => dialog.accept('合成資料：已核對測試核准範圍'));
+  await confirm.click();
+  await page.getByText('已確認', { exact: true }).first().waitFor();
+
+  await page.getByLabel('開發身分', { exact: true }).selectOption('dev-site-a');
+  await page.getByRole('button', { name: '03資料收集' }).click();
+  await page.getByText('新增訪視', { exact: true }).click();
+  await page.getByLabel('訪視名稱', { exact: true }).fill('合成基線訪視');
+  await page.getByLabel('日期', { exact: true }).fill('2026-10-28');
+  await page.getByRole('button', { name: '建立訪視', exact: true }).click();
+  await page.getByText('新增應收表單', { exact: true }).waitFor();
+  await page.getByText('新增應收表單', { exact: true }).click();
+  const adoption = page.getByRole('combobox', { name: '採用版本', exact: true });
+  await adoption.selectOption(await adoption.locator('option').nth(1).getAttribute('value'));
+  await page.getByRole('button', { name: '建立表單次別', exact: true }).click();
+  await page.getByRole('spinbutton', { name: '體重（必填）', exact: true }).fill('65');
+  await page.getByLabel('操作／更正理由', { exact: true }).fill('確認合成資料送出');
+  await page.getByRole('button', { name: '驗證並送出', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: '已送出並保存正式紀錄' }).waitFor();
+  await page.reload();
+  await page.getByLabel('開發身分', { exact: true }).selectOption('dev-site-a');
+  await page.getByRole('button', { name: '03資料收集' }).click();
+  const saved = page.getByRole('spinbutton', { name: '體重（必填）', exact: true });
+  await saved.waitFor(); if (await saved.inputValue() !== '65') throw new Error('重新載入未取得伺服器保存的填答');
+  await page.getByLabel('開發身分', { exact: true }).selectOption('dev-reviewer');
+  await page.getByLabel('操作／更正理由', { exact: true }).fill('獨立核對合成紀錄');
+  await page.getByRole('button', { name: '確認審閱', exact: true }).click();
+  await page.getByRole('button', { name: '鎖定資料', exact: true }).click();
+  await page.getByText('已鎖定', { exact: true }).first().waitFor();
+  await page.getByRole('button', { name: '06資料查核與匯出' }).click();
+  await page.getByLabel('匯出理由', { exact: true }).fill('合成研究瀏覽器驗收');
+  await page.getByRole('button', { name: '建立匯出快照', exact: true }).click();
+  await page.getByRole('button', { name: '下載 JSON 快照', exact: true }).waitFor();
+  await page.screenshot({ path: 'output/playwright/platform-20261028/review-and-export.png', fullPage: true });
+  console.log('已完成：獨立發布、研究採用、依據確認、訪視填答、重載持久化、審閱、鎖定及匯出快照。');
+}

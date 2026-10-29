@@ -1,0 +1,31 @@
+async page => {
+  const base = new URL('/api/', page.url()).href;
+  const runtime = await (await page.request.get(base + 'runtime')).json();
+  if (!runtime.developmentIdentity || !runtime.syntheticOnly) throw new Error('僅允許本機合成資料驗收');
+  const headers = { 'X-Development-User': 'dev-site-a' };
+  const get = async path => { const r = await page.request.get(base + path, { headers }); if (!r.ok()) throw new Error(await r.text()); return r.json(); };
+  const post = async (path, data) => { const r = await page.request.post(base + path, { headers, data }); if (!r.ok()) throw new Error(await r.text()); return r.json(); };
+  const study = (await get('studies')).find(s => s.code === 'SYNTH-UI-001');
+  if (!study) throw new Error('請先建立合成研究');
+  const subject = (await get(`studies/${study.id}/subjects`))[0];
+  const adoption = (await get(`studies/${study.id}/adoptions`)).find(a => a.active && !a.visitDefinitionId);
+  if (!subject || !adoption) throw new Error('缺少既有合成受試者或核准採用版本');
+  const visit = await post(`subjects/${subject.id}/visits`, { name: `未執行驗收 ${Date.now()}`, date: '2026-10-28', unscheduled: true });
+  const occurrence = await post(`visits/${visit.id}/occurrences`, { adoptionId: adoption.id, number: 1 });
+  await page.getByRole('combobox', { name: '開發身分', exact: true }).selectOption('dev-site-a');
+  await page.getByRole('combobox', { name: '目前研究', exact: true }).selectOption(study.id);
+  await page.getByRole('button', { name: '03資料收集', exact: true }).click();
+  await page.getByRole('combobox', { name: '訪視', exact: true }).selectOption(visit.id);
+  await page.getByRole('combobox', { name: '表單次別', exact: true }).selectOption(occurrence.id);
+  await page.getByRole('textbox', { name: '未執行理由', exact: true }).fill('合成驗收：當日未到院');
+  await page.getByRole('button', { name: '標記未執行', exact: true }).click();
+  await page.getByRole('heading', { name: '此表單未執行', exact: true }).waitFor();
+  if (await page.getByRole('combobox', { name: '訪視', exact: true }).inputValue() !== visit.id) throw new Error('保存後選取訪視遭重設');
+  await page.getByRole('button', { name: '重新載入', exact: true }).click();
+  await page.getByRole('heading', { name: '此表單未執行', exact: true }).waitFor();
+  await page.getByRole('textbox', { name: '恢復收集理由', exact: true }).fill('合成驗收：已安排補做');
+  await page.getByRole('button', { name: '恢復收集', exact: true }).click();
+  await page.getByRole('button', { name: '驗證並送出', exact: true }).waitFor();
+  await page.screenshot({ path: 'output/playwright/platform-20261028/not-done-resume.png', fullPage: true });
+  console.log('已驗證未執行理由、保存後保持選取、重新載入與恢復收集。');
+}
